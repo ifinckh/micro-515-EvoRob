@@ -32,15 +32,29 @@
 
     <!-- Static objects -->
     <body name="static_box" pos="0 0 2">
+      <freejoint/>
       <geom name="box" type="box" size="0.25 0.25 0.25" rgba="0.8 0.4 0.1 1" mass="0.2"/>
     </body>
 
     <!-- Free-falling objects -->
     <!-- TODO -->
+    <body name="sphere1" pos="1 -1 2">
+      <freejoint/>
+      <geom name="sphere" type="sphere" size="0.25" rgba="0.8 0.4 0.1 1" mass="0.5"/>
+    </body>
 
-    <!-- Simple 2-link robot arm -->
-    <!-- TODO -->
+    <body name="2_link_robot_arm" pos="1 1 0.5">
+      <geom name="base_arm" type="box" size="0.1 0.1 0.5" rgba="0.8 0.4 0.1 1" mass="0.2"/>
+
+      <!-- child body origin at the hinge pivot (top of base) -->
+      <body name="forearm" pos="0 0 0.5">
+        <joint name="joint1" type="hinge" axis="0 1 0" pos="0 0 0" stiffness="0" damping="0" frictionloss="0" armature="0"/>
+
+        <!-- Upright link: center is +0.8 above hinge -->
+        <geom name="forearm_cylinder" type="cylinder" size="0.1 0.8" pos="0 0 0.8" rgba="0.8 0.4 0.1 1" euler="10 10 0" mass="0.2"/>
+      </body>
+    </body>
+    
 
   </worldbody>
-
 </mujoco>
