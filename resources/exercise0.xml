@@ -51,7 +51,7 @@
         <joint name="joint1" type="hinge" axis="0 1 0" pos="0 0 0" stiffness="0" damping="0" frictionloss="0" armature="0"/>
 
         <!-- Upright link: center is +0.8 above hinge -->
-        <geom name="forearm_cylinder" type="cylinder" size="0.1 0.8" pos="0 0 0.8" rgba="0.8 0.4 0.1 1" euler="10 10 0" mass="0.2"/>
+        <geom name="forearm_cylinder" type="cylinder" size="0.1 0.8" pos="0 0 0.8" rgba="0.8 0.4 0.1 1" euler="10 0 0" mass="0.2"/>
       </body>
     </body>
     

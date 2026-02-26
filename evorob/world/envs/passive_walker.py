@@ -142,11 +142,18 @@ class PassiveWalker(MujocoEnv, utils.EzPickle):
 
         xy_velocity = (xy_position_after - xy_position_before) / self.dt
         x_velocity, y_velocity = xy_velocity
+        
+        reward_weights = np.array([1,0.5,0.5])
 
-        forward_reward = x_velocity * self._forward_reward_weight
+        forward_reward = x_velocity * self._forward_reward_weight 
+        on_path_reward = -abs(xy_position_after[1]) # penalize for deviation in the y direction
+        z_pos = self.data.body(self._main_body).xpos[2].copy()
+        stand_up_reward = z_pos # maximizing for z position, therefore penalizing falling down
 
         #TODO
-        reward = forward_reward
+        reward_array = np.array([forward_reward, on_path_reward, stand_up_reward])
+        reward = np.sum(reward_array * reward_weights)
+        print(reward)
         observation = self._get_obs()
         info = {
             "reward_forward": forward_reward,
