@@ -155,7 +155,10 @@ def main():
             fit_ind = world.evaluate_individual(genotype)
             fitnesses_gen[index] = fit_ind
         ea.tell(pop, fitnesses_gen)
-
+        
+    #%% MF Save at least one checkpoint
+    ea.save_checkpoint()
+    
     #%% visualise
     checkpoint = get_last_checkpoint_dir(results_dir)
     best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"))
