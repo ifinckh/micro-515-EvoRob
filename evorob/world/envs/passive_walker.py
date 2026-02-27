@@ -143,15 +143,18 @@ class PassiveWalker(MujocoEnv, utils.EzPickle):
         xy_velocity = (xy_position_after - xy_position_before) / self.dt
         x_velocity, y_velocity = xy_velocity
         
-        reward_weights = np.array([1,0.5,0.5])
-
+        reward_weights = np.array([1,0.2,0.1,0.3])
+        
+        z_ground = self.init_z_offset - self.data.qpos[0]*np.tan(5*np.pi/180)
+        z = self.data.body(self._main_body).xpos[2].copy()
+        z_relative = z-z_ground
+        
         forward_reward = x_velocity * self._forward_reward_weight 
-        on_path_reward = -abs(xy_position_after[1]) # penalize for deviation in the y direction
-        z_pos = self.data.body(self._main_body).xpos[2].copy()
-        stand_up_reward = z_pos # maximizing for z position, therefore penalizing falling down
-
+        on_path_reward_pos = -abs(xy_position_after[1])  # penalize for deviation in the y direction
+        on_path_reward_vel = -abs(y_velocity)  # penalize for deviation in the y direction
+        stand_up_reward = np.exp(-((z_relative-0.4)**2)/(2*0.08*0.08)) # gaussian height reward
         #TODO
-        reward_array = np.array([forward_reward, on_path_reward, stand_up_reward])
+        reward_array = np.array([forward_reward, on_path_reward_pos, on_path_reward_vel, stand_up_reward])
         reward = np.sum(reward_array * reward_weights)
         observation = self._get_obs()
         info = {
@@ -170,7 +173,7 @@ class PassiveWalker(MujocoEnv, utils.EzPickle):
             DOF = np.argwhere((np.isnan(qacc)) + (np.isinf(qacc)) + (np.abs(qacc) > 1e6)).squeeze()
             print(ValueError(f'MuJoCo Warning: Nan, Inf or huge value in QACC at DOF {DOF}'))
             terminated = True
-            reward = -1000.0 
+            # reward = -1000.0 
         if self.data.qpos[2] < self.init_z_offset + 0.25 - self.data.qpos[0]*np.tan(5*np.pi/180):
             log(f"Walker Fell off the platform at {self.data.qpos[0]} meter!!", self.verbose)
             terminated = True

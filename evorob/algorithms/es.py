@@ -91,6 +91,7 @@ class ES(EA):
         """Initialises the first population."""
         # TODO: generate the initial population mean vector (current_mean)
         # mean_vector = [self.current_mean]*self.n_pop
+        # mean_vector = [[0.5, 0.5, 0.5, 0.5, 0.26859011,0.1300598]]*self.n_pop
         mean_vector = self.generate_mutated_offspring(self.n_pop)
         return mean_vector
 
@@ -99,10 +100,13 @@ class ES(EA):
         # TODO: implement a decay of the sigma value over generations, ensuring it does not go below min_sigma
         
         # for sigma decay
-        tau = self.sigma_decay_rate / np.sqrt(self.n_params) * np.random.normal(0,1)
+        # tau = self.sigma_decay_rate / np.sqrt(self.n_params) * np.random.normal(0,1)
         
         # # coevolution rule for mutation size in ES : sigma' = sigma * exp(tau * N(0,1))
-        current_sigma = self.current_sigma * np.exp(tau)
+        # current_sigma = self.current_sigma * np.exp(tau)
+        
+        # simple decay 
+        current_sigma = self.current_sigma * self.sigma_decay_rate
         
         # test boundary rule
         if current_sigma < self.min_sigma:
