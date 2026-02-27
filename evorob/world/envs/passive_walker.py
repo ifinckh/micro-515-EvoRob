@@ -173,7 +173,7 @@ class PassiveWalker(MujocoEnv, utils.EzPickle):
             DOF = np.argwhere((np.isnan(qacc)) + (np.isinf(qacc)) + (np.abs(qacc) > 1e6)).squeeze()
             print(ValueError(f'MuJoCo Warning: Nan, Inf or huge value in QACC at DOF {DOF}'))
             terminated = True
-            # reward = -1000.0 
+            # reward = -1000.0
         if self.data.qpos[2] < self.init_z_offset + 0.25 - self.data.qpos[0]*np.tan(5*np.pi/180):
             log(f"Walker Fell off the platform at {self.data.qpos[0]} meter!!", self.verbose)
             terminated = True
