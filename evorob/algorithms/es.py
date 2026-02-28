@@ -92,6 +92,7 @@ class ES(EA):
         # TODO: generate the initial population mean vector (current_mean)
         # mean_vector = [self.current_mean]*self.n_pop
         # mean_vector = [[0.5, 0.5, 0.5, 0.5, 0.26859011,0.1300598]]*self.n_pop
+        self.current_mean = [0.5, 0.5, 0.13664606, 0.5, 0.5, 0.14355455]
         mean_vector = self.generate_mutated_offspring(self.n_pop)
         return mean_vector
 
@@ -127,26 +128,40 @@ class ES(EA):
         # TODO: compute the new population mean as a weighted average of the parent population, where the weights are based on the parent fitness
         # (you can use rank or raw fitness values)
         
+        
+        
+        # ------------------------------------------------
+        good_idx = np.isfinite(parent_fitness)
+        parent_population = parent_population[good_idx]
+        parent_fitness = parent_fitness[good_idx]
+        
         # Normalise parent fitness scores
-        # normed_parents_fitness = np.array(parent_fitness / np.sum(parent_fitness))
-        # normed_parents_fitness = normed_parents_fitness[:, np.newaxis]
+        normed_parents_fitness = np.array(parent_fitness / np.sum(parent_fitness))
+        normed_parents_fitness = normed_parents_fitness[:, np.newaxis]
+        
+        weighted_parents_population = np.array(parent_population) * normed_parents_fitness
+        # --------------------- or --------------------------
+        
+        # print(np.sum(normed_parents_fitness))
         
         
-        num_parents = len(parent_fitness)
+        # num_parents = len(parent_fitness)
         
-        # 1. Create linear ranks. 
-        # Since parent_fitness is sorted descending, ranks are: [num_parents, num_parents - 1, ..., 1]
-        ranks = np.arange(num_parents, 0, -1)
+        # # 1. Create linear ranks. 
+        # # Since parent_fitness is sorted descending, ranks are: [num_parents, num_parents - 1, ..., 1]
+        # ranks = np.arange(num_parents, 0, -1)
         
-        # 2. Normalize the ranks so they sum to 1
-        rank_weights = ranks / np.sum(ranks)
+        # # 2. Normalize the ranks so they sum to 1
+        # rank_weights = ranks / np.sum(ranks)
         
-        # 3. Reshape to (num_parents, 1) for broadcasting across the n_params axis
-        rank_weights = rank_weights[:, np.newaxis]
+        # # 3. Reshape to (num_parents, 1) for broadcasting across the n_params axis
+        # rank_weights = rank_weights[:, np.newaxis]
         
-        # Compute population weighted to the normed fitness scores
-        weighted_parents_population = np.array(parent_population) * rank_weights # normed_parents_fitness
+        # # Compute population weighted to the normed fitness scores
+        # weighted_parents_population = np.array(parent_population) * rank_weights # normed_parents_fitness
 
+
+        
         # Calculate the sum of weighted parents population
         updated_mean_vector = np.sum(weighted_parents_population, axis=0)
         

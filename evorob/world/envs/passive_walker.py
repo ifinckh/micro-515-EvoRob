@@ -143,22 +143,45 @@ class PassiveWalker(MujocoEnv, utils.EzPickle):
         xy_velocity = (xy_position_after - xy_position_before) / self.dt
         x_velocity, y_velocity = xy_velocity
         
-        reward_weights = np.array([1,0.2,0.1,0.3])
+        reward_weights = np.array([5,2,0.2,0.1,0.3,10,1e4,2.0])
         
+        # Compute floor height at the current x position and keep body height relative to the floor 
         z_ground = self.init_z_offset - self.data.qpos[0]*np.tan(5*np.pi/180)
         z = self.data.body(self._main_body).xpos[2].copy()
         z_relative = z-z_ground
         
-        forward_reward = x_velocity * self._forward_reward_weight 
+        # Compute foot penetration and add a penalty for it
+        z_lowest_foot = min(self.data.geom("geom_2.3").xpos[2], self.data.geom("geom_3.4").xpos[2], self.data.geom("geom_7.8").xpos[2], self.data.geom("geom_8.9").xpos[2])
+        penetration = max(0.0, z_ground - z_lowest_foot)
+        
+        # Compute a reward for having symmetrical limb lengths (encourage the robot to evolve with similar limb lengths on both sides)
+        right_limb_lengths = np.array([
+            self.model.geom("geom_0.1").rbound,
+            self.model.geom("geom_1.2").rbound,
+            self.model.geom("geom_2.3").rbound,
+            self.model.geom("geom_3.4").rbound,
+        ])
+        left_limb_lengths = np.array([
+            self.model.geom("geom_5.6").rbound,
+            self.model.geom("geom_6.7").rbound,
+            self.model.geom("geom_7.8").rbound,
+            self.model.geom("geom_8.9").rbound,
+        ])
+        limb_length_mismatch = np.mean(np.abs(right_limb_lengths - left_limb_lengths))
+        symmetrical_limbs_reward = np.exp(-20.0 * limb_length_mismatch)
+        
+        forward_speed_reward = x_velocity 
+        forward_position_reward = xy_position_after[0]
         on_path_reward_pos = -abs(xy_position_after[1])  # penalize for deviation in the y direction
         on_path_reward_vel = -abs(y_velocity)  # penalize for deviation in the y direction
         stand_up_reward = np.exp(-((z_relative-0.4)**2)/(2*0.08*0.08)) # gaussian height reward
+        stuck_penalty = 0 # -self.stuck
         #TODO
-        reward_array = np.array([forward_reward, on_path_reward_pos, on_path_reward_vel, stand_up_reward])
+        reward_array = np.array([forward_speed_reward, forward_position_reward, on_path_reward_pos, on_path_reward_vel, stand_up_reward, stuck_penalty, -penetration**2, symmetrical_limbs_reward])
         reward = np.sum(reward_array * reward_weights)
         observation = self._get_obs()
         info = {
-            "reward_forward": forward_reward,
+            "reward_forward": reward,
             "x_position": self.data.qpos[0],
             "y_position": self.data.qpos[1],
             "distance_from_origin": np.linalg.norm(self.data.qpos[0:2], ord=2),

@@ -106,6 +106,7 @@ class PassiveWalkerWorld(World):
             env = self.create_env()
         except ValueError:
             return -np.inf  # invalid individual
+        
         observations, info = env.reset()
         actions = []
         rewards_list = []
@@ -127,9 +128,9 @@ def main():
 
     #%% Understanding the world
     # TODO: can you improve the genotype - you will also need to modify the PassiveWalkerWorld class!
-    genotype = [0.3, 0.2, 0.1, 0.3, 0.2, 0.1] # [0.09481275, 0.34998705, 0.40082637, 0.5, 0.17754931, 0.5] 
-    world.visualise_individual(genotype)
-
+    # genotype = [0.25, 0.4, 0.12, 0.25, 0.4, 0.12] # [0.3, 0.2, 0.1, 0.3, 0.2, 0.1]
+    # world.visualise_individual(genotype)
+    
     results_dir = join(ROOT_DIR, "results", ENV_NAME, "EA")
     results_dir = get_distinct_filename(results_dir)
 
@@ -145,7 +146,7 @@ def main():
 
     population_size = 100
 
-    ea = ES(population_size, n_parameters, opts, log_every=2, output_dir=results_dir)
+    ea = ES(population_size, n_parameters, opts, log_every=5, output_dir=results_dir)
 
     #%% Optimise
     for _ in range(ea.n_gen):
