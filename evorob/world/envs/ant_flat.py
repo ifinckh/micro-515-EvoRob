@@ -104,6 +104,11 @@ class AntFlatEnvironment(MujocoEnv):
         # - velocity: self.data.qvel.flatten() (14 values)
         # This gives 27 total dimensions, making the task translation-invariant
         # Hint: Use np.concatenate() to combine both arrays
+        pos = self.data.qpos[2:].flatten() # 13 values
+        vel = self.data.qvel.flatten() # 14 values
+        obs = np.concatenate((pos,vel))
+        return obs
+    
         raise NotImplementedError("TODO: Implement observation function")
 
     def _get_rew(self, x_velocity: float, action):
@@ -113,6 +118,28 @@ class AntFlatEnvironment(MujocoEnv):
         # 3. ctrl_cost = ...
         # Final reward is the sum of these three components.
         # Return: (reward, reward_info_dict)
+        
+        # reward forward velocity
+        forward_reward = x_velocity
+        # reward not terminating
+        healthy_reward = not self._get_termination()
+        # reward low motor toques (penalize high control inputs)
+        ctrl_cost = np.sum(action)
+        
+        # recommended weights
+        weights = np.array([1,1,-0.5])
+        reward_array = np.array([forward_reward, healthy_reward, ctrl_cost])
+        
+        reward = np.sum(reward_array * weights)
+        
+        # have access to the individual losses just in case
+        reward_info_dict = {
+            "reward_forward" : forward_reward,
+            "reward_survive" : healthy_reward, 
+            "reward_ctrl" : ctrl_cost}
+        
+        return (reward, reward_info_dict)
+    
         raise NotImplementedError("TODO: Implement reward function")
 
     def _get_termination(self):
@@ -120,4 +147,14 @@ class AntFlatEnvironment(MujocoEnv):
         # - Torso height is below 0.26 or above 1.0
         # Return True if NOT healthy (i.e., should terminate)
         # Hint: Use self.state_vector() to get current state.
+        
+        torso_height = self.state_vector()[2]
+        
+        # termination condition
+        if (torso_height < 0.26) or (torso_height > 1.0):
+            return True
+        else:
+            return False
+        
+        
         raise NotImplementedError("TODO: Implement termination function")

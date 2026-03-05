@@ -30,12 +30,12 @@ class NeuralNetworkController(Controller):
         # - self.input_to_hidden: shape (hidden_size, input_size)
         # - self.hidden_to_output: shape (output_size, hidden_size)
         # Hint: Use np.random.uniform(-1, 1, (rows, cols))
-        self.input_to_hidden = ...  # TODO!
-        self.hidden_to_output = ...  # TODO!
+        self.input_to_hidden = np.random.uniform(-1, 1, (hidden_size, input_size))  # TODO!
+        self.hidden_to_output = np.random.uniform(-1, 1, (output_size, hidden_size))  # TODO!
 
         # TODO: Compute number of parameters in each layer
-        self.n_params_i2h = ...  # TODO!
-        self.n_params_h2o = ...  # TODO!
+        self.n_params_i2h = hidden_size * input_size  # TODO!
+        self.n_params_h2o = output_size * hidden_size  # TODO!
 
         self.n_params = self.get_num_params()
 
@@ -57,6 +57,19 @@ class NeuralNetworkController(Controller):
         # Hint: Use @ operator or np.matmul for matrix multiplication
         # Hint: .T transposes a matrix
         # Hint: np.tanh() applies tanh element-wise
+        
+        # if state of shape (input_size,) 
+        if state.shape[0] == self.n_input:
+            hidden = np.tanh(self.input_to_hidden @ state) # (hidden_size, input_size) x (input_size,) = (hidden_size, )
+            output = np.tanh(self.hidden_to_output @ hidden) # (output_size, hidden_size) x (hidden_size, ) = (output_size, )
+        # if state of shape (batch_size, input_size)
+        else:
+            hidden = np.tanh(self.input_to_hidden @ state.T) # (hidden_size, input_size) x (input_size, batch_size) = (hidden_size, batch_size)
+            output = np.tanh(self.hidden_to_output @ hidden) # (output_size, hidden_size) x (hidden_size, batch_size) = (output_size, batch_size)
+            
+        # clip just in case, but tanh should do that either way
+        return np.clip(output, a_min = -1, a_max = 1)
+    
         raise NotImplementedError("TODO: Implement forward pass")
 
     def set_weights(self, encoding):
