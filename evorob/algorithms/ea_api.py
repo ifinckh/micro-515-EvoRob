@@ -2,6 +2,8 @@ import numpy as np
 
 from evorob.algorithms.base_ea import EA
 
+import cma
+
 
 class EvoAlgAPI(EA):
     """Evolutionary algorithm API wrapper.
@@ -32,6 +34,17 @@ class EvoAlgAPI(EA):
         self.n_gen = num_generations
         self.population_size = population_size
         
+        if "sigma" in kwargs:
+            sigma = kwargs["sigma"]
+        else:
+            sigma = 0.5
+        
+        self.es = cma.CMAEvolutionStrategy(
+            np.random.uniform(0, 1, n_params),  # n_params *[0], # np.random.uniform(0, 1, n_params), 
+            sigma,
+            {'popsize': population_size}
+        )
+        
         # % bookkeeping for base EA
         self.directory_name = output_dir
         self.current_gen = 0
@@ -42,6 +55,7 @@ class EvoAlgAPI(EA):
         self.x = None
         self.f = None
 
+        return
         raise NotImplementedError(
             "TODO: Initialize your chosen EA framework.\n"
             "Recommended: pip install cma, then import cma and create CMAEvolutionStrategy.\n"
@@ -57,6 +71,12 @@ class EvoAlgAPI(EA):
         """
         # TODO: Get new population from your EA
         # Make sure the returned array has shape (population_size, n_params)
+        
+        population = np.array(self.es.ask())
+        
+        # print("Shape out of ask() :",population.shape,"\npop_size :", self.population_size, ", n_params :", self.n_params )
+        
+        return population
 
         raise NotImplementedError(
             "TODO: Implement ask() to sample new population.\n"
@@ -76,6 +96,8 @@ class EvoAlgAPI(EA):
         # Note: Some algorithms minimize, others maximize.
         # Adjust accordingly (negate fitnesses if needed).
         
+        self.es.tell(population, -fitnesses)
+        
         # After updating the EA, do bookkeeping for checkpointing:
         self.full_f.append(fitnesses)
         self.full_x.append(population)
@@ -87,10 +109,12 @@ class EvoAlgAPI(EA):
         if fitnesses[best_idx] > self.f_best_so_far:
             self.f_best_so_far = fitnesses[best_idx]
             self.x_best_so_far = population[best_idx].copy()
-        
+                    
         if save_checkpoint:
             self.save_checkpoint()
         self.current_gen += 1
+        
+        return
 
         raise NotImplementedError(
             "TODO: Implement tell() to update the EA.\n"

@@ -67,8 +67,14 @@ class NeuralNetworkController(Controller):
             hidden = np.tanh(self.input_to_hidden @ state.T) # (hidden_size, input_size) x (input_size, batch_size) = (hidden_size, batch_size)
             output = np.tanh(self.hidden_to_output @ hidden) # (output_size, hidden_size) x (hidden_size, batch_size) = (output_size, batch_size)
             
+        # hidden = np.tanh(np.matmul(self.input_to_hidden, state.T)) # (hidden_size, input_size) x (input_size, batch_size) = (hidden_size, batch_size)
+        # output = np.tanh(np.matmul(self.hidden_to_output,hidden)) # (output_size, hidden_size) x (hidden_size, batch_size) = (output_size, batch_size)
+        
+        # print(output)
+        
+            
         # clip just in case, but tanh should do that either way
-        return np.clip(output, a_min = -1, a_max = 1)
+        return np.clip(output.T, a_min = -1, a_max = 1)
     
         raise NotImplementedError("TODO: Implement forward pass")
 
@@ -86,6 +92,12 @@ class NeuralNetworkController(Controller):
         #
         # Hint: Use array slicing: encoding[:n] and encoding[n:]
         # Hint: Use np.reshape(array, (rows, cols)) or array.reshape((rows, cols))
+        
+        self.input_to_hidden =  encoding[:self.n_hidden*self.n_input].reshape((self.n_hidden, self.n_input))
+        self.hidden_to_output =  encoding[self.n_hidden*self.n_input:].reshape((self.n_output, self.n_hidden))
+        
+        return
+
         raise NotImplementedError("TODO: Implement weight setting")
 
     def geno2pheno(self, genotype):
@@ -96,6 +108,13 @@ class NeuralNetworkController(Controller):
         # To provide a genetic encoding for our neural network controller,
         # we compute and store the number of parameters in our NN class.
         # TODO: Return the total number of parameters in both layers!
+        
+        i2h = self.n_input*self.n_hidden
+        h2o = self.n_output*self.n_hidden
+        
+        return i2h + h2o
+    
+    
         raise NotImplementedError
 
     def reset_controller(self, batch_size=1) -> None:

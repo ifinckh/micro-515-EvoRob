@@ -402,7 +402,14 @@ def evaluate_checkpoint(
     os.makedirs(output_dir, exist_ok=True)
 
     video_path = os.path.join(output_dir, "evaluation_video.mp4")
-    imageio.mimwrite(video_path, frames, fps=20)
+    
+    imageio.mimwrite(video_path, frames, fps=20, format="ffmpeg")
+    # # imageio.mimwrite(video_path, frames, fps=20)
+    # writer = imageio.get_writer(video_path, fps=20)  # uses ffmpeg for .mp4
+    # for f in frames:
+    #     writer.append_data(f)
+    # writer.close()
+    
     print(f"Video saved to: {video_path}")
 
     score_path = os.path.join(output_dir, "evaluation_score.txt")
@@ -432,24 +439,34 @@ def evaluate_checkpoint(
 
 
 if __name__ == "__main__":
-    test_exercise_implementation()
+    # test_exercise_implementation()
 
     # Uncomment to run full evolution:
-    run_evolution_neural_controller(
-        num_generations=100,
-        population_size=10,
-        ckpt_interval=5,
-        checkpoint_path=None,
-        run_evaluation=True,
-        compute_score=True,
-        random_seed=42,
-    )
+    # run_evolution_neural_controller(
+    #     num_generations=100,
+    #     population_size=10,
+    #     ckpt_interval=5,
+    #     checkpoint_path=None,
+    #     run_evaluation=False, # initially True
+    #     compute_score=False,
+    #     random_seed=41,
+    # )
+    
+    # run_evolution_neural_controller(
+    #     num_generations=50,
+    #     population_size=250,
+    #     ckpt_interval=5,
+    #     checkpoint_path=None,
+    #     run_evaluation=False, # initially True
+    #     compute_score=True,
+    #     random_seed=41,
+    # )
 
     # ----------------------------------------------------------------
     # EVALUATION: Uncomment the lines below to evaluate your checkpoint
     # on the standard Gymnasium Ant-v5 and get your final score + video.
     # Replace the path with your actual checkpoint folder.
     # ----------------------------------------------------------------
-    # evaluate_checkpoint(
-    #     checkpoint_dir="results/20260304_174619_neural_controller_ckpts",
-    # )
+    evaluate_checkpoint(
+        checkpoint_dir="results/20260305_174433_neural_controller_ckpts",
+    )

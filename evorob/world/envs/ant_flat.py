@@ -119,10 +119,10 @@ class AntFlatEnvironment(MujocoEnv):
         # Final reward is the sum of these three components.
         # Return: (reward, reward_info_dict)
         
-        # reward forward velocity
-        forward_reward = x_velocity
         # reward not terminating
         healthy_reward = not self._get_termination()
+        # reward forward velocity
+        forward_reward = x_velocity #* healthy_reward
         # reward low motor toques (penalize high control inputs)
         ctrl_cost = np.sum(action)
         
@@ -137,6 +137,8 @@ class AntFlatEnvironment(MujocoEnv):
             "reward_forward" : forward_reward,
             "reward_survive" : healthy_reward, 
             "reward_ctrl" : ctrl_cost}
+        
+        # print(reward_info_dict)
         
         return (reward, reward_info_dict)
     

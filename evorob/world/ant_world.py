@@ -64,13 +64,15 @@ class AntFlatWorld(World):
         rewards_full = np.zeros((n_sim_steps, self.n_repeats))
         for step in range(n_sim_steps):
             action = self.controller.get_action(observations)
-            observations, rewards, terminated, truncated, _ = self.env.step(action)
+            observations, rewards, terminated, truncated, info = self.env.step(action)
             rewards_full[step, ~done_mask] = rewards[~done_mask]
 
             done_mask = done_mask | terminated | truncated
 
             if np.all(done_mask):
                 break
+        
+        # print(info["reward_forward"], info["reward_survive"], info["reward_ctrl"])
 
         final_rewards = np.sum(rewards_full, axis=0)
         return np.mean(final_rewards)
