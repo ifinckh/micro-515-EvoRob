@@ -286,9 +286,13 @@ def evaluate_checkpoint(
     print(f"Controller: OscillatoryController  |  Parameters: {controller.n_params}\n")
 
     # --- Run evaluation episodes on the real Ant-v5 ---
-    env = gym.make(
-        "Ant-v5", use_contact_forces=False, max_episode_steps=max_episode_steps
-    )
+    # env = gym.make(
+    #     "Ant-v5", use_contact_forces=False, max_episode_steps=max_episode_steps
+    # )
+
+    env = gym.make("Ant-v5")
+
+
     rng = np.random.default_rng(seed)
     episode_rewards = []
 
@@ -320,7 +324,7 @@ def evaluate_checkpoint(
     print("\nRecording video...")
     video_env = gym.make(
         "Ant-v5",
-        use_contact_forces=False,
+        # use_contact_forces=False,
         max_episode_steps=max_episode_steps,
         render_mode="rgb_array",
     )
@@ -379,12 +383,12 @@ if __name__ == "__main__":
 
     # Uncomment to run full evolution:
     run_evolution_oscillatory_controller(
-        num_generations=100,
-        population_size=10,
+        num_generations=10,
+        population_size=20,
         ckpt_interval=5,
         checkpoint_path=None,
         run_evaluation=True,
-        random_seed=42,
+        random_seed=41,
     )
 
     # ----------------------------------------------------------------
