@@ -10,11 +10,15 @@
 #SBATCH --partition=academic                     # Partition to submit to academic partition
 #SBATCH --account=micro-515                      # Account name
 
+export MUJOCO_GL=egl
+
 # Activate virtual environment
- source .venv/bin/activate
+conda activate evorob
 
 # Create logs directory
 mkdir -p logs
 
 # Run Python script
 python Challenge1b.py
+
+conda deactivate

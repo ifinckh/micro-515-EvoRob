@@ -197,6 +197,7 @@ def run_evolution_neural_controller(
     run_evaluation: bool = True,
     compute_score: bool = True,
     random_seed: int = 42,
+    sigma: float = 0.5,
 ) -> None:
     """Run evolutionary optimization for robot controller."""
     np.random.seed(random_seed)
@@ -220,7 +221,7 @@ def run_evolution_neural_controller(
     # Create evolutionary algorithm with checkpointing
     num_params = world.n_params
     ea = EvoAlgAPI(
-        num_params, population_size=population_size, sigma=0.5, output_dir=ckpt_dir
+        num_params, population_size=population_size, sigma=sigma, output_dir=ckpt_dir
     )
 
     # Evolution loop (checkpointing happens automatically in ea.tell())
@@ -403,8 +404,8 @@ def evaluate_checkpoint(
 
     video_path = os.path.join(output_dir, "evaluation_video.mp4")
     
-    imageio.mimwrite(video_path, frames, fps=20, format="ffmpeg")
-    # # imageio.mimwrite(video_path, frames, fps=20)
+    # imageio.mimwrite(video_path, frames, fps=20, format="ffmpeg")
+    imageio.mimwrite(video_path, frames, fps=20)
     # writer = imageio.get_writer(video_path, fps=20)  # uses ffmpeg for .mp4
     # for f in frames:
     #     writer.append_data(f)
@@ -440,17 +441,37 @@ def evaluate_checkpoint(
 
 if __name__ == "__main__":
     # test_exercise_implementation()
-
+    num_generations=100
+    population_size=200
+    ckpt_interval=5
+    checkpoint_path=None
+    run_evaluation=False # initially True
+    compute_score=True
+    random_seed=41
+    sigma = 0.5
+    
+    print("Num. Generations:", num_generations)
+    print("Population Size:", population_size)
+    print("Sigma (mutation strength):", sigma)
+    
+    import time
+    start_time = time.time()
+    
     # Uncomment to run full evolution:
-    # run_evolution_neural_controller(
-    #     num_generations=100,
-    #     population_size=10,
-    #     ckpt_interval=5,
-    #     checkpoint_path=None,
-    #     run_evaluation=False, # initially True
-    #     compute_score=False,
-    #     random_seed=41,
-    # )
+    run_evolution_neural_controller(
+        num_generations=num_generations,
+        population_size=population_size,
+        ckpt_interval=ckpt_interval,
+        checkpoint_path=checkpoint_path,
+        run_evaluation=run_evaluation, # initially True
+        compute_score=compute_score,
+        random_seed=random_seed,
+        sigma = sigma,
+    )
+    
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"\nTotal elapsed time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
     
     # run_evolution_neural_controller(
     #     num_generations=50,
@@ -467,6 +488,6 @@ if __name__ == "__main__":
     # on the standard Gymnasium Ant-v5 and get your final score + video.
     # Replace the path with your actual checkpoint folder.
     # ----------------------------------------------------------------
-    evaluate_checkpoint(
-        checkpoint_dir="results/20260305_174433_neural_controller_ckpts",
-    )
+    # evaluate_checkpoint(
+    #     checkpoint_dir="results/20260305_174433_neural_controller_ckpts",
+    # )
