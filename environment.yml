@@ -1,4 +1,4 @@
-name: micro515
+name: evorob
 channels:
   - conda-forge
   - defaults
