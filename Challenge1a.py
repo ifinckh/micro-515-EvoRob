@@ -198,6 +198,7 @@ def run_evolution_neural_controller(
     compute_score: bool = True,
     random_seed: int = 42,
     sigma: float = 0.5,
+    sigma: float = 0.5,
 ) -> None:
     """Run evolutionary optimization for robot controller."""
     np.random.seed(random_seed)
@@ -437,18 +438,104 @@ def evaluate_checkpoint(
     print(f"\n{'=' * 50}")
     print(f"  FINAL SCORE: {mean_reward:.2f} +/- {std_reward:.2f}")
     print(f"{'=' * 50}")
+    
+
+def make_video(
+    checkpoint_dir: str,
+    output_dir: str = "evaluation_output",
+    i: int = 1
+) -> None:
+    """Evaluate a checkpoint on the standard Gymnasium Ant-v5 (no contact forces).
+
+    Loads the best genotype from the checkpoint, runs it for multiple episodes,
+    writes a score file and records a video.
+
+    Args:
+        checkpoint_dir: Path to your EA checkpoint folder
+                        (e.g. "results/20260301_120000_neural_controller_ckpts")
+        output_dir:     Where to save score file and video (default: "evaluation_output")
+    """
+    n_episodes: int = 256  # DO NOT CHANGE!
+    max_episode_steps: int = 1000  # DO NOT CHANGE!
+    seed: int = 3  # DO NOT CHANGE!
+
+    # --- Load best genotype from checkpoint ---
+    last_gen = get_last_checkpoint_dir(checkpoint_dir)
+    x_best_path = os.path.join(last_gen, "x_best.npy") if last_gen else ""
+
+    if not os.path.isfile(x_best_path):
+        x_best_path = os.path.join(checkpoint_dir, "x_best.npy")
+
+    if not os.path.isfile(x_best_path):
+        print(f"ERROR: Could not find x_best.npy in '{checkpoint_dir}'.")
+        print("Make sure the path points to your checkpoint folder.")
+        return
+
+    genotype = np.load(x_best_path)
+    print(f"Loaded genotype from: {x_best_path}  (shape: {genotype.shape})")
+
+    # --- Create controller (same one used during training) ---
+    controller = NeuralNetworkController(input_size=27, output_size=8, hidden_size=16)
+    controller.geno2pheno(genotype)
+    print(
+        f"Controller: NeuralNetworkController  |  Parameters: {controller.n_params}\n"
+    )
+
+    
+    # --- Record video ---
+    print("\nRecording video...")
+    video_env = gym.make(
+        "Ant-v5",
+        include_cfrc_ext_in_observation=False,
+        max_episode_steps=max_episode_steps,
+        render_mode="rgb_array",
+    )
+    obs, _ = video_env.reset(seed=seed)
+    controller.reset_controller(batch_size=1)
+    frames = []
+    done = False
+    video_reward = 0.0
+
+    for _ in range(max_episode_steps):
+        frames.append(video_env.render())
+        action = controller.get_action(obs)
+        if action.ndim > 1:
+            action = action.squeeze(0)
+        obs, reward, terminated, truncated, _ = video_env.step(action)
+        video_reward += reward
+        done = terminated or truncated
+
+        if done:
+            break
+
+    video_env.close()
+
+    # --- Save outputs ---
+    os.makedirs(output_dir, exist_ok=True)
+
+    video_path = os.path.join(output_dir, "evaluation_video"+str(i)+".mp4")
+    
+    imageio.mimwrite(video_path, frames, fps=20, format="ffmpeg")
+    # # imageio.mimwrite(video_path, frames, fps=20)
+    # writer = imageio.get_writer(video_path, fps=20)  # uses ffmpeg for .mp4
+    # for f in frames:
+    #     writer.append_data(f)
+    # writer.close()
+    
+    print(f"Video saved to: {video_path}")
 
 
 if __name__ == "__main__":
     # test_exercise_implementation()
-    num_generations=100
-    population_size=200
+    
+    num_generations=250
+    population_size=300
     ckpt_interval=5
     checkpoint_path=None
     run_evaluation=False # initially True
     compute_score=True
     random_seed=41
-    sigma = 0.5
+    sigma = 0.7
     
     print("Num. Generations:", num_generations)
     print("Population Size:", population_size)
@@ -469,9 +556,10 @@ if __name__ == "__main__":
         sigma = sigma,
     )
     
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print(f"\nTotal elapsed time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
+    # end_time = time.time()
+    # elapsed_time = end_time - start_time
+    # print(f"\nTotal elapsed time: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
+    
     
     # run_evolution_neural_controller(
     #     num_generations=50,
@@ -488,6 +576,17 @@ if __name__ == "__main__":
     # on the standard Gymnasium Ant-v5 and get your final score + video.
     # Replace the path with your actual checkpoint folder.
     # ----------------------------------------------------------------
+    
     # evaluate_checkpoint(
-    #     checkpoint_dir="results/20260305_174433_neural_controller_ckpts",
+    #     checkpoint_dir="results/20260317_145248_neural_controller_ckpts",
+    # )
+    
+    
+    # fp = "results/20260317_145248_neural_controller_ckpts/"
+    # if not os.path.exists(fp+"video/"):
+    #     os.mkdir(fp+"video/")
+    # make_video(
+    #     checkpoint_dir=fp,
+    #     output_dir=fp+"video/",
+    #     i = 1
     # )

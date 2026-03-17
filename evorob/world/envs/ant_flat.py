@@ -130,9 +130,12 @@ class AntFlatEnvironment(MujocoEnv):
         # reward low motor toques (penalize high control inputs)
         ctrl_cost = np.sum(action)
         
+        distance_reward = x_velocity * self.dt
+        
         # recommended weights
-        weights = np.array([1,1,-0.5])
-        reward_array = np.array([forward_reward, healthy_reward, ctrl_cost])
+        # weights = np.array([1,1,-0.5, 0])
+        weights = np.array([3,1,-0.3,3])
+        reward_array = np.array([forward_reward, healthy_reward, ctrl_cost, distance_reward])
         
         reward = np.sum(reward_array * weights)
         
