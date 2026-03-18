@@ -134,7 +134,7 @@ class AntFlatEnvironment(MujocoEnv):
         
         # recommended weights
         # weights = np.array([1,1,-0.5, 0])
-        weights = np.array([3,1,-0.3,3])
+        weights = np.array([5,1,-0.5,4])
         reward_array = np.array([forward_reward, healthy_reward, ctrl_cost, distance_reward])
         
         reward = np.sum(reward_array * weights)

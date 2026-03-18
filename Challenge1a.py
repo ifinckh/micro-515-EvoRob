@@ -198,7 +198,6 @@ def run_evolution_neural_controller(
     compute_score: bool = True,
     random_seed: int = 42,
     sigma: float = 0.5,
-    sigma: float = 0.5,
 ) -> None:
     """Run evolutionary optimization for robot controller."""
     np.random.seed(random_seed)
@@ -528,7 +527,7 @@ def make_video(
 if __name__ == "__main__":
     # test_exercise_implementation()
     
-    num_generations=250
+    num_generations=100
     population_size=300
     ckpt_interval=5
     checkpoint_path=None
