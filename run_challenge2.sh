@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=ER_Challenge1a                # Job name
-#SBATCH --output=logs/ER_Challenge1a_%j.out      # Standard output file (%j will be replaced by the job ID)
-#SBATCH --error=logs/ER_Challenge1a_%j.err       # Standard error file
+#SBATCH --job-name=ER_Challenge2                # Job name
+#SBATCH --output=logs/ER_Challenge2_%j.out      # Standard output file (%j will be replaced by the job ID)
+#SBATCH --error=logs/ER_Challenge2_%j.err       # Standard error file
 #SBATCH --nodes=1                                # Number of nodes requested
 #SBATCH --ntasks=1                               # Number of tasks requested
 #SBATCH --cpus-per-task=64                       # Number of CPU cores per task (adjust based on your parallel environment)
@@ -20,7 +20,7 @@ conda activate evorob
 mkdir -p logs
 
 # Run Python script
-python Challenge1a.py
+python Challenge2.py
 
 # conda init
 conda deactivate

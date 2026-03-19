@@ -1,0 +1,7 @@
+
+CondaError: Run 'conda init' before 'conda activate'
+
+python: can't open file '/home/finckh/ER_course/micro-515-EvoRob/Challenge1c.py': [Errno 2] No such file or directory
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
