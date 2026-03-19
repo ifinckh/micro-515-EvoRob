@@ -527,14 +527,14 @@ def make_video(
 if __name__ == "__main__":
     # test_exercise_implementation()
     
-    num_generations=300
+    num_generations=800
     population_size=400
     ckpt_interval=5
     checkpoint_path=None
     run_evaluation=False # initially True
     compute_score=True
-    random_seed=41
-    sigma = 0.5
+    random_seed=40
+    sigma = 0.4
     
     print("Num. Generations:", num_generations)
     print("Population Size:", population_size)
