@@ -128,7 +128,7 @@ class AntFlatEnvironment(MujocoEnv):
         # reward forward velocity
         forward_reward = x_velocity #* healthy_reward
         # reward low motor toques (penalize high control inputs)
-        ctrl_cost = np.sum(action)
+        ctrl_cost = np.sum(np.square(action))
         # reward distance traveled in the forward (x) direction
         distance_reward = x_velocity * self.dt
         # penalty for standing still, track last 5 positions and penalize if not moving 

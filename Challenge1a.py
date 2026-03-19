@@ -527,7 +527,7 @@ def make_video(
 if __name__ == "__main__":
     # test_exercise_implementation()
     
-    num_generations=200
+    num_generations=300
     population_size=400
     ckpt_interval=5
     checkpoint_path=None
