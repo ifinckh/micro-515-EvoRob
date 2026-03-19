@@ -40,7 +40,7 @@ class EvoAlgAPI(EA):
             sigma = 0.5
         
         self.es = cma.CMAEvolutionStrategy(
-            n_params *[0],  # n_params *[0], # np.random.uniform(0, 1, n_params), 
+            np.random.uniform(-0.2, 0.2, n_params),  # n_params *[0], # np.random.uniform(0, 1, n_params), 
             sigma,
             {'popsize': population_size}
         )
