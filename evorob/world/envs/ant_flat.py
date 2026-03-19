@@ -131,7 +131,12 @@ class AntFlatEnvironment(MujocoEnv):
         ctrl_cost = np.sum(np.square(action))
         # reward distance traveled in the forward (x) direction
         distance_reward = x_velocity * self.dt
-        # penalty for standing still, track last 5 positions and penalize if not moving 
+        # most likely redundant with forward_reward
+        
+        # might want to try body height as a guassian
+        # might want to start with rewarding the robot for any distance (e.g. eucledian) and then reward it going in that same direction (e.g. dot product with forward direction) to encourage it to move in a straight line rather than just spinning in circles, which could be a local minima for forward velocity reward
+        # mujoco_gym website for innovative reward
+        
                 
         
         # recommended weights
