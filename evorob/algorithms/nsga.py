@@ -400,13 +400,24 @@ class NSGAII(EA):
         # 1. Sort the front by that objective
         # 2. Assign infinite distance to boundary solutions
         # 3. Compute normalized distance for interior solutions
-        
-        for i in range(n_solutions):
-            distance[i] = 0
-            for m in range(n_objectives):
+        for obj in range(n_objectives):
+            # sort along objective m in our front
+            idx_sort = np.argsort(fitness[front,obj])
+            
+            # set extremes to inf
+            distance[idx_sort[0]] = np.inf
+            distance[idx_sort[-1]] = np.inf
+            
+            # make sure the range of objectives is non-zero
+            obj_range = np.max(fitness[front,obj]) - np.min(fitness[front,obj])
+            if obj_range == 0: continue
+            
+            # fill the normalized distances
+            distance[idx_sort[1:-1]] = ( fitness[front,obj][idx_sort[2:]] - fitness[front,obj][idx_sort[:-2]] ) / obj_range
                 
-                # Sort the front by the m-th objective
-                np.sort(front, key=lambda idx: fitness[idx][m])
+        
+        
+        return distance
         
         raise NotImplementedError(
             "TODO: Implement crowding distance calculation.\n"
@@ -434,6 +445,17 @@ class NSGAII(EA):
         # TODO: Compare two individuals
         # 1. Prefer lower rank (better Pareto front)
         # 2. If same rank, prefer larger crowding distance
+        
+        if population_rank[individual_idx] > population_rank[other_individual_idx]:
+            return other_individual_idx
+        elif population_rank[individual_idx] < population_rank[other_individual_idx]:
+            return individual_idx
+        else:
+            if crowding_distances[individual_idx] > crowding_distances[other_individual_idx]:
+                return individual_idx
+            else :
+                return other_individual_idx
+            
         
         raise NotImplementedError(
             "TODO: Implement crowding operator.\n"

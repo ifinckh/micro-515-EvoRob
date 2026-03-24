@@ -124,20 +124,26 @@ class AntFlatEnvironment(MujocoEnv):
         # Return: (reward, reward_info_dict)
         
         # reward not terminating
-        healthy_reward = not self._get_termination()
+        healthy_reward = 1 # not self._get_termination()
         # reward forward velocity
         forward_reward = x_velocity #* healthy_reward
         # reward low motor toques (penalize high control inputs)
         ctrl_cost = np.sum(np.square(action))
         # reward distance traveled in the forward (x) direction
-        distance_reward = x_velocity * self.dt
-        # penalty for standing still, track last 5 positions and penalize if not moving 
+        # distance_reward = x_velocity * self.dt
+        # most likely redundant with forward_reward
+        
+        # might want to try body height as a guassian
+        # might want to start with rewarding the robot for any distance (e.g. eucledian) and then reward it going in that same direction (e.g. dot product with forward direction) to encourage it to move in a straight line rather than just spinning in circles, which could be a local minima for forward velocity reward
+        # mujoco_gym website for innovative reward
+        
                 
         
         # recommended weights
-        # weights = np.array([1,1,-0.5, 0])
-        weights = np.array([7,0.5,-0.5,3])
-        reward_array = np.array([forward_reward, healthy_reward, ctrl_cost, distance_reward])
+        weights = np.array([7,0.7,-0.3])
+        # weights = np.array([7,0.5,-0.5,0])
+        reward_array = np.array([forward_reward, healthy_reward, ctrl_cost]) # , distance_reward])
+        # print("Reward components: ", reward_array**weights)
         
         reward = np.sum(reward_array * weights)
         

@@ -1,6 +1,8 @@
 import os
 
-os.environ.setdefault("MUJOCO_GL", "egl")
+# os.environ.setdefault("MUJOCO_GL", "egl")
+# os.environ["MUJOCO_GL"] = "egl"
+
 
 from datetime import datetime
 from pathlib import Path
@@ -805,20 +807,29 @@ def replay_checkpoint(checkpoint_path: str):
 
 if __name__ == "__main__":
     # Run unit tests first
-    test_exercise_implementation()
+    # test_exercise_implementation()
+    
+    num_generations=150
+    population_size=100
+    mutation_prob=0.8
+    crossover_prob=0.9
+    n_parents= int(population_size/2)
+    
+    print("Num Generations:", num_generations, "| Population Size:", population_size, 
+          "| Parents:", n_parents, "| Mutation Prob:", mutation_prob, "| Crossover Prob:", crossover_prob)
 
     # Uncomment to run full NSGA-II evolution:
     run_evolution_nsga(
-        num_generations=100,
-        population_size=10,
+        num_generations=num_generations,
+        population_size=population_size,
         run_evaluation=False,
         compute_score=True,
-        random_seed=42,
+        random_seed=41,
         n_repeats=2,
-        mutation_prob=0.3,
-        crossover_prob=0.5,
+        mutation_prob=mutation_prob,
+        crossover_prob=crossover_prob,
         bounds=(-1, 1),
-        n_parents=10,
+        n_parents=n_parents,
         ckpt_interval=5,
         checkpoint_path=None,
     )
