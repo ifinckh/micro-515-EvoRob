@@ -137,10 +137,10 @@ class AntFlatEnvironment(MujocoEnv):
         # might want to start with rewarding the robot for any distance (e.g. eucledian) and then reward it going in that same direction (e.g. dot product with forward direction) to encourage it to move in a straight line rather than just spinning in circles, which could be a local minima for forward velocity reward
         # mujoco_gym website for innovative reward
         
-                
+        
         
         # recommended weights
-        weights = np.array([7,0.7,-0.3])
+        weights = np.array([1,1,-0.5])
         # weights = np.array([7,0.5,-0.5,0])
         reward_array = np.array([forward_reward, healthy_reward, ctrl_cost]) # , distance_reward])
         # print("Reward components: ", reward_array**weights)

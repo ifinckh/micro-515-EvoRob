@@ -809,14 +809,16 @@ if __name__ == "__main__":
     # Run unit tests first
     # test_exercise_implementation()
     
-    num_generations=150
+    num_generations=400
     population_size=300
     mutation_prob=0.4
     crossover_prob=0.5
-    n_parents= int(population_size/5)
+    n_parents= int(population_size/4)
     
+    print("\n" + "#" * 70)
     print("\nNum Generations:", num_generations, "| Population Size:", population_size, 
-          "| Parents:", n_parents, "| Mutation Prob:", mutation_prob, "| Crossover Prob:", crossover_prob, "\n")
+          "| Parents:", n_parents, "| Mutation Prob:", mutation_prob, "| Crossover Prob:", crossover_prob)
+    print("\n" + "#" * 70)
 
     # Uncomment to run full NSGA-II evolution:
     run_evolution_nsga(

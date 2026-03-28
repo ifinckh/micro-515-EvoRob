@@ -129,7 +129,7 @@ class NSGAII(EA):
 
         # Select best n_pop individuals from combined population
         parents_population, parents_fitness = self.sort_and_select_parents(
-            combined_population, combined_fitness, self.n_pop
+            combined_population, combined_fitness, self.n_parents #self.n_pop
         )
 
         self.current_population = parents_population
@@ -410,13 +410,12 @@ class NSGAII(EA):
             
             # make sure the range of objectives is non-zero
             obj_range = np.max(fitness[front,obj]) - np.min(fitness[front,obj])
-            if obj_range == 0: continue
+            if obj_range == 0: 
+                continue
             
             # fill the normalized distances
             distance[idx_sort[1:-1]] = ( fitness[front,obj][idx_sort[2:]] - fitness[front,obj][idx_sort[:-2]] ) / obj_range
-                
-        
-        
+            
         return distance
         
         raise NotImplementedError(
