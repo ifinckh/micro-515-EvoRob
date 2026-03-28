@@ -809,11 +809,11 @@ if __name__ == "__main__":
     # Run unit tests first
     # test_exercise_implementation()
     
-    num_generations=400
+    num_generations=300
     population_size=300
-    mutation_prob=0.4
+    mutation_prob=0.5
     crossover_prob=0.5
-    n_parents= int(population_size/4)
+    n_parents= int(population_size*0.8)
     
     print("\n" + "#" * 70)
     print("\nNum Generations:", num_generations, "| Population Size:", population_size, 

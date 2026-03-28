@@ -199,6 +199,8 @@ class NSGAII(EA):
             dist = self.compute_crowding_distance(self.fitness, front)
             for i, idx in enumerate(front):
                 crowding[idx] = dist[i]
+                
+        current_pop_size = len(self.current_population)
 
         for i in range(population_size):
             # Select parent using tournament selection
@@ -207,13 +209,13 @@ class NSGAII(EA):
             # Select 3 different individuals for differential evolution
             r0 = parent_idx
             while r0 == parent_idx:
-                r0 = np.random.randint(0, population_size)
+                r0 = np.random.randint(0, current_pop_size) # population_size)
             r1 = r0
             while r1 == r0 or r1 == parent_idx:
-                r1 = np.random.randint(0, population_size)
+                r1 = np.random.randint(0, current_pop_size) # population_size)
             r2 = r1
             while r2 == r1 or r2 == r0 or r2 == parent_idx:
-                r2 = np.random.randint(0, population_size)
+                r2 = np.random.randint(0, current_pop_size) # population_size)
 
             jrand = np.random.randint(0, self.n_params)
             for j in range(self.n_params):
