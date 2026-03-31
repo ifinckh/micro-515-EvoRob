@@ -416,7 +416,7 @@ class NSGAII(EA):
                 continue
             
             # fill the normalized distances
-            distance[idx_sort[1:-1]] = ( fitness[front,obj][idx_sort[2:]] - fitness[front,obj][idx_sort[:-2]] ) / obj_range
+            distance[idx_sort[1:-1]] += ( fitness[front,obj][idx_sort[2:]] - fitness[front,obj][idx_sort[:-2]] ) / obj_range
             
         return distance
         
