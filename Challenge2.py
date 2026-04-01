@@ -816,7 +816,7 @@ if __name__ == "__main__":
     parser.add_argument("--population_size", type=int, default=300)
     parser.add_argument("--mutation_prob", type=float, default=0.5)
     parser.add_argument("--crossover_prob", type=float, default=0.5)
-    parser.add_argument("--n_parents", type=int, default=30)
+    parser.add_argument("--n_parents", type=int, default=300/3)
     args = parser.parse_args()
 
     num_generations = args.num_generations

@@ -126,23 +126,10 @@ class NSGAII(EA):
         else:
             combined_population = np.vstack([self.current_population, population])
             combined_fitness = np.vstack([self.fitness, fitness])
-            
-        #####################################################################################################################
-        ############## Added by Mathis ######################################################################################
-        # Normalize combined fitness before NSGA-II selection
-        normalized_fitness = combined_fitness.copy()
-        for obj in range(normalized_fitness.shape[1]):
-            f_min = normalized_fitness[:, obj].min()
-            f_max = normalized_fitness[:, obj].max()
-            r = f_max - f_min
-            if r > 1e-8:
-                normalized_fitness[:, obj] = (normalized_fitness[:, obj] - f_min) / r
-        #####################################################################################################################
-        #####################################################################################################################
         
         # Select best n_pop individuals from combined population
         parents_population, parents_fitness = self.sort_and_select_parents(
-            combined_population, normalized_fitness, self.n_parents #self.n_pop
+            combined_population, combined_fitness, self.n_parents #self.n_pop
         )
 
         self.current_population = parents_population
