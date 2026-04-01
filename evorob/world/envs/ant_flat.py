@@ -141,9 +141,9 @@ class AntFlatEnvironment(MujocoEnv):
         
         # recommended weights
         if self.terrain_type == "ice":
-            weights = np.array([1, 1, -1.5])   # harsher ctrl penalty on ice
+            weights = np.array([1, 1, -2.0])   # harsher ctrl penalty on ice
         else:
-            weights = np.array([1, 1, -0.5])   # standard flat
+            weights = np.array([1, 1, -1])   # standard flat
             
         reward_array = np.array([forward_reward, healthy_reward, ctrl_cost])
         # print("Reward components: ", reward_array**weights)

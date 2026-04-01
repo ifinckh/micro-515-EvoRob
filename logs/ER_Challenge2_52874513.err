@@ -1,0 +1,10 @@
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Traceback (most recent call last):
+  File "/home/finckh/ER_course/micro-515-EvoRob/Challenge2.py", line 11, in <module>
+    import imageio
+ModuleNotFoundError: No module named 'imageio'
+
+CondaError: Run 'conda init' before 'conda deactivate'
+

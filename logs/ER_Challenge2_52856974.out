@@ -1,0 +1,2333 @@
+
+######################################################################
+
+Num Generations: 500 | Population Size: 300 | Parents: 30 | Mutation Prob: 0.5 | Crossover Prob: 0.9
+
+######################################################################
+Metadata saved to: results/20260331_165444_nsga_ckpts/metadata.txt
+
+======================================================================
+                 MULTI-OBJECTIVE EVOLUTION - NSGA-II                  
+======================================================================
+Population: 300 | Generations: 500 | Parents: 30
+Objective 1: Flat Terrain Speed | Objective 2: Ice Terrain Speed
+======================================================================
+
+Generation 0:	[ -6.72590306 -68.14328294]
+Mean fitness:	-328.45 +- 569.63
+Mean fitness per obj: ['-53.08 +-52.49', '-603.81 +-703.24']
+Gen    1/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.2%
+     Best:     Objective 1=   7.89  Objective 2= -60.13
+     Mean:     Objective 1= -53.08  Objective 2=-603.81
+
+Gen    2/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.4%
+     Best:     Objective 1=  28.35  Objective 2= -55.31
+     Mean:     Objective 1= -52.31  Objective 2=-517.63
+
+Gen    3/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.6%
+     Best:     Objective 1=  -7.23  Objective 2= -63.57
+     Mean:     Objective 1= -48.64  Objective 2=-455.47
+
+Gen    4/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.8%
+     Best:     Objective 1=   1.19  Objective 2= -63.62
+     Mean:     Objective 1= -50.99  Objective 2=-518.07
+
+Gen    5/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.0%
+     Best:     Objective 1=  -4.49  Objective 2= -60.52
+     Mean:     Objective 1= -50.06  Objective 2=-471.60
+
+Generation 5:	[ -6.72590306 -68.14328294]
+Mean fitness:	-285.74 +- 498.93
+Mean fitness per obj: ['-46.47 +-61.80', '-525.01 +-616.07']
+Gen    6/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.2%
+     Best:     Objective 1=   4.90  Objective 2= -53.41
+     Mean:     Objective 1= -46.47  Objective 2=-525.01
+
+Gen    7/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.4%
+     Best:     Objective 1=  -1.10  Objective 2= -49.58
+     Mean:     Objective 1= -46.92  Objective 2=-519.30
+
+Gen    8/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.6%
+     Best:     Objective 1=  15.70  Objective 2= -45.39
+     Mean:     Objective 1= -46.56  Objective 2=-561.09
+
+Gen    9/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.8%
+     Best:     Objective 1=   1.64  Objective 2= -48.66
+     Mean:     Objective 1= -48.29  Objective 2=-565.56
+
+Gen   10/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   2.0%
+     Best:     Objective 1=  -1.16  Objective 2= -44.95
+     Mean:     Objective 1= -43.34  Objective 2=-446.08
+
+Generation 10:	[ -6.72590306 -68.14328294]
+Mean fitness:	-265.49 +- 468.15
+Mean fitness per obj: ['-42.88 +-56.36', '-488.11 +-579.69']
+Gen   11/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   2.2%
+     Best:     Objective 1=  33.85  Objective 2= -46.75
+     Mean:     Objective 1= -42.88  Objective 2=-488.11
+
+Gen   12/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   2.4%
+     Best:     Objective 1=  11.46  Objective 2= -38.32
+     Mean:     Objective 1= -41.75  Objective 2=-467.06
+
+Gen   13/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   2.6%
+     Best:     Objective 1=   4.05  Objective 2= -47.88
+     Mean:     Objective 1= -38.10  Objective 2=-444.46
+
+Gen   14/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   2.8%
+     Best:     Objective 1=  13.51  Objective 2= -48.25
+     Mean:     Objective 1= -35.94  Objective 2=-457.61
+
+Gen   15/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3.0%
+     Best:     Objective 1=   1.50  Objective 2= -43.96
+     Mean:     Objective 1= -40.15  Objective 2=-429.62
+
+Generation 15:	[ 11.46355971 -45.78871034]
+Mean fitness:	-267.18 +- 489.56
+Mean fitness per obj: ['-39.46 +-46.53', '-494.90 +-611.12']
+Gen   16/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3.2%
+     Best:     Objective 1=   3.73  Objective 2= -44.41
+     Mean:     Objective 1= -39.46  Objective 2=-494.90
+
+Gen   17/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3.4%
+     Best:     Objective 1=   5.85  Objective 2= -40.34
+     Mean:     Objective 1= -39.32  Objective 2=-428.09
+
+Gen   18/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3.6%
+     Best:     Objective 1=   4.17  Objective 2= -45.84
+     Mean:     Objective 1= -37.45  Objective 2=-442.66
+
+Gen   19/500 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3.8%
+     Best:     Objective 1=   9.11  Objective 2= -41.61
+     Mean:     Objective 1= -36.41  Objective 2=-419.08
+
+Gen   20/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   4.0%
+     Best:     Objective 1=  35.66  Objective 2= -38.13
+     Mean:     Objective 1= -36.16  Objective 2=-449.19
+
+Generation 20:	[ 11.46355971 -45.78871034]
+Mean fitness:	-239.64 +- 444.50
+Mean fitness per obj: ['-32.26 +-40.57', '-447.03 +-554.52']
+Gen   21/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   4.2%
+     Best:     Objective 1=  21.36  Objective 2= -42.91
+     Mean:     Objective 1= -32.26  Objective 2=-447.03
+
+Gen   22/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   4.4%
+     Best:     Objective 1=  20.02  Objective 2= -35.89
+     Mean:     Objective 1= -32.80  Objective 2=-386.78
+
+Gen   23/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   4.6%
+     Best:     Objective 1=  35.92  Objective 2= -38.22
+     Mean:     Objective 1= -27.39  Objective 2=-374.71
+
+Gen   24/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   4.8%
+     Best:     Objective 1=  13.05  Objective 2= -35.06
+     Mean:     Objective 1= -29.67  Objective 2=-364.63
+
+Gen   25/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5.0%
+     Best:     Objective 1=  29.87  Objective 2= -36.33
+     Mean:     Objective 1= -28.51  Objective 2=-355.62
+
+Generation 25:	[ 11.46355971 -45.78871034]
+Mean fitness:	-159.42 +- 273.48
+Mean fitness per obj: ['-26.10 +-28.60', '-292.73 +-336.49']
+Gen   26/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5.2%
+     Best:     Objective 1=  19.22  Objective 2= -36.62
+     Mean:     Objective 1= -26.10  Objective 2=-292.73
+
+Gen   27/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5.4%
+     Best:     Objective 1=  18.64  Objective 2= -29.32
+     Mean:     Objective 1= -23.11  Objective 2=-306.60
+
+Gen   28/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5.6%
+     Best:     Objective 1=  22.76  Objective 2= -36.82
+     Mean:     Objective 1= -21.35  Objective 2=-337.39
+
+Gen   29/500 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5.8%
+     Best:     Objective 1=  17.72  Objective 2= -29.02
+     Mean:     Objective 1= -20.15  Objective 2=-349.45
+
+Gen   30/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   6.0%
+     Best:     Objective 1=  71.58  Objective 2= -29.85
+     Mean:     Objective 1= -19.75  Objective 2=-321.46
+
+Generation 30:	[ 22.75726313 -40.4482609 ]
+Mean fitness:	-151.87 +- 306.25
+Mean fitness per obj: ['-19.89 +-33.17', '-283.85 +-389.41']
+Gen   31/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   6.2%
+     Best:     Objective 1=  35.64  Objective 2= -29.42
+     Mean:     Objective 1= -19.89  Objective 2=-283.85
+
+Gen   32/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   6.4%
+     Best:     Objective 1=  20.84  Objective 2= -28.54
+     Mean:     Objective 1= -15.69  Objective 2=-229.50
+
+Gen   33/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   6.6%
+     Best:     Objective 1=  28.09  Objective 2= -33.03
+     Mean:     Objective 1= -16.75  Objective 2=-276.85
+
+Gen   34/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   6.8%
+     Best:     Objective 1=  24.02  Objective 2= -29.00
+     Mean:     Objective 1= -15.65  Objective 2=-262.52
+
+Gen   35/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   7.0%
+     Best:     Objective 1=  43.28  Objective 2= -31.78
+     Mean:     Objective 1= -17.39  Objective 2=-285.84
+
+Generation 35:	[ 26.39777776 -36.96721282]
+Mean fitness:	-145.60 +- 266.50
+Mean fitness per obj: ['-21.02 +-33.20', '-270.18 +-331.51']
+Gen   36/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   7.2%
+     Best:     Objective 1=  27.94  Objective 2= -29.05
+     Mean:     Objective 1= -21.02  Objective 2=-270.18
+
+Gen   37/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   7.4%
+     Best:     Objective 1=  19.18  Objective 2= -29.35
+     Mean:     Objective 1= -18.03  Objective 2=-275.45
+
+Gen   38/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   7.6%
+     Best:     Objective 1=  44.56  Objective 2= -28.07
+     Mean:     Objective 1= -16.65  Objective 2=-316.46
+
+Gen   39/500 [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   7.8%
+     Best:     Objective 1=  40.55  Objective 2= -28.70
+     Mean:     Objective 1= -17.78  Objective 2=-255.37
+
+Gen   40/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   8.0%
+     Best:     Objective 1=  16.41  Objective 2= -21.87
+     Mean:     Objective 1= -16.52  Objective 2=-245.21
+
+Generation 40:	[ 26.39777776 -36.96721282]
+Mean fitness:	-130.18 +- 227.73
+Mean fitness per obj: ['-18.87 +-36.77', '-241.50 +-278.55']
+Gen   41/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   8.2%
+     Best:     Objective 1=  32.38  Objective 2= -26.87
+     Mean:     Objective 1= -18.87  Objective 2=-241.50
+
+Gen   42/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   8.4%
+     Best:     Objective 1=  29.03  Objective 2= -24.15
+     Mean:     Objective 1= -17.43  Objective 2=-270.66
+
+Gen   43/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   8.6%
+     Best:     Objective 1=  36.49  Objective 2= -23.69
+     Mean:     Objective 1= -16.61  Objective 2=-290.91
+
+Gen   44/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   8.8%
+     Best:     Objective 1=  59.47  Objective 2= -25.67
+     Mean:     Objective 1= -16.84  Objective 2=-257.42
+
+Gen   45/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.0%
+     Best:     Objective 1=  42.30  Objective 2= -28.03
+     Mean:     Objective 1= -18.25  Objective 2=-252.47
+
+Generation 45:	[ 26.39777776 -36.96721282]
+Mean fitness:	-152.58 +- 316.66
+Mean fitness per obj: ['-16.62 +-24.05', '-288.54 +-403.73']
+Gen   46/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.2%
+     Best:     Objective 1=  36.00  Objective 2= -25.23
+     Mean:     Objective 1= -16.62  Objective 2=-288.54
+
+Gen   47/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.4%
+     Best:     Objective 1=  53.79  Objective 2= -27.80
+     Mean:     Objective 1= -16.36  Objective 2=-282.46
+
+Gen   48/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.6%
+     Best:     Objective 1=  31.05  Objective 2= -26.27
+     Mean:     Objective 1= -18.59  Objective 2=-226.34
+
+Gen   49/500 [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.8%
+     Best:     Objective 1=  30.84  Objective 2= -24.42
+     Mean:     Objective 1= -16.85  Objective 2=-251.51
+
+Gen   50/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  10.0%
+     Best:     Objective 1=  27.17  Objective 2= -25.65
+     Mean:     Objective 1= -17.74  Objective 2=-278.95
+
+Generation 50:	[ 26.39777776 -36.96721282]
+Mean fitness:	-138.23 +- 252.27
+Mean fitness per obj: ['-14.08 +-17.75', '-262.38 +-310.06']
+Gen   51/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  10.2%
+     Best:     Objective 1=  22.20  Objective 2= -30.43
+     Mean:     Objective 1= -14.08  Objective 2=-262.38
+
+Gen   52/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  10.4%
+     Best:     Objective 1=  35.16  Objective 2= -26.28
+     Mean:     Objective 1= -16.76  Objective 2=-239.90
+
+Gen   53/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  10.6%
+     Best:     Objective 1=  34.72  Objective 2= -23.59
+     Mean:     Objective 1= -17.40  Objective 2=-262.81
+
+Gen   54/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  10.8%
+     Best:     Objective 1=  61.64  Objective 2= -26.80
+     Mean:     Objective 1= -17.18  Objective 2=-258.57
+
+Gen   55/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  11.0%
+     Best:     Objective 1=  31.67  Objective 2= -20.72
+     Mean:     Objective 1= -15.96  Objective 2=-242.44
+
+Generation 55:	[ 34.7239395  -28.30279524]
+Mean fitness:	-141.42 +- 258.86
+Mean fitness per obj: ['-15.60 +-21.43', '-267.24 +-319.21']
+Gen   56/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  11.2%
+     Best:     Objective 1=  23.82  Objective 2= -25.12
+     Mean:     Objective 1= -15.60  Objective 2=-267.24
+
+Gen   57/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  11.4%
+     Best:     Objective 1=  32.42  Objective 2= -26.26
+     Mean:     Objective 1= -15.28  Objective 2=-236.32
+
+Gen   58/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  11.6%
+     Best:     Objective 1=  30.55  Objective 2= -25.59
+     Mean:     Objective 1= -15.37  Objective 2=-253.47
+
+Gen   59/500 [█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  11.8%
+     Best:     Objective 1=  43.73  Objective 2= -23.90
+     Mean:     Objective 1= -14.25  Objective 2=-290.38
+
+Gen   60/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  12.0%
+     Best:     Objective 1=  48.72  Objective 2= -24.23
+     Mean:     Objective 1= -14.06  Objective 2=-268.68
+
+Generation 60:	[ 34.7239395  -28.30279524]
+Mean fitness:	-125.22 +- 242.35
+Mean fitness per obj: ['-17.11 +-25.09', '-233.32 +-305.72']
+Gen   61/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  12.2%
+     Best:     Objective 1=  31.33  Objective 2= -25.08
+     Mean:     Objective 1= -17.11  Objective 2=-233.32
+
+Gen   62/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  12.4%
+     Best:     Objective 1=  36.32  Objective 2= -24.11
+     Mean:     Objective 1= -16.44  Objective 2=-248.20
+
+Gen   63/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  12.6%
+     Best:     Objective 1=  41.56  Objective 2= -25.96
+     Mean:     Objective 1= -14.01  Objective 2=-261.19
+
+Gen   64/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  12.8%
+     Best:     Objective 1=  38.01  Objective 2= -22.70
+     Mean:     Objective 1= -13.15  Objective 2=-250.08
+
+Gen   65/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  13.0%
+     Best:     Objective 1=  51.63  Objective 2= -23.14
+     Mean:     Objective 1= -14.37  Objective 2=-223.71
+
+Generation 65:	[ 34.7239395  -28.30279524]
+Mean fitness:	-126.84 +- 252.18
+Mean fitness per obj: ['-16.59 +-30.83', '-237.09 +-319.27']
+Gen   66/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  13.2%
+     Best:     Objective 1=  29.60  Objective 2= -19.84
+     Mean:     Objective 1= -16.59  Objective 2=-237.09
+
+Gen   67/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  13.4%
+     Best:     Objective 1=  38.98  Objective 2= -26.05
+     Mean:     Objective 1= -14.87  Objective 2=-215.75
+
+Gen   68/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  13.6%
+     Best:     Objective 1=  29.34  Objective 2= -20.03
+     Mean:     Objective 1= -15.28  Objective 2=-216.93
+
+Gen   69/500 [██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  13.8%
+     Best:     Objective 1=  23.88  Objective 2= -27.25
+     Mean:     Objective 1= -13.61  Objective 2=-263.70
+
+Gen   70/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  14.0%
+     Best:     Objective 1=  36.40  Objective 2= -23.99
+     Mean:     Objective 1= -15.62  Objective 2=-266.95
+
+Generation 70:	[ 34.7239395  -28.30279524]
+Mean fitness:	-129.62 +- 253.71
+Mean fitness per obj: ['-13.13 +-18.31', '-246.11 +-318.22']
+Gen   71/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  14.2%
+     Best:     Objective 1=  41.54  Objective 2= -27.33
+     Mean:     Objective 1= -13.13  Objective 2=-246.11
+
+Gen   72/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  14.4%
+     Best:     Objective 1=  27.35  Objective 2= -22.05
+     Mean:     Objective 1= -14.10  Objective 2=-283.54
+
+Gen   73/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  14.6%
+     Best:     Objective 1=  37.71  Objective 2= -28.00
+     Mean:     Objective 1= -15.66  Objective 2=-252.90
+
+Gen   74/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  14.8%
+     Best:     Objective 1=  37.19  Objective 2= -22.75
+     Mean:     Objective 1= -14.62  Objective 2=-251.64
+
+Gen   75/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  15.0%
+     Best:     Objective 1=  39.17  Objective 2= -18.71
+     Mean:     Objective 1= -15.27  Objective 2=-265.85
+
+Generation 75:	[ 34.7239395  -28.30279524]
+Mean fitness:	-123.83 +- 241.11
+Mean fitness per obj: ['-14.67 +-19.89', '-233.00 +-303.37']
+Gen   76/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  15.2%
+     Best:     Objective 1=  25.75  Objective 2= -23.74
+     Mean:     Objective 1= -14.67  Objective 2=-233.00
+
+Gen   77/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  15.4%
+     Best:     Objective 1=  39.80  Objective 2= -21.44
+     Mean:     Objective 1= -13.69  Objective 2=-233.73
+
+Gen   78/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  15.6%
+     Best:     Objective 1=  22.47  Objective 2= -23.50
+     Mean:     Objective 1= -13.74  Objective 2=-231.12
+
+Gen   79/500 [███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  15.8%
+     Best:     Objective 1=  40.29  Objective 2= -25.32
+     Mean:     Objective 1= -15.68  Objective 2=-231.01
+
+Gen   80/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  16.0%
+     Best:     Objective 1=  28.88  Objective 2= -22.46
+     Mean:     Objective 1= -14.86  Objective 2=-238.64
+
+Generation 80:	[ 34.7239395  -28.30279524]
+Mean fitness:	-125.12 +- 228.09
+Mean fitness per obj: ['-15.15 +-22.56', '-235.10 +-281.70']
+Gen   81/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  16.2%
+     Best:     Objective 1=  21.28  Objective 2= -27.40
+     Mean:     Objective 1= -15.15  Objective 2=-235.10
+
+Gen   82/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  16.4%
+     Best:     Objective 1=  46.50  Objective 2= -21.94
+     Mean:     Objective 1= -16.37  Objective 2=-252.59
+
+Gen   83/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  16.6%
+     Best:     Objective 1=  35.11  Objective 2= -23.39
+     Mean:     Objective 1= -11.58  Objective 2=-221.80
+
+Gen   84/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  16.8%
+     Best:     Objective 1=  33.44  Objective 2= -20.71
+     Mean:     Objective 1= -12.82  Objective 2=-241.44
+
+Gen   85/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  17.0%
+     Best:     Objective 1=  41.81  Objective 2= -26.59
+     Mean:     Objective 1= -14.36  Objective 2=-274.42
+
+Generation 85:	[ 34.7239395  -28.30279524]
+Mean fitness:	-127.95 +- 266.33
+Mean fitness per obj: ['-14.24 +-27.40', '-241.65 +-339.49']
+Gen   86/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  17.2%
+     Best:     Objective 1=  18.36  Objective 2= -25.51
+     Mean:     Objective 1= -14.24  Objective 2=-241.65
+
+Gen   87/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  17.4%
+     Best:     Objective 1=  26.70  Objective 2= -23.66
+     Mean:     Objective 1= -13.82  Objective 2=-250.85
+
+Gen   88/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  17.6%
+     Best:     Objective 1=  51.15  Objective 2= -26.17
+     Mean:     Objective 1= -14.43  Objective 2=-234.53
+
+Gen   89/500 [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  17.8%
+     Best:     Objective 1=  62.84  Objective 2= -24.44
+     Mean:     Objective 1= -14.04  Objective 2=-216.09
+
+Gen   90/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  18.0%
+     Best:     Objective 1=  43.37  Objective 2= -23.66
+     Mean:     Objective 1= -12.35  Objective 2=-196.12
+
+Generation 90:	[ 34.7239395  -28.30279524]
+Mean fitness:	-140.26 +- 280.95
+Mean fitness per obj: ['-15.43 +-27.90', '-265.09 +-354.85']
+Gen   91/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  18.2%
+     Best:     Objective 1=  31.30  Objective 2= -21.72
+     Mean:     Objective 1= -15.43  Objective 2=-265.09
+
+Gen   92/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  18.4%
+     Best:     Objective 1=  32.56  Objective 2= -23.78
+     Mean:     Objective 1= -11.32  Objective 2=-236.31
+
+Gen   93/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  18.6%
+     Best:     Objective 1=  40.24  Objective 2= -27.40
+     Mean:     Objective 1= -11.61  Objective 2=-218.67
+
+Gen   94/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  18.8%
+     Best:     Objective 1=  46.13  Objective 2= -21.58
+     Mean:     Objective 1= -12.26  Objective 2=-222.45
+
+Gen   95/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  19.0%
+     Best:     Objective 1=  33.35  Objective 2= -19.61
+     Mean:     Objective 1= -10.31  Objective 2=-262.91
+
+Generation 95:	[ 44.04078199 -25.67760942]
+Mean fitness:	-121.02 +- 242.12
+Mean fitness per obj: ['-12.07 +-18.60', '-229.97 +-305.22']
+Gen   96/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  19.2%
+     Best:     Objective 1=  44.04  Objective 2= -23.05
+     Mean:     Objective 1= -12.07  Objective 2=-229.97
+
+Gen   97/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  19.4%
+     Best:     Objective 1=  37.93  Objective 2= -25.05
+     Mean:     Objective 1= -13.34  Objective 2=-234.25
+
+Gen   98/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  19.6%
+     Best:     Objective 1=  32.91  Objective 2= -24.24
+     Mean:     Objective 1= -12.99  Objective 2=-221.28
+
+Gen   99/500 [█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  19.8%
+     Best:     Objective 1=  33.40  Objective 2= -20.28
+     Mean:     Objective 1= -10.60  Objective 2=-227.44
+
+Gen  100/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  20.0%
+     Best:     Objective 1=  40.47  Objective 2= -24.02
+     Mean:     Objective 1= -10.08  Objective 2=-197.76
+
+Generation 100:	[ 44.04078199 -25.67760942]
+Mean fitness:	-119.62 +- 226.49
+Mean fitness per obj: ['-11.08 +-16.79', '-228.16 +-280.63']
+Gen  101/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  20.2%
+     Best:     Objective 1=  32.18  Objective 2= -22.66
+     Mean:     Objective 1= -11.08  Objective 2=-228.16
+
+Gen  102/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  20.4%
+     Best:     Objective 1=  33.08  Objective 2= -24.60
+     Mean:     Objective 1= -11.44  Objective 2=-228.80
+
+Gen  103/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  20.6%
+     Best:     Objective 1=  33.01  Objective 2= -25.25
+     Mean:     Objective 1= -14.41  Objective 2=-208.10
+
+Gen  104/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  20.8%
+     Best:     Objective 1=  40.83  Objective 2= -17.62
+     Mean:     Objective 1= -11.96  Objective 2=-214.21
+
+Gen  105/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  21.0%
+     Best:     Objective 1=  52.62  Objective 2= -21.65
+     Mean:     Objective 1= -12.40  Objective 2=-220.48
+
+Generation 105:	[ 44.04078199 -25.67760942]
+Mean fitness:	-116.22 +- 253.74
+Mean fitness per obj: ['-12.00 +-26.03', '-220.43 +-326.15']
+Gen  106/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  21.2%
+     Best:     Objective 1=  41.75  Objective 2= -21.33
+     Mean:     Objective 1= -12.00  Objective 2=-220.43
+
+Gen  107/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  21.4%
+     Best:     Objective 1=  36.07  Objective 2= -23.22
+     Mean:     Objective 1= -12.99  Objective 2=-222.42
+
+Gen  108/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  21.6%
+     Best:     Objective 1=  50.54  Objective 2= -23.32
+     Mean:     Objective 1= -12.95  Objective 2=-234.66
+
+Gen  109/500 [██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  21.8%
+     Best:     Objective 1=  53.68  Objective 2= -20.46
+     Mean:     Objective 1= -10.94  Objective 2=-256.55
+
+Gen  110/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  22.0%
+     Best:     Objective 1=  38.59  Objective 2= -23.18
+     Mean:     Objective 1= -10.01  Objective 2=-219.60
+
+Generation 110:	[ 44.04078199 -25.67760942]
+Mean fitness:	-119.77 +- 237.93
+Mean fitness per obj: ['-11.52 +-22.44', '-228.03 +-298.80']
+Gen  111/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  22.2%
+     Best:     Objective 1=  31.52  Objective 2= -24.69
+     Mean:     Objective 1= -11.52  Objective 2=-228.03
+
+Gen  112/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  22.4%
+     Best:     Objective 1=  36.54  Objective 2= -21.57
+     Mean:     Objective 1= -12.69  Objective 2=-224.85
+
+Gen  113/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  22.6%
+     Best:     Objective 1=  64.16  Objective 2= -21.34
+     Mean:     Objective 1= -10.13  Objective 2=-241.84
+
+Gen  114/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  22.8%
+     Best:     Objective 1=  37.98  Objective 2= -19.62
+     Mean:     Objective 1= -11.66  Objective 2=-224.02
+
+Gen  115/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  23.0%
+     Best:     Objective 1=  41.45  Objective 2= -23.83
+     Mean:     Objective 1= -10.88  Objective 2=-244.32
+
+Generation 115:	[ 44.04078199 -25.67760942]
+Mean fitness:	-105.01 +- 195.30
+Mean fitness per obj: ['-12.69 +-21.84', '-197.33 +-242.41']
+Gen  116/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  23.2%
+     Best:     Objective 1=  29.36  Objective 2= -22.82
+     Mean:     Objective 1= -12.69  Objective 2=-197.33
+
+Gen  117/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  23.4%
+     Best:     Objective 1=  56.14  Objective 2= -23.23
+     Mean:     Objective 1= -11.48  Objective 2=-244.34
+
+Gen  118/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  23.6%
+     Best:     Objective 1=  49.77  Objective 2= -22.96
+     Mean:     Objective 1= -10.53  Objective 2=-247.31
+
+Gen  119/500 [███████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  23.8%
+     Best:     Objective 1=  54.37  Objective 2= -24.24
+     Mean:     Objective 1=  -8.66  Objective 2=-226.15
+
+Gen  120/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  24.0%
+     Best:     Objective 1=  27.03  Objective 2= -24.98
+     Mean:     Objective 1= -12.42  Objective 2=-245.51
+
+Generation 120:	[ 44.04078199 -25.67760942]
+Mean fitness:	-121.37 +- 234.57
+Mean fitness per obj: ['-14.21 +-22.97', '-228.53 +-294.20']
+Gen  121/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  24.2%
+     Best:     Objective 1=  36.30  Objective 2= -22.83
+     Mean:     Objective 1= -14.21  Objective 2=-228.53
+
+Gen  122/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  24.4%
+     Best:     Objective 1=  59.61  Objective 2= -22.94
+     Mean:     Objective 1= -11.45  Objective 2=-223.85
+
+Gen  123/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  24.6%
+     Best:     Objective 1=  47.88  Objective 2= -22.16
+     Mean:     Objective 1=  -9.37  Objective 2=-241.83
+
+Gen  124/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  24.8%
+     Best:     Objective 1=  38.18  Objective 2= -24.02
+     Mean:     Objective 1=  -9.33  Objective 2=-232.29
+
+Gen  125/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  25.0%
+     Best:     Objective 1=  76.10  Objective 2= -24.15
+     Mean:     Objective 1=  -9.70  Objective 2=-253.98
+
+Generation 125:	[ 44.04078199 -25.67760942]
+Mean fitness:	-115.50 +- 232.21
+Mean fitness per obj: ['-11.90 +-22.28', '-219.11 +-293.05']
+Gen  126/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  25.2%
+     Best:     Objective 1=  47.65  Objective 2= -24.34
+     Mean:     Objective 1= -11.90  Objective 2=-219.11
+
+Gen  127/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  25.4%
+     Best:     Objective 1=  28.08  Objective 2= -23.91
+     Mean:     Objective 1= -14.33  Objective 2=-235.27
+
+Gen  128/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  25.6%
+     Best:     Objective 1=  65.00  Objective 2= -22.24
+     Mean:     Objective 1= -12.66  Objective 2=-252.70
+
+Gen  129/500 [████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  25.8%
+     Best:     Objective 1=  56.49  Objective 2= -22.15
+     Mean:     Objective 1= -11.86  Objective 2=-219.24
+
+Gen  130/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  26.0%
+     Best:     Objective 1=  21.64  Objective 2= -17.39
+     Mean:     Objective 1=  -9.57  Objective 2=-250.43
+
+Generation 130:	[ 44.04078199 -25.67760942]
+Mean fitness:	-122.54 +- 258.16
+Mean fitness per obj: ['-9.64 +-21.56', '-235.44 +-327.63']
+Gen  131/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  26.2%
+     Best:     Objective 1=  69.77  Objective 2= -22.20
+     Mean:     Objective 1=  -9.64  Objective 2=-235.44
+
+Gen  132/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  26.4%
+     Best:     Objective 1=  35.98  Objective 2= -19.90
+     Mean:     Objective 1= -11.19  Objective 2=-218.59
+
+Gen  133/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  26.6%
+     Best:     Objective 1=  68.57  Objective 2= -23.35
+     Mean:     Objective 1= -10.68  Objective 2=-220.59
+
+Gen  134/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  26.8%
+     Best:     Objective 1=  38.55  Objective 2= -22.28
+     Mean:     Objective 1=  -9.97  Objective 2=-245.79
+
+Gen  135/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  27.0%
+     Best:     Objective 1=  42.05  Objective 2= -23.17
+     Mean:     Objective 1= -14.33  Objective 2=-226.08
+
+Generation 135:	[ 44.04078199 -25.67760942]
+Mean fitness:	-116.90 +- 222.45
+Mean fitness per obj: ['-12.85 +-27.08', '-220.95 +-276.73']
+Gen  136/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  27.2%
+     Best:     Objective 1=  52.10  Objective 2= -21.51
+     Mean:     Objective 1= -12.85  Objective 2=-220.95
+
+Gen  137/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  27.4%
+     Best:     Objective 1=  39.65  Objective 2= -23.33
+     Mean:     Objective 1= -10.45  Objective 2=-254.00
+
+Gen  138/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  27.6%
+     Best:     Objective 1=  40.47  Objective 2= -20.02
+     Mean:     Objective 1= -11.35  Objective 2=-239.58
+
+Gen  139/500 [█████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  27.8%
+     Best:     Objective 1=  43.03  Objective 2= -20.71
+     Mean:     Objective 1=  -8.99  Objective 2=-235.80
+
+Gen  140/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  28.0%
+     Best:     Objective 1=  47.30  Objective 2= -22.24
+     Mean:     Objective 1= -12.92  Objective 2=-257.94
+
+Generation 140:	[ 44.04078199 -25.67760942]
+Mean fitness:	-131.72 +- 257.00
+Mean fitness per obj: ['-10.29 +-19.29', '-253.16 +-319.75']
+Gen  141/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  28.2%
+     Best:     Objective 1=  45.47  Objective 2= -21.23
+     Mean:     Objective 1= -10.29  Objective 2=-253.16
+
+Gen  142/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  28.4%
+     Best:     Objective 1=  32.97  Objective 2= -21.49
+     Mean:     Objective 1= -11.87  Objective 2=-221.39
+
+Gen  143/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  28.6%
+     Best:     Objective 1=  45.30  Objective 2= -22.93
+     Mean:     Objective 1= -13.99  Objective 2=-248.98
+
+Gen  144/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  28.8%
+     Best:     Objective 1=  41.72  Objective 2= -21.16
+     Mean:     Objective 1= -12.74  Objective 2=-217.48
+
+Gen  145/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  29.0%
+     Best:     Objective 1=  42.07  Objective 2= -21.65
+     Mean:     Objective 1= -10.55  Objective 2=-263.10
+
+Generation 145:	[ 44.04078199 -25.67760942]
+Mean fitness:	-119.13 +- 224.09
+Mean fitness per obj: ['-11.35 +-22.09', '-226.91 +-276.97']
+Gen  146/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  29.2%
+     Best:     Objective 1=  94.82  Objective 2= -20.57
+     Mean:     Objective 1= -11.35  Objective 2=-226.91
+
+Gen  147/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  29.4%
+     Best:     Objective 1=  73.46  Objective 2= -22.22
+     Mean:     Objective 1= -11.53  Objective 2=-219.20
+
+Gen  148/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  29.6%
+     Best:     Objective 1=  47.74  Objective 2= -22.12
+     Mean:     Objective 1=  -9.58  Objective 2=-244.14
+
+Gen  149/500 [██████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  29.8%
+     Best:     Objective 1=  55.97  Objective 2= -23.98
+     Mean:     Objective 1= -12.41  Objective 2=-274.53
+
+Gen  150/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  30.0%
+     Best:     Objective 1=  36.31  Objective 2= -21.56
+     Mean:     Objective 1= -10.12  Objective 2=-225.66
+
+Generation 150:	[ 44.04078199 -25.67760942]
+Mean fitness:	-115.07 +- 219.75
+Mean fitness per obj: ['-8.31 +-17.76', '-221.84 +-271.04']
+Gen  151/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  30.2%
+     Best:     Objective 1=  49.23  Objective 2= -20.23
+     Mean:     Objective 1=  -8.31  Objective 2=-221.84
+
+Gen  152/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  30.4%
+     Best:     Objective 1=  50.64  Objective 2= -24.95
+     Mean:     Objective 1=  -9.54  Objective 2=-241.59
+
+Gen  153/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  30.6%
+     Best:     Objective 1=  46.35  Objective 2= -20.90
+     Mean:     Objective 1= -11.99  Objective 2=-239.37
+
+Gen  154/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  30.8%
+     Best:     Objective 1=  26.36  Objective 2= -17.89
+     Mean:     Objective 1= -11.28  Objective 2=-259.94
+
+Gen  155/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  31.0%
+     Best:     Objective 1=  37.32  Objective 2= -19.28
+     Mean:     Objective 1= -11.56  Objective 2=-220.04
+
+Generation 155:	[ 44.04078199 -25.67760942]
+Mean fitness:	-132.21 +- 269.23
+Mean fitness per obj: ['-10.11 +-19.92', '-254.32 +-338.76']
+Gen  156/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  31.2%
+     Best:     Objective 1=  35.36  Objective 2= -22.87
+     Mean:     Objective 1= -10.11  Objective 2=-254.32
+
+Gen  157/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  31.4%
+     Best:     Objective 1=  40.77  Objective 2= -20.12
+     Mean:     Objective 1= -10.10  Objective 2=-266.73
+
+Gen  158/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  31.6%
+     Best:     Objective 1=  44.03  Objective 2= -24.96
+     Mean:     Objective 1= -11.42  Objective 2=-243.86
+
+Gen  159/500 [███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  31.8%
+     Best:     Objective 1=  40.56  Objective 2= -22.23
+     Mean:     Objective 1= -11.18  Objective 2=-246.23
+
+Gen  160/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  32.0%
+     Best:     Objective 1=  50.47  Objective 2= -22.96
+     Mean:     Objective 1= -11.55  Objective 2=-214.61
+
+Generation 160:	[ 44.04078199 -25.67760942]
+Mean fitness:	-123.15 +- 250.82
+Mean fitness per obj: ['-9.67 +-17.91', '-236.62 +-315.83']
+Gen  161/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  32.2%
+     Best:     Objective 1=  32.95  Objective 2= -21.00
+     Mean:     Objective 1=  -9.67  Objective 2=-236.62
+
+Gen  162/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  32.4%
+     Best:     Objective 1=  42.03  Objective 2= -23.87
+     Mean:     Objective 1= -10.57  Objective 2=-239.81
+
+Gen  163/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  32.6%
+     Best:     Objective 1=  77.09  Objective 2= -20.79
+     Mean:     Objective 1= -11.20  Objective 2=-247.07
+
+Gen  164/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  32.8%
+     Best:     Objective 1=  29.31  Objective 2= -23.88
+     Mean:     Objective 1= -12.41  Objective 2=-244.33
+
+Gen  165/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  33.0%
+     Best:     Objective 1=  47.98  Objective 2= -21.45
+     Mean:     Objective 1=  -9.59  Objective 2=-245.63
+
+Generation 165:	[ 44.04078199 -25.67760942]
+Mean fitness:	-136.15 +- 272.40
+Mean fitness per obj: ['-12.20 +-23.34', '-260.10 +-342.24']
+Gen  166/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  33.2%
+     Best:     Objective 1=  47.48  Objective 2= -23.69
+     Mean:     Objective 1= -12.20  Objective 2=-260.10
+
+Gen  167/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  33.4%
+     Best:     Objective 1=  50.19  Objective 2= -23.39
+     Mean:     Objective 1=  -9.02  Objective 2=-246.46
+
+Gen  168/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  33.6%
+     Best:     Objective 1=  39.76  Objective 2= -21.63
+     Mean:     Objective 1=  -9.50  Objective 2=-224.63
+
+Gen  169/500 [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  33.8%
+     Best:     Objective 1=  40.92  Objective 2= -23.30
+     Mean:     Objective 1=  -9.78  Objective 2=-258.20
+
+Gen  170/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  34.0%
+     Best:     Objective 1=  36.98  Objective 2= -22.01
+     Mean:     Objective 1= -11.07  Objective 2=-243.30
+
+Generation 170:	[ 44.04078199 -25.67760942]
+Mean fitness:	-154.36 +- 299.46
+Mean fitness per obj: ['-10.48 +-19.56', '-298.24 +-370.90']
+Gen  171/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  34.2%
+     Best:     Objective 1=  38.54  Objective 2= -22.36
+     Mean:     Objective 1= -10.48  Objective 2=-298.24
+
+Gen  172/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  34.4%
+     Best:     Objective 1=  35.20  Objective 2= -21.46
+     Mean:     Objective 1= -13.33  Objective 2=-262.80
+
+Gen  173/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  34.6%
+     Best:     Objective 1=  38.82  Objective 2= -21.43
+     Mean:     Objective 1= -10.91  Objective 2=-243.63
+
+Gen  174/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  34.8%
+     Best:     Objective 1=  42.61  Objective 2= -22.55
+     Mean:     Objective 1= -10.99  Objective 2=-235.91
+
+Gen  175/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  35.0%
+     Best:     Objective 1=  80.32  Objective 2= -22.97
+     Mean:     Objective 1= -10.79  Objective 2=-256.77
+
+Generation 175:	[ 44.04078199 -25.67760942]
+Mean fitness:	-124.44 +- 240.43
+Mean fitness per obj: ['-11.09 +-23.98', '-237.78 +-298.91']
+Gen  176/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  35.2%
+     Best:     Objective 1=  66.57  Objective 2= -22.27
+     Mean:     Objective 1= -11.09  Objective 2=-237.78
+
+Gen  177/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  35.4%
+     Best:     Objective 1=  43.52  Objective 2= -22.18
+     Mean:     Objective 1= -10.23  Objective 2=-218.13
+
+Gen  178/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  35.6%
+     Best:     Objective 1=  72.50  Objective 2= -20.29
+     Mean:     Objective 1=  -9.69  Objective 2=-224.60
+
+Gen  179/500 [█████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  35.8%
+     Best:     Objective 1=  50.42  Objective 2= -20.90
+     Mean:     Objective 1= -10.82  Objective 2=-249.03
+
+Gen  180/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  36.0%
+     Best:     Objective 1=  37.45  Objective 2= -19.93
+     Mean:     Objective 1= -12.56  Objective 2=-280.21
+
+Generation 180:	[ 54.21525577 -23.08263828]
+Mean fitness:	-139.41 +- 274.75
+Mean fitness per obj: ['-10.71 +-19.64', '-268.11 +-342.73']
+Gen  181/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  36.2%
+     Best:     Objective 1=  54.22  Objective 2= -22.92
+     Mean:     Objective 1= -10.71  Objective 2=-268.11
+
+Gen  182/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  36.4%
+     Best:     Objective 1=  45.77  Objective 2= -21.77
+     Mean:     Objective 1= -10.00  Objective 2=-238.22
+
+Gen  183/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  36.6%
+     Best:     Objective 1=  56.27  Objective 2= -21.12
+     Mean:     Objective 1= -11.00  Objective 2=-246.57
+
+Gen  184/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  36.8%
+     Best:     Objective 1=  34.97  Objective 2= -23.36
+     Mean:     Objective 1= -10.63  Objective 2=-274.55
+
+Gen  185/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  37.0%
+     Best:     Objective 1=  28.87  Objective 2= -20.40
+     Mean:     Objective 1= -10.05  Objective 2=-245.72
+
+Generation 185:	[ 54.21525577 -23.08263828]
+Mean fitness:	-135.81 +- 251.88
+Mean fitness per obj: ['-13.13 +-26.57', '-258.48 +-309.97']
+Gen  186/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  37.2%
+     Best:     Objective 1=  68.69  Objective 2= -22.33
+     Mean:     Objective 1= -13.13  Objective 2=-258.48
+
+Gen  187/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  37.4%
+     Best:     Objective 1=  32.53  Objective 2= -20.94
+     Mean:     Objective 1= -12.49  Objective 2=-254.00
+
+Gen  188/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  37.6%
+     Best:     Objective 1=  52.52  Objective 2= -23.24
+     Mean:     Objective 1=  -7.66  Objective 2=-214.95
+
+Gen  189/500 [██████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  37.8%
+     Best:     Objective 1=  34.10  Objective 2= -22.67
+     Mean:     Objective 1= -10.11  Objective 2=-246.47
+
+Gen  190/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  38.0%
+     Best:     Objective 1=  38.32  Objective 2= -24.59
+     Mean:     Objective 1= -12.17  Objective 2=-282.83
+
+Generation 190:	[ 54.21525577 -23.08263828]
+Mean fitness:	-129.82 +- 233.03
+Mean fitness per obj: ['-9.94 +-20.74', '-249.69 +-281.84']
+Gen  191/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  38.2%
+     Best:     Objective 1=  40.82  Objective 2= -23.91
+     Mean:     Objective 1=  -9.94  Objective 2=-249.69
+
+Gen  192/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  38.4%
+     Best:     Objective 1=  35.35  Objective 2= -19.51
+     Mean:     Objective 1=  -9.74  Objective 2=-237.99
+
+Gen  193/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  38.6%
+     Best:     Objective 1=  55.45  Objective 2= -23.35
+     Mean:     Objective 1= -10.76  Objective 2=-246.50
+
+Gen  194/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  38.8%
+     Best:     Objective 1=  31.14  Objective 2= -22.48
+     Mean:     Objective 1= -11.28  Objective 2=-251.85
+
+Gen  195/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  39.0%
+     Best:     Objective 1=  47.75  Objective 2= -21.31
+     Mean:     Objective 1= -11.27  Objective 2=-242.57
+
+Generation 195:	[ 54.21525577 -23.08263828]
+Mean fitness:	-132.72 +- 263.78
+Mean fitness per obj: ['-9.58 +-17.56', '-255.85 +-329.43']
+Gen  196/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  39.2%
+     Best:     Objective 1=  68.98  Objective 2= -24.00
+     Mean:     Objective 1=  -9.58  Objective 2=-255.85
+
+Gen  197/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  39.4%
+     Best:     Objective 1=  53.97  Objective 2= -25.02
+     Mean:     Objective 1= -11.04  Objective 2=-226.24
+
+Gen  198/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  39.6%
+     Best:     Objective 1=  47.31  Objective 2= -21.82
+     Mean:     Objective 1= -11.31  Objective 2=-274.99
+
+Gen  199/500 [███████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  39.8%
+     Best:     Objective 1=  22.74  Objective 2= -21.63
+     Mean:     Objective 1= -13.61  Objective 2=-256.23
+
+Gen  200/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  40.0%
+     Best:     Objective 1=  53.95  Objective 2= -23.12
+     Mean:     Objective 1= -11.96  Objective 2=-247.06
+
+Generation 200:	[ 54.21525577 -23.08263828]
+Mean fitness:	-143.77 +- 269.76
+Mean fitness per obj: ['-13.05 +-34.68', '-274.48 +-331.90']
+Gen  201/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  40.2%
+     Best:     Objective 1=  37.98  Objective 2= -24.19
+     Mean:     Objective 1= -13.05  Objective 2=-274.48
+
+Gen  202/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  40.4%
+     Best:     Objective 1=  38.47  Objective 2= -20.00
+     Mean:     Objective 1= -11.38  Objective 2=-255.27
+
+Gen  203/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  40.6%
+     Best:     Objective 1=  71.94  Objective 2= -22.47
+     Mean:     Objective 1= -11.06  Objective 2=-284.97
+
+Gen  204/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  40.8%
+     Best:     Objective 1=  62.93  Objective 2= -23.62
+     Mean:     Objective 1= -10.95  Objective 2=-262.96
+
+Gen  205/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  41.0%
+     Best:     Objective 1=  76.97  Objective 2= -22.45
+     Mean:     Objective 1= -12.09  Objective 2=-235.74
+
+Generation 205:	[ 54.21525577 -23.08263828]
+Mean fitness:	-136.67 +- 248.02
+Mean fitness per obj: ['-10.75 +-22.89', '-262.59 +-301.32']
+Gen  206/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  41.2%
+     Best:     Objective 1=  39.22  Objective 2= -22.26
+     Mean:     Objective 1= -10.75  Objective 2=-262.59
+
+Gen  207/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  41.4%
+     Best:     Objective 1=  60.17  Objective 2= -20.78
+     Mean:     Objective 1= -11.30  Objective 2=-260.95
+
+Gen  208/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  41.6%
+     Best:     Objective 1=  35.69  Objective 2= -20.97
+     Mean:     Objective 1=  -9.86  Objective 2=-237.07
+
+Gen  209/500 [████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  41.8%
+     Best:     Objective 1=  50.81  Objective 2= -18.12
+     Mean:     Objective 1=  -9.66  Objective 2=-269.85
+
+Gen  210/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  42.0%
+     Best:     Objective 1=  43.87  Objective 2= -21.26
+     Mean:     Objective 1=  -9.51  Objective 2=-246.13
+
+Generation 210:	[ 60.16547851 -21.31538714]
+Mean fitness:	-130.52 +- 248.77
+Mean fitness per obj: ['-12.17 +-24.50', '-248.86 +-308.48']
+Gen  211/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  42.2%
+     Best:     Objective 1=  42.37  Objective 2= -21.80
+     Mean:     Objective 1= -12.17  Objective 2=-248.86
+
+Gen  212/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  42.4%
+     Best:     Objective 1=  28.43  Objective 2= -20.39
+     Mean:     Objective 1= -11.94  Objective 2=-288.39
+
+Gen  213/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  42.6%
+     Best:     Objective 1=  31.08  Objective 2= -22.06
+     Mean:     Objective 1= -11.04  Objective 2=-229.65
+
+Gen  214/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  42.8%
+     Best:     Objective 1=  31.32  Objective 2= -23.58
+     Mean:     Objective 1= -10.48  Objective 2=-243.77
+
+Gen  215/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  43.0%
+     Best:     Objective 1=  66.50  Objective 2= -22.54
+     Mean:     Objective 1= -11.77  Objective 2=-239.66
+
+Generation 215:	[ 60.16547851 -21.31538714]
+Mean fitness:	-130.71 +- 253.13
+Mean fitness per obj: ['-12.06 +-25.06', '-249.36 +-315.22']
+Gen  216/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  43.2%
+     Best:     Objective 1=  83.46  Objective 2= -24.25
+     Mean:     Objective 1= -12.06  Objective 2=-249.36
+
+Gen  217/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  43.4%
+     Best:     Objective 1=  52.57  Objective 2= -22.94
+     Mean:     Objective 1= -12.29  Objective 2=-247.87
+
+Gen  218/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  43.6%
+     Best:     Objective 1=  40.15  Objective 2= -21.53
+     Mean:     Objective 1=  -8.15  Objective 2=-256.92
+
+Gen  219/500 [█████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  43.8%
+     Best:     Objective 1=  52.42  Objective 2= -22.38
+     Mean:     Objective 1= -13.38  Objective 2=-255.16
+
+Gen  220/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  44.0%
+     Best:     Objective 1=  38.02  Objective 2= -21.31
+     Mean:     Objective 1= -13.76  Objective 2=-269.41
+
+Generation 220:	[ 60.16547851 -21.31538714]
+Mean fitness:	-133.00 +- 264.35
+Mean fitness per obj: ['-12.71 +-30.74', '-253.30 +-331.47']
+Gen  221/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  44.2%
+     Best:     Objective 1=  28.95  Objective 2= -21.78
+     Mean:     Objective 1= -12.71  Objective 2=-253.30
+
+Gen  222/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  44.4%
+     Best:     Objective 1=  49.65  Objective 2= -21.74
+     Mean:     Objective 1= -10.14  Objective 2=-260.68
+
+Gen  223/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  44.6%
+     Best:     Objective 1=  46.79  Objective 2= -23.38
+     Mean:     Objective 1= -13.32  Objective 2=-284.75
+
+Gen  224/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  44.8%
+     Best:     Objective 1=  47.31  Objective 2= -23.30
+     Mean:     Objective 1=  -9.70  Objective 2=-254.67
+
+Gen  225/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  45.0%
+     Best:     Objective 1=  41.30  Objective 2= -21.00
+     Mean:     Objective 1= -12.83  Objective 2=-239.40
+
+Generation 225:	[ 60.16547851 -21.31538714]
+Mean fitness:	-125.60 +- 235.06
+Mean fitness per obj: ['-11.74 +-24.59', '-239.45 +-289.79']
+Gen  226/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  45.2%
+     Best:     Objective 1=  36.36  Objective 2= -21.49
+     Mean:     Objective 1= -11.74  Objective 2=-239.45
+
+Gen  227/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  45.4%
+     Best:     Objective 1=  39.03  Objective 2= -20.04
+     Mean:     Objective 1=  -9.50  Objective 2=-244.48
+
+Gen  228/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  45.6%
+     Best:     Objective 1=  33.60  Objective 2= -21.36
+     Mean:     Objective 1= -12.73  Objective 2=-265.30
+
+Gen  229/500 [██████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  45.8%
+     Best:     Objective 1=  44.97  Objective 2= -20.77
+     Mean:     Objective 1= -11.29  Objective 2=-237.71
+
+Gen  230/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  46.0%
+     Best:     Objective 1=  57.78  Objective 2= -22.91
+     Mean:     Objective 1= -11.17  Objective 2=-265.22
+
+Generation 230:	[ 60.16547851 -21.31538714]
+Mean fitness:	-137.13 +- 263.52
+Mean fitness per obj: ['-11.70 +-25.64', '-262.57 +-326.74']
+Gen  231/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  46.2%
+     Best:     Objective 1=  57.15  Objective 2= -23.69
+     Mean:     Objective 1= -11.70  Objective 2=-262.57
+
+Gen  232/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  46.4%
+     Best:     Objective 1=  65.62  Objective 2= -21.42
+     Mean:     Objective 1= -10.70  Objective 2=-251.49
+
+Gen  233/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  46.6%
+     Best:     Objective 1=  35.72  Objective 2= -22.01
+     Mean:     Objective 1= -10.44  Objective 2=-256.58
+
+Gen  234/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  46.8%
+     Best:     Objective 1=  36.41  Objective 2= -19.48
+     Mean:     Objective 1= -11.43  Objective 2=-286.53
+
+Gen  235/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  47.0%
+     Best:     Objective 1=  54.61  Objective 2= -23.59
+     Mean:     Objective 1= -10.62  Objective 2=-236.75
+
+Generation 235:	[ 60.16547851 -21.31538714]
+Mean fitness:	-133.30 +- 248.33
+Mean fitness per obj: ['-11.19 +-22.14', '-255.40 +-305.00']
+Gen  236/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  47.2%
+     Best:     Objective 1=  35.02  Objective 2= -21.77
+     Mean:     Objective 1= -11.19  Objective 2=-255.40
+
+Gen  237/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  47.4%
+     Best:     Objective 1=  40.12  Objective 2= -21.52
+     Mean:     Objective 1= -12.82  Objective 2=-238.42
+
+Gen  238/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  47.6%
+     Best:     Objective 1=  53.14  Objective 2= -25.37
+     Mean:     Objective 1= -10.63  Objective 2=-274.11
+
+Gen  239/500 [███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░]  47.8%
+     Best:     Objective 1=  36.04  Objective 2= -22.62
+     Mean:     Objective 1=  -9.67  Objective 2=-243.68
+
+Gen  240/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  48.0%
+     Best:     Objective 1=  39.53  Objective 2= -21.51
+     Mean:     Objective 1= -12.74  Objective 2=-227.78
+
+Generation 240:	[ 60.16547851 -21.31538714]
+Mean fitness:	-120.41 +- 220.44
+Mean fitness per obj: ['-11.98 +-21.74', '-228.85 +-270.56']
+Gen  241/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  48.2%
+     Best:     Objective 1=  43.80  Objective 2= -23.30
+     Mean:     Objective 1= -11.98  Objective 2=-228.85
+
+Gen  242/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  48.4%
+     Best:     Objective 1=  40.88  Objective 2= -21.44
+     Mean:     Objective 1= -12.15  Objective 2=-255.55
+
+Gen  243/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  48.6%
+     Best:     Objective 1=  69.55  Objective 2= -22.50
+     Mean:     Objective 1= -10.65  Objective 2=-256.88
+
+Gen  244/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  48.8%
+     Best:     Objective 1=  26.76  Objective 2= -21.71
+     Mean:     Objective 1= -10.57  Objective 2=-235.44
+
+Gen  245/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  49.0%
+     Best:     Objective 1=  54.68  Objective 2= -22.07
+     Mean:     Objective 1=  -9.75  Objective 2=-261.21
+
+Generation 245:	[ 60.16547851 -21.31538714]
+Mean fitness:	-116.00 +- 217.75
+Mean fitness per obj: ['-11.17 +-22.76', '-220.83 +-268.95']
+Gen  246/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  49.2%
+     Best:     Objective 1=  34.39  Objective 2= -21.37
+     Mean:     Objective 1= -11.17  Objective 2=-220.83
+
+Gen  247/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  49.4%
+     Best:     Objective 1=  55.79  Objective 2= -21.51
+     Mean:     Objective 1=  -9.33  Objective 2=-210.44
+
+Gen  248/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  49.6%
+     Best:     Objective 1=  35.44  Objective 2= -21.76
+     Mean:     Objective 1= -11.33  Objective 2=-262.23
+
+Gen  249/500 [████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░]  49.8%
+     Best:     Objective 1=  37.95  Objective 2= -22.54
+     Mean:     Objective 1= -10.00  Objective 2=-256.90
+
+Gen  250/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  50.0%
+     Best:     Objective 1=  56.22  Objective 2= -21.88
+     Mean:     Objective 1=  -9.36  Objective 2=-221.94
+
+Generation 250:	[ 60.16547851 -21.31538714]
+Mean fitness:	-135.32 +- 264.19
+Mean fitness per obj: ['-12.08 +-22.45', '-258.55 +-329.73']
+Gen  251/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  50.2%
+     Best:     Objective 1=  41.30  Objective 2= -19.79
+     Mean:     Objective 1= -12.08  Objective 2=-258.55
+
+Gen  252/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  50.4%
+     Best:     Objective 1=  41.23  Objective 2= -20.65
+     Mean:     Objective 1=  -9.76  Objective 2=-259.87
+
+Gen  253/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  50.6%
+     Best:     Objective 1=  47.99  Objective 2= -22.90
+     Mean:     Objective 1= -11.61  Objective 2=-219.36
+
+Gen  254/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  50.8%
+     Best:     Objective 1=  51.54  Objective 2= -20.69
+     Mean:     Objective 1=  -9.80  Objective 2=-265.78
+
+Gen  255/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  51.0%
+     Best:     Objective 1=  32.88  Objective 2= -22.21
+     Mean:     Objective 1= -10.35  Objective 2=-233.72
+
+Generation 255:	[ 60.16547851 -21.31538714]
+Mean fitness:	-137.92 +- 256.90
+Mean fitness per obj: ['-12.01 +-28.44', '-263.82 +-315.40']
+Gen  256/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  51.2%
+     Best:     Objective 1=  69.86  Objective 2= -18.27
+     Mean:     Objective 1= -12.01  Objective 2=-263.82
+
+Gen  257/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  51.4%
+     Best:     Objective 1=  37.96  Objective 2= -22.93
+     Mean:     Objective 1= -15.45  Objective 2=-246.64
+
+Gen  258/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  51.6%
+     Best:     Objective 1=  64.19  Objective 2= -20.52
+     Mean:     Objective 1=  -9.78  Objective 2=-271.91
+
+Gen  259/500 [█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  51.8%
+     Best:     Objective 1=  42.91  Objective 2= -21.21
+     Mean:     Objective 1= -10.75  Objective 2=-239.07
+
+Gen  260/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  52.0%
+     Best:     Objective 1=  50.32  Objective 2= -22.60
+     Mean:     Objective 1= -10.96  Objective 2=-260.09
+
+Generation 260:	[ 60.16547851 -21.31538714]
+Mean fitness:	-125.86 +- 229.98
+Mean fitness per obj: ['-13.02 +-32.93', '-238.70 +-281.48']
+Gen  261/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  52.2%
+     Best:     Objective 1=  55.68  Objective 2= -23.26
+     Mean:     Objective 1= -13.02  Objective 2=-238.70
+
+Gen  262/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  52.4%
+     Best:     Objective 1=  46.08  Objective 2= -22.56
+     Mean:     Objective 1=  -9.18  Objective 2=-251.95
+
+Gen  263/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  52.6%
+     Best:     Objective 1=  36.65  Objective 2= -19.46
+     Mean:     Objective 1= -10.78  Objective 2=-259.04
+
+Gen  264/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  52.8%
+     Best:     Objective 1=  27.42  Objective 2= -22.58
+     Mean:     Objective 1= -11.69  Objective 2=-241.20
+
+Gen  265/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  53.0%
+     Best:     Objective 1=  55.69  Objective 2= -23.64
+     Mean:     Objective 1=  -9.65  Objective 2=-275.80
+
+Generation 265:	[ 60.16547851 -21.31538714]
+Mean fitness:	-124.11 +- 220.00
+Mean fitness per obj: ['-11.16 +-25.31', '-237.06 +-265.78']
+Gen  266/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  53.2%
+     Best:     Objective 1=  39.22  Objective 2= -23.68
+     Mean:     Objective 1= -11.16  Objective 2=-237.06
+
+Gen  267/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  53.4%
+     Best:     Objective 1=  51.57  Objective 2= -23.68
+     Mean:     Objective 1=  -7.92  Objective 2=-234.85
+
+Gen  268/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  53.6%
+     Best:     Objective 1=  48.03  Objective 2= -20.12
+     Mean:     Objective 1= -12.10  Objective 2=-240.36
+
+Gen  269/500 [██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░]  53.8%
+     Best:     Objective 1=  58.57  Objective 2= -18.34
+     Mean:     Objective 1= -11.51  Objective 2=-273.45
+
+Gen  270/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  54.0%
+     Best:     Objective 1=  51.83  Objective 2= -21.42
+     Mean:     Objective 1= -11.01  Objective 2=-258.32
+
+Generation 270:	[ 60.16547851 -21.31538714]
+Mean fitness:	-130.94 +- 258.47
+Mean fitness per obj: ['-13.34 +-28.07', '-248.54 +-324.29']
+Gen  271/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  54.2%
+     Best:     Objective 1=  27.83  Objective 2= -21.33
+     Mean:     Objective 1= -13.34  Objective 2=-248.54
+
+Gen  272/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  54.4%
+     Best:     Objective 1=  59.45  Objective 2= -21.33
+     Mean:     Objective 1= -11.08  Objective 2=-281.07
+
+Gen  273/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  54.6%
+     Best:     Objective 1=  31.90  Objective 2= -18.87
+     Mean:     Objective 1= -10.93  Objective 2=-218.40
+
+Gen  274/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  54.8%
+     Best:     Objective 1=  41.66  Objective 2= -22.54
+     Mean:     Objective 1= -10.40  Objective 2=-242.61
+
+Gen  275/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  55.0%
+     Best:     Objective 1=  30.38  Objective 2= -22.19
+     Mean:     Objective 1= -10.24  Objective 2=-254.57
+
+Generation 275:	[ 60.16547851 -21.31538714]
+Mean fitness:	-138.56 +- 263.54
+Mean fitness per obj: ['-11.40 +-25.14', '-265.73 +-325.47']
+Gen  276/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  55.2%
+     Best:     Objective 1=  49.28  Objective 2= -20.47
+     Mean:     Objective 1= -11.40  Objective 2=-265.73
+
+Gen  277/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  55.4%
+     Best:     Objective 1=  94.48  Objective 2= -24.00
+     Mean:     Objective 1= -10.49  Objective 2=-235.01
+
+Gen  278/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  55.6%
+     Best:     Objective 1=  33.46  Objective 2= -23.84
+     Mean:     Objective 1= -11.57  Objective 2=-257.71
+
+Gen  279/500 [███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░]  55.8%
+     Best:     Objective 1=  46.91  Objective 2= -21.56
+     Mean:     Objective 1= -13.73  Objective 2=-231.27
+
+Gen  280/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  56.0%
+     Best:     Objective 1=  32.22  Objective 2= -21.44
+     Mean:     Objective 1= -12.14  Objective 2=-246.46
+
+Generation 280:	[ 60.16547851 -21.31538714]
+Mean fitness:	-112.73 +- 211.28
+Mean fitness per obj: ['-9.14 +-19.43', '-216.31 +-259.69']
+Gen  281/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  56.2%
+     Best:     Objective 1=  65.21  Objective 2= -21.28
+     Mean:     Objective 1=  -9.14  Objective 2=-216.31
+
+Gen  282/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  56.4%
+     Best:     Objective 1=  57.53  Objective 2= -24.22
+     Mean:     Objective 1= -10.16  Objective 2=-271.20
+
+Gen  283/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  56.6%
+     Best:     Objective 1=  85.74  Objective 2= -21.56
+     Mean:     Objective 1=  -9.86  Objective 2=-243.87
+
+Gen  284/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  56.8%
+     Best:     Objective 1=  39.36  Objective 2= -24.72
+     Mean:     Objective 1=  -9.39  Objective 2=-238.60
+
+Gen  285/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  57.0%
+     Best:     Objective 1=  38.69  Objective 2= -23.63
+     Mean:     Objective 1=  -9.79  Objective 2=-246.92
+
+Generation 285:	[ 60.16547851 -21.31538714]
+Mean fitness:	-130.20 +- 260.84
+Mean fitness per obj: ['-10.95 +-22.83', '-249.44 +-327.28']
+Gen  286/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  57.2%
+     Best:     Objective 1=  61.42  Objective 2= -23.70
+     Mean:     Objective 1= -10.95  Objective 2=-249.44
+
+Gen  287/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  57.4%
+     Best:     Objective 1=  82.62  Objective 2= -21.28
+     Mean:     Objective 1=  -9.47  Objective 2=-236.25
+
+Gen  288/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  57.6%
+     Best:     Objective 1=  56.54  Objective 2= -22.20
+     Mean:     Objective 1= -11.24  Objective 2=-260.35
+
+Gen  289/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  57.8%
+     Best:     Objective 1=  37.61  Objective 2= -20.75
+     Mean:     Objective 1= -12.31  Objective 2=-228.95
+
+Gen  290/500 [████████████████████████████░░░░░░░░░░░░░░░░░░░░░░]  58.0%
+     Best:     Objective 1=  57.56  Objective 2= -23.58
+     Mean:     Objective 1=  -7.45  Objective 2=-239.62
+
+Generation 290:	[ 60.16547851 -21.31538714]
+Mean fitness:	-116.38 +- 214.55
+Mean fitness per obj: ['-9.50 +-22.69', '-223.26 +-262.12']
+Gen  291/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  58.2%
+     Best:     Objective 1=  43.73  Objective 2= -21.86
+     Mean:     Objective 1=  -9.50  Objective 2=-223.26
+
+Gen  292/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  58.4%
+     Best:     Objective 1=  49.76  Objective 2= -22.95
+     Mean:     Objective 1= -10.98  Objective 2=-255.69
+
+Gen  293/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  58.6%
+     Best:     Objective 1=  45.16  Objective 2= -22.46
+     Mean:     Objective 1=  -8.72  Objective 2=-238.32
+
+Gen  294/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  58.8%
+     Best:     Objective 1=  73.36  Objective 2= -19.52
+     Mean:     Objective 1= -12.02  Objective 2=-241.78
+
+Gen  295/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  59.0%
+     Best:     Objective 1=  62.17  Objective 2= -20.18
+     Mean:     Objective 1= -13.19  Objective 2=-227.82
+
+Generation 295:	[ 60.16547851 -21.31538714]
+Mean fitness:	-130.03 +- 246.97
+Mean fitness per obj: ['-8.73 +-17.40', '-251.32 +-303.75']
+Gen  296/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  59.2%
+     Best:     Objective 1=  40.55  Objective 2= -21.27
+     Mean:     Objective 1=  -8.73  Objective 2=-251.32
+
+Gen  297/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  59.4%
+     Best:     Objective 1=  35.71  Objective 2= -19.41
+     Mean:     Objective 1= -11.57  Objective 2=-247.12
+
+Gen  298/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  59.6%
+     Best:     Objective 1=  36.65  Objective 2= -23.06
+     Mean:     Objective 1=  -9.29  Objective 2=-250.51
+
+Gen  299/500 [█████████████████████████████░░░░░░░░░░░░░░░░░░░░░]  59.8%
+     Best:     Objective 1=  52.25  Objective 2= -24.58
+     Mean:     Objective 1= -10.52  Objective 2=-233.23
+
+Gen  300/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  60.0%
+     Best:     Objective 1=  33.74  Objective 2= -22.35
+     Mean:     Objective 1= -10.43  Objective 2=-241.76
+
+Generation 300:	[ 60.16547851 -21.31538714]
+Mean fitness:	-129.02 +- 246.10
+Mean fitness per obj: ['-9.44 +-18.14', '-248.60 +-303.65']
+Gen  301/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  60.2%
+     Best:     Objective 1=  34.84  Objective 2= -23.21
+     Mean:     Objective 1=  -9.44  Objective 2=-248.60
+
+Gen  302/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  60.4%
+     Best:     Objective 1=  81.34  Objective 2= -22.47
+     Mean:     Objective 1= -12.28  Objective 2=-220.68
+
+Gen  303/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  60.6%
+     Best:     Objective 1=  72.45  Objective 2= -21.25
+     Mean:     Objective 1= -10.81  Objective 2=-232.19
+
+Gen  304/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  60.8%
+     Best:     Objective 1=  91.12  Objective 2= -20.32
+     Mean:     Objective 1=  -9.66  Objective 2=-252.82
+
+Gen  305/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  61.0%
+     Best:     Objective 1=  56.87  Objective 2= -22.74
+     Mean:     Objective 1= -10.37  Objective 2=-251.21
+
+Generation 305:	[ 60.16547851 -21.31538714]
+Mean fitness:	-132.39 +- 253.46
+Mean fitness per obj: ['-9.22 +-18.98', '-255.55 +-312.70']
+Gen  306/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  61.2%
+     Best:     Objective 1=  40.54  Objective 2= -19.07
+     Mean:     Objective 1=  -9.22  Objective 2=-255.55
+
+Gen  307/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  61.4%
+     Best:     Objective 1=  34.04  Objective 2= -22.00
+     Mean:     Objective 1= -13.36  Objective 2=-259.40
+
+Gen  308/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  61.6%
+     Best:     Objective 1=  59.31  Objective 2= -19.84
+     Mean:     Objective 1= -10.98  Objective 2=-240.91
+
+Gen  309/500 [██████████████████████████████░░░░░░░░░░░░░░░░░░░░]  61.8%
+     Best:     Objective 1=  51.73  Objective 2= -22.43
+     Mean:     Objective 1= -10.81  Objective 2=-230.15
+
+Gen  310/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  62.0%
+     Best:     Objective 1=  39.31  Objective 2= -21.64
+     Mean:     Objective 1= -11.27  Objective 2=-257.88
+
+Generation 310:	[ 60.16547851 -21.31538714]
+Mean fitness:	-131.42 +- 225.78
+Mean fitness per obj: ['-10.42 +-29.33', '-252.43 +-267.96']
+Gen  311/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  62.2%
+     Best:     Objective 1=  60.71  Objective 2= -20.59
+     Mean:     Objective 1= -10.42  Objective 2=-252.43
+
+Gen  312/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  62.4%
+     Best:     Objective 1=  58.41  Objective 2= -22.87
+     Mean:     Objective 1=  -8.88  Objective 2=-239.01
+
+Gen  313/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  62.6%
+     Best:     Objective 1=  48.99  Objective 2= -20.38
+     Mean:     Objective 1= -11.68  Objective 2=-262.47
+
+Gen  314/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  62.8%
+     Best:     Objective 1=  32.41  Objective 2= -20.78
+     Mean:     Objective 1= -11.05  Objective 2=-245.40
+
+Gen  315/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  63.0%
+     Best:     Objective 1=  66.19  Objective 2= -21.38
+     Mean:     Objective 1=  -8.87  Objective 2=-251.45
+
+Generation 315:	[ 60.16547851 -21.31538714]
+Mean fitness:	-136.51 +- 247.80
+Mean fitness per obj: ['-10.97 +-20.72', '-262.05 +-301.44']
+Gen  316/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  63.2%
+     Best:     Objective 1=  39.19  Objective 2= -22.77
+     Mean:     Objective 1= -10.97  Objective 2=-262.05
+
+Gen  317/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  63.4%
+     Best:     Objective 1=  39.85  Objective 2= -20.40
+     Mean:     Objective 1= -10.79  Objective 2=-237.67
+
+Gen  318/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  63.6%
+     Best:     Objective 1=  38.52  Objective 2= -20.78
+     Mean:     Objective 1= -11.53  Objective 2=-230.12
+
+Gen  319/500 [███████████████████████████████░░░░░░░░░░░░░░░░░░░]  63.8%
+     Best:     Objective 1=  51.35  Objective 2= -20.45
+     Mean:     Objective 1= -10.64  Objective 2=-252.45
+
+Gen  320/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  64.0%
+     Best:     Objective 1=  48.44  Objective 2= -20.03
+     Mean:     Objective 1= -11.37  Objective 2=-229.24
+
+Generation 320:	[ 60.16547851 -21.31538714]
+Mean fitness:	-131.38 +- 238.13
+Mean fitness per obj: ['-12.00 +-22.24', '-250.76 +-290.54']
+Gen  321/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  64.2%
+     Best:     Objective 1=  42.70  Objective 2= -23.36
+     Mean:     Objective 1= -12.00  Objective 2=-250.76
+
+Gen  322/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  64.4%
+     Best:     Objective 1=  37.18  Objective 2= -23.70
+     Mean:     Objective 1= -11.92  Objective 2=-273.48
+
+Gen  323/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  64.6%
+     Best:     Objective 1=  42.09  Objective 2= -21.93
+     Mean:     Objective 1=  -9.83  Objective 2=-251.09
+
+Gen  324/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  64.8%
+     Best:     Objective 1=  49.63  Objective 2= -23.31
+     Mean:     Objective 1=  -7.48  Objective 2=-259.00
+
+Gen  325/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  65.0%
+     Best:     Objective 1=  45.52  Objective 2= -21.86
+     Mean:     Objective 1= -11.96  Objective 2=-251.36
+
+Generation 325:	[ 60.16547851 -21.31538714]
+Mean fitness:	-128.51 +- 233.31
+Mean fitness per obj: ['-10.48 +-26.97', '-246.55 +-283.34']
+Gen  326/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  65.2%
+     Best:     Objective 1=  60.47  Objective 2= -21.41
+     Mean:     Objective 1= -10.48  Objective 2=-246.55
+
+Gen  327/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  65.4%
+     Best:     Objective 1=  59.37  Objective 2= -21.90
+     Mean:     Objective 1= -10.46  Objective 2=-263.23
+
+Gen  328/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  65.6%
+     Best:     Objective 1=  79.29  Objective 2= -21.35
+     Mean:     Objective 1= -11.47  Objective 2=-282.75
+
+Gen  329/500 [████████████████████████████████░░░░░░░░░░░░░░░░░░]  65.8%
+     Best:     Objective 1=  58.93  Objective 2= -22.77
+     Mean:     Objective 1=  -9.98  Objective 2=-240.94
+
+Gen  330/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  66.0%
+     Best:     Objective 1=  45.11  Objective 2= -22.28
+     Mean:     Objective 1= -11.83  Objective 2=-253.60
+
+Generation 330:	[ 60.16547851 -21.31538714]
+Mean fitness:	-147.40 +- 288.48
+Mean fitness per obj: ['-11.62 +-21.21', '-283.17 +-359.33']
+Gen  331/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  66.2%
+     Best:     Objective 1=  25.88  Objective 2= -23.38
+     Mean:     Objective 1= -11.62  Objective 2=-283.17
+
+Gen  332/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  66.4%
+     Best:     Objective 1=  39.59  Objective 2= -24.19
+     Mean:     Objective 1= -13.20  Objective 2=-246.75
+
+Gen  333/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  66.6%
+     Best:     Objective 1=  49.43  Objective 2= -21.64
+     Mean:     Objective 1= -13.28  Objective 2=-231.61
+
+Gen  334/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  66.8%
+     Best:     Objective 1=  49.99  Objective 2= -22.62
+     Mean:     Objective 1= -10.38  Objective 2=-257.58
+
+Gen  335/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  67.0%
+     Best:     Objective 1=  69.04  Objective 2= -19.85
+     Mean:     Objective 1= -11.52  Objective 2=-267.84
+
+Generation 335:	[ 60.16547851 -21.31538714]
+Mean fitness:	-135.63 +- 252.80
+Mean fitness per obj: ['-12.22 +-22.72', '-259.03 +-311.20']
+Gen  336/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  67.2%
+     Best:     Objective 1=  45.97  Objective 2= -21.74
+     Mean:     Objective 1= -12.22  Objective 2=-259.03
+
+Gen  337/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  67.4%
+     Best:     Objective 1=  37.65  Objective 2= -24.10
+     Mean:     Objective 1= -10.49  Objective 2=-215.32
+
+Gen  338/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  67.6%
+     Best:     Objective 1=  37.44  Objective 2= -21.06
+     Mean:     Objective 1= -12.43  Objective 2=-225.80
+
+Gen  339/500 [█████████████████████████████████░░░░░░░░░░░░░░░░░]  67.8%
+     Best:     Objective 1=  48.83  Objective 2= -23.19
+     Mean:     Objective 1= -10.45  Objective 2=-207.31
+
+Gen  340/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  68.0%
+     Best:     Objective 1=  29.18  Objective 2= -21.44
+     Mean:     Objective 1= -10.50  Objective 2=-276.96
+
+Generation 340:	[ 60.16547851 -21.31538714]
+Mean fitness:	-120.64 +- 234.02
+Mean fitness per obj: ['-10.81 +-18.51', '-230.48 +-291.66']
+Gen  341/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  68.2%
+     Best:     Objective 1=  40.55  Objective 2= -21.21
+     Mean:     Objective 1= -10.81  Objective 2=-230.48
+
+Gen  342/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  68.4%
+     Best:     Objective 1=  45.54  Objective 2= -20.86
+     Mean:     Objective 1= -14.29  Objective 2=-218.19
+
+Gen  343/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  68.6%
+     Best:     Objective 1=  48.73  Objective 2= -19.57
+     Mean:     Objective 1= -13.67  Objective 2=-254.50
+
+Gen  344/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  68.8%
+     Best:     Objective 1=  53.55  Objective 2= -21.02
+     Mean:     Objective 1=  -9.92  Objective 2=-224.08
+
+Gen  345/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  69.0%
+     Best:     Objective 1=  41.27  Objective 2= -24.02
+     Mean:     Objective 1=  -9.94  Objective 2=-233.95
+
+Generation 345:	[ 60.16547851 -21.31538714]
+Mean fitness:	-122.90 +- 227.19
+Mean fitness per obj: ['-12.01 +-22.55', '-233.79 +-279.50']
+Gen  346/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  69.2%
+     Best:     Objective 1=  23.04  Objective 2= -22.22
+     Mean:     Objective 1= -12.01  Objective 2=-233.79
+
+Gen  347/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  69.4%
+     Best:     Objective 1=  45.84  Objective 2= -22.61
+     Mean:     Objective 1= -12.94  Objective 2=-223.46
+
+Gen  348/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  69.6%
+     Best:     Objective 1=  55.28  Objective 2= -23.20
+     Mean:     Objective 1= -11.72  Objective 2=-243.59
+
+Gen  349/500 [██████████████████████████████████░░░░░░░░░░░░░░░░]  69.8%
+     Best:     Objective 1=  61.10  Objective 2= -21.94
+     Mean:     Objective 1= -10.88  Objective 2=-245.08
+
+Gen  350/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  70.0%
+     Best:     Objective 1=  46.40  Objective 2= -24.38
+     Mean:     Objective 1= -12.39  Objective 2=-235.00
+
+Generation 350:	[ 60.16547851 -21.31538714]
+Mean fitness:	-126.66 +- 258.17
+Mean fitness per obj: ['-10.96 +-24.71', '-242.37 +-325.45']
+Gen  351/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  70.2%
+     Best:     Objective 1=  37.55  Objective 2= -22.33
+     Mean:     Objective 1= -10.96  Objective 2=-242.37
+
+Gen  352/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  70.4%
+     Best:     Objective 1=  48.11  Objective 2= -25.20
+     Mean:     Objective 1= -12.28  Objective 2=-242.73
+
+Gen  353/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  70.6%
+     Best:     Objective 1=  54.80  Objective 2= -20.36
+     Mean:     Objective 1= -10.02  Objective 2=-239.90
+
+Gen  354/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  70.8%
+     Best:     Objective 1=  39.64  Objective 2= -22.42
+     Mean:     Objective 1= -10.75  Objective 2=-237.34
+
+Gen  355/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  71.0%
+     Best:     Objective 1=  26.74  Objective 2= -23.18
+     Mean:     Objective 1=  -9.77  Objective 2=-262.05
+
+Generation 355:	[ 60.16547851 -21.31538714]
+Mean fitness:	-116.30 +- 217.36
+Mean fitness per obj: ['-8.15 +-19.02', '-224.45 +-265.97']
+Gen  356/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  71.2%
+     Best:     Objective 1=  61.10  Objective 2= -22.13
+     Mean:     Objective 1=  -8.15  Objective 2=-224.45
+
+Gen  357/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  71.4%
+     Best:     Objective 1=  42.58  Objective 2= -21.81
+     Mean:     Objective 1= -11.25  Objective 2=-266.91
+
+Gen  358/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  71.6%
+     Best:     Objective 1=  51.03  Objective 2= -18.07
+     Mean:     Objective 1= -11.39  Objective 2=-236.00
+
+Gen  359/500 [███████████████████████████████████░░░░░░░░░░░░░░░]  71.8%
+     Best:     Objective 1=  45.54  Objective 2= -19.35
+     Mean:     Objective 1= -11.14  Objective 2=-239.66
+
+Gen  360/500 [████████████████████████████████████░░░░░░░░░░░░░░]  72.0%
+     Best:     Objective 1=  44.09  Objective 2= -21.96
+     Mean:     Objective 1= -10.39  Objective 2=-250.12
+
+Generation 360:	[ 60.16547851 -21.31538714]
+Mean fitness:	-119.08 +- 219.72
+Mean fitness per obj: ['-9.76 +-20.74', '-228.40 +-268.75']
+Gen  361/500 [████████████████████████████████████░░░░░░░░░░░░░░]  72.2%
+     Best:     Objective 1=  29.70  Objective 2= -22.95
+     Mean:     Objective 1=  -9.76  Objective 2=-228.40
+
+Gen  362/500 [████████████████████████████████████░░░░░░░░░░░░░░]  72.4%
+     Best:     Objective 1=  74.71  Objective 2= -24.58
+     Mean:     Objective 1= -13.11  Objective 2=-221.36
+
+Gen  363/500 [████████████████████████████████████░░░░░░░░░░░░░░]  72.6%
+     Best:     Objective 1=  43.85  Objective 2= -22.75
+     Mean:     Objective 1= -10.00  Objective 2=-243.82
+
+Gen  364/500 [████████████████████████████████████░░░░░░░░░░░░░░]  72.8%
+     Best:     Objective 1=  36.17  Objective 2= -23.66
+     Mean:     Objective 1=  -9.23  Objective 2=-243.40
+
+Gen  365/500 [████████████████████████████████████░░░░░░░░░░░░░░]  73.0%
+     Best:     Objective 1=  53.70  Objective 2= -24.52
+     Mean:     Objective 1=  -9.91  Objective 2=-271.13
+
+Generation 365:	[ 60.16547851 -21.31538714]
+Mean fitness:	-137.18 +- 247.49
+Mean fitness per obj: ['-10.94 +-31.58', '-263.43 +-299.39']
+Gen  366/500 [████████████████████████████████████░░░░░░░░░░░░░░]  73.2%
+     Best:     Objective 1=  37.80  Objective 2= -23.15
+     Mean:     Objective 1= -10.94  Objective 2=-263.43
+
+Gen  367/500 [████████████████████████████████████░░░░░░░░░░░░░░]  73.4%
+     Best:     Objective 1=  50.27  Objective 2= -23.11
+     Mean:     Objective 1=  -9.46  Objective 2=-212.57
+
+Gen  368/500 [████████████████████████████████████░░░░░░░░░░░░░░]  73.6%
+     Best:     Objective 1=  47.05  Objective 2= -20.67
+     Mean:     Objective 1= -11.38  Objective 2=-248.63
+
+Gen  369/500 [████████████████████████████████████░░░░░░░░░░░░░░]  73.8%
+     Best:     Objective 1=  37.40  Objective 2= -17.80
+     Mean:     Objective 1= -11.29  Objective 2=-228.86
+
+Gen  370/500 [█████████████████████████████████████░░░░░░░░░░░░░]  74.0%
+     Best:     Objective 1=  56.22  Objective 2= -20.55
+     Mean:     Objective 1= -10.04  Objective 2=-278.03
+
+Generation 370:	[ 60.16547851 -21.31538714]
+Mean fitness:	-127.62 +- 231.38
+Mean fitness per obj: ['-11.57 +-24.33', '-243.68 +-282.03']
+Gen  371/500 [█████████████████████████████████████░░░░░░░░░░░░░]  74.2%
+     Best:     Objective 1=  35.08  Objective 2= -21.07
+     Mean:     Objective 1= -11.57  Objective 2=-243.68
+
+Gen  372/500 [█████████████████████████████████████░░░░░░░░░░░░░]  74.4%
+     Best:     Objective 1=  64.26  Objective 2= -20.81
+     Mean:     Objective 1= -10.06  Objective 2=-259.13
+
+Gen  373/500 [█████████████████████████████████████░░░░░░░░░░░░░]  74.6%
+     Best:     Objective 1=  61.57  Objective 2= -20.85
+     Mean:     Objective 1=  -9.96  Objective 2=-252.18
+
+Gen  374/500 [█████████████████████████████████████░░░░░░░░░░░░░]  74.8%
+     Best:     Objective 1=  41.86  Objective 2= -22.00
+     Mean:     Objective 1= -10.51  Objective 2=-227.94
+
+Gen  375/500 [█████████████████████████████████████░░░░░░░░░░░░░]  75.0%
+     Best:     Objective 1=  70.63  Objective 2= -22.01
+     Mean:     Objective 1=  -9.32  Objective 2=-278.49
+
+Generation 375:	[ 60.16547851 -21.31538714]
+Mean fitness:	-114.28 +- 218.94
+Mean fitness per obj: ['-8.17 +-24.03', '-220.39 +-269.77']
+Gen  376/500 [█████████████████████████████████████░░░░░░░░░░░░░]  75.2%
+     Best:     Objective 1=  88.09  Objective 2= -20.17
+     Mean:     Objective 1=  -8.17  Objective 2=-220.39
+
+Gen  377/500 [█████████████████████████████████████░░░░░░░░░░░░░]  75.4%
+     Best:     Objective 1=  52.32  Objective 2= -22.01
+     Mean:     Objective 1=  -9.51  Objective 2=-243.38
+
+Gen  378/500 [█████████████████████████████████████░░░░░░░░░░░░░]  75.6%
+     Best:     Objective 1=  24.89  Objective 2= -22.14
+     Mean:     Objective 1=  -8.08  Objective 2=-252.40
+
+Gen  379/500 [█████████████████████████████████████░░░░░░░░░░░░░]  75.8%
+     Best:     Objective 1=  42.39  Objective 2= -20.59
+     Mean:     Objective 1= -10.15  Objective 2=-248.80
+
+Gen  380/500 [██████████████████████████████████████░░░░░░░░░░░░]  76.0%
+     Best:     Objective 1=  74.64  Objective 2= -21.09
+     Mean:     Objective 1=  -8.88  Objective 2=-238.89
+
+Generation 380:	[ 60.16547851 -21.31538714]
+Mean fitness:	-149.03 +- 271.48
+Mean fitness per obj: ['-10.23 +-26.23', '-287.82 +-328.92']
+Gen  381/500 [██████████████████████████████████████░░░░░░░░░░░░]  76.2%
+     Best:     Objective 1=  34.33  Objective 2= -20.53
+     Mean:     Objective 1= -10.23  Objective 2=-287.82
+
+Gen  382/500 [██████████████████████████████████████░░░░░░░░░░░░]  76.4%
+     Best:     Objective 1=  60.07  Objective 2= -21.90
+     Mean:     Objective 1= -10.09  Objective 2=-211.51
+
+Gen  383/500 [██████████████████████████████████████░░░░░░░░░░░░]  76.6%
+     Best:     Objective 1=  73.99  Objective 2= -18.60
+     Mean:     Objective 1=  -9.96  Objective 2=-263.33
+
+Gen  384/500 [██████████████████████████████████████░░░░░░░░░░░░]  76.8%
+     Best:     Objective 1=  40.86  Objective 2= -20.52
+     Mean:     Objective 1= -12.33  Objective 2=-215.34
+
+Gen  385/500 [██████████████████████████████████████░░░░░░░░░░░░]  77.0%
+     Best:     Objective 1=  40.57  Objective 2= -23.69
+     Mean:     Objective 1=  -7.06  Objective 2=-270.96
+
+Generation 385:	[ 60.16547851 -21.31538714]
+Mean fitness:	-126.98 +- 225.48
+Mean fitness per obj: ['-11.74 +-22.52', '-242.22 +-273.15']
+Gen  386/500 [██████████████████████████████████████░░░░░░░░░░░░]  77.2%
+     Best:     Objective 1=  59.41  Objective 2= -24.02
+     Mean:     Objective 1= -11.74  Objective 2=-242.22
+
+Gen  387/500 [██████████████████████████████████████░░░░░░░░░░░░]  77.4%
+     Best:     Objective 1=  73.13  Objective 2= -21.42
+     Mean:     Objective 1=  -8.39  Objective 2=-217.29
+
+Gen  388/500 [██████████████████████████████████████░░░░░░░░░░░░]  77.6%
+     Best:     Objective 1=  57.29  Objective 2= -19.39
+     Mean:     Objective 1= -11.34  Objective 2=-242.68
+
+Gen  389/500 [██████████████████████████████████████░░░░░░░░░░░░]  77.8%
+     Best:     Objective 1=  33.93  Objective 2= -20.57
+     Mean:     Objective 1= -10.04  Objective 2=-241.62
+
+Gen  390/500 [███████████████████████████████████████░░░░░░░░░░░]  78.0%
+     Best:     Objective 1=  72.76  Objective 2= -21.31
+     Mean:     Objective 1=  -9.24  Objective 2=-285.16
+
+Generation 390:	[ 60.16547851 -21.31538714]
+Mean fitness:	-148.09 +- 281.72
+Mean fitness per obj: ['-10.10 +-25.39', '-286.08 +-346.42']
+Gen  391/500 [███████████████████████████████████████░░░░░░░░░░░]  78.2%
+     Best:     Objective 1=  35.91  Objective 2= -22.29
+     Mean:     Objective 1= -10.10  Objective 2=-286.08
+
+Gen  392/500 [███████████████████████████████████████░░░░░░░░░░░]  78.4%
+     Best:     Objective 1=  73.73  Objective 2= -19.68
+     Mean:     Objective 1=  -9.34  Objective 2=-252.65
+
+Gen  393/500 [███████████████████████████████████████░░░░░░░░░░░]  78.6%
+     Best:     Objective 1=  42.29  Objective 2= -20.39
+     Mean:     Objective 1=  -8.37  Objective 2=-263.09
+
+Gen  394/500 [███████████████████████████████████████░░░░░░░░░░░]  78.8%
+     Best:     Objective 1=  81.90  Objective 2= -21.09
+     Mean:     Objective 1= -10.17  Objective 2=-230.03
+
+Gen  395/500 [███████████████████████████████████████░░░░░░░░░░░]  79.0%
+     Best:     Objective 1=  57.64  Objective 2= -22.26
+     Mean:     Objective 1=  -9.53  Objective 2=-261.18
+
+Generation 395:	[ 60.16547851 -21.31538714]
+Mean fitness:	-115.72 +- 205.50
+Mean fitness per obj: ['-8.57 +-21.94', '-222.87 +-247.01']
+Gen  396/500 [███████████████████████████████████████░░░░░░░░░░░]  79.2%
+     Best:     Objective 1=  44.88  Objective 2= -21.67
+     Mean:     Objective 1=  -8.57  Objective 2=-222.87
+
+Gen  397/500 [███████████████████████████████████████░░░░░░░░░░░]  79.4%
+     Best:     Objective 1=  31.91  Objective 2= -24.32
+     Mean:     Objective 1= -12.00  Objective 2=-266.43
+
+Gen  398/500 [███████████████████████████████████████░░░░░░░░░░░]  79.6%
+     Best:     Objective 1=  59.11  Objective 2= -22.63
+     Mean:     Objective 1=  -9.56  Objective 2=-277.22
+
+Gen  399/500 [███████████████████████████████████████░░░░░░░░░░░]  79.8%
+     Best:     Objective 1=  35.73  Objective 2= -23.17
+     Mean:     Objective 1=  -9.58  Objective 2=-221.17
+
+Gen  400/500 [████████████████████████████████████████░░░░░░░░░░]  80.0%
+     Best:     Objective 1=  47.31  Objective 2= -20.50
+     Mean:     Objective 1=  -9.81  Objective 2=-284.64
+
+Generation 400:	[ 60.16547851 -21.31538714]
+Mean fitness:	-127.84 +- 249.74
+Mean fitness per obj: ['-8.36 +-17.65', '-247.32 +-309.64']
+Gen  401/500 [████████████████████████████████████████░░░░░░░░░░]  80.2%
+     Best:     Objective 1=  71.11  Objective 2= -18.90
+     Mean:     Objective 1=  -8.36  Objective 2=-247.32
+
+Gen  402/500 [████████████████████████████████████████░░░░░░░░░░]  80.4%
+     Best:     Objective 1=  30.57  Objective 2= -21.89
+     Mean:     Objective 1= -11.80  Objective 2=-250.02
+
+Gen  403/500 [████████████████████████████████████████░░░░░░░░░░]  80.6%
+     Best:     Objective 1=  43.52  Objective 2= -22.05
+     Mean:     Objective 1= -10.36  Objective 2=-244.60
+
+Gen  404/500 [████████████████████████████████████████░░░░░░░░░░]  80.8%
+     Best:     Objective 1=  59.88  Objective 2= -23.69
+     Mean:     Objective 1=  -8.05  Objective 2=-248.52
+
+Gen  405/500 [████████████████████████████████████████░░░░░░░░░░]  81.0%
+     Best:     Objective 1=  47.49  Objective 2= -19.32
+     Mean:     Objective 1= -12.80  Objective 2=-290.07
+
+Generation 405:	[ 60.16547851 -21.31538714]
+Mean fitness:	-123.63 +- 226.85
+Mean fitness per obj: ['-9.14 +-20.03', '-238.11 +-276.24']
+Gen  406/500 [████████████████████████████████████████░░░░░░░░░░]  81.2%
+     Best:     Objective 1=  41.38  Objective 2= -25.04
+     Mean:     Objective 1=  -9.14  Objective 2=-238.11
+
+Gen  407/500 [████████████████████████████████████████░░░░░░░░░░]  81.4%
+     Best:     Objective 1=  85.36  Objective 2= -24.97
+     Mean:     Objective 1=  -8.91  Objective 2=-255.02
+
+Gen  408/500 [████████████████████████████████████████░░░░░░░░░░]  81.6%
+     Best:     Objective 1=  46.27  Objective 2= -25.02
+     Mean:     Objective 1=  -7.17  Objective 2=-241.96
+
+Gen  409/500 [████████████████████████████████████████░░░░░░░░░░]  81.8%
+     Best:     Objective 1=  66.17  Objective 2= -21.89
+     Mean:     Objective 1=  -9.40  Objective 2=-249.06
+
+Gen  410/500 [█████████████████████████████████████████░░░░░░░░░]  82.0%
+     Best:     Objective 1=  52.56  Objective 2= -22.29
+     Mean:     Objective 1= -11.20  Objective 2=-260.53
+
+Generation 410:	[ 60.16547851 -21.31538714]
+Mean fitness:	-138.62 +- 250.20
+Mean fitness per obj: ['-9.68 +-20.80', '-267.57 +-302.51']
+Gen  411/500 [█████████████████████████████████████████░░░░░░░░░]  82.2%
+     Best:     Objective 1=  49.14  Objective 2= -22.53
+     Mean:     Objective 1=  -9.68  Objective 2=-267.57
+
+Gen  412/500 [█████████████████████████████████████████░░░░░░░░░]  82.4%
+     Best:     Objective 1=  57.76  Objective 2= -22.33
+     Mean:     Objective 1= -10.04  Objective 2=-267.73
+
+Gen  413/500 [█████████████████████████████████████████░░░░░░░░░]  82.6%
+     Best:     Objective 1=  83.98  Objective 2= -21.08
+     Mean:     Objective 1=  -8.66  Objective 2=-262.55
+
+Gen  414/500 [█████████████████████████████████████████░░░░░░░░░]  82.8%
+     Best:     Objective 1=  46.25  Objective 2= -19.86
+     Mean:     Objective 1= -10.84  Objective 2=-252.21
+
+Gen  415/500 [█████████████████████████████████████████░░░░░░░░░]  83.0%
+     Best:     Objective 1=  38.95  Objective 2= -21.41
+     Mean:     Objective 1= -11.87  Objective 2=-254.35
+
+Generation 415:	[ 60.16547851 -21.31538714]
+Mean fitness:	-136.93 +- 253.07
+Mean fitness per obj: ['-11.22 +-27.88', '-262.64 +-309.36']
+Gen  416/500 [█████████████████████████████████████████░░░░░░░░░]  83.2%
+     Best:     Objective 1=  39.90  Objective 2= -18.70
+     Mean:     Objective 1= -11.22  Objective 2=-262.64
+
+Gen  417/500 [█████████████████████████████████████████░░░░░░░░░]  83.4%
+     Best:     Objective 1=  44.22  Objective 2= -22.35
+     Mean:     Objective 1=  -9.93  Objective 2=-271.35
+
+Gen  418/500 [█████████████████████████████████████████░░░░░░░░░]  83.6%
+     Best:     Objective 1=  35.36  Objective 2= -21.86
+     Mean:     Objective 1= -10.23  Objective 2=-239.77
+
+Gen  419/500 [█████████████████████████████████████████░░░░░░░░░]  83.8%
+     Best:     Objective 1=  40.90  Objective 2= -22.54
+     Mean:     Objective 1= -10.19  Objective 2=-251.93
+
+Gen  420/500 [██████████████████████████████████████████░░░░░░░░]  84.0%
+     Best:     Objective 1=  31.52  Objective 2= -23.30
+     Mean:     Objective 1=  -8.26  Objective 2=-278.27
+
+Generation 420:	[ 60.16547851 -21.31538714]
+Mean fitness:	-144.38 +- 266.65
+Mean fitness per obj: ['-10.09 +-21.40', '-278.67 +-325.08']
+Gen  421/500 [██████████████████████████████████████████░░░░░░░░]  84.2%
+     Best:     Objective 1=  76.39  Objective 2= -24.59
+     Mean:     Objective 1= -10.09  Objective 2=-278.67
+
+Gen  422/500 [██████████████████████████████████████████░░░░░░░░]  84.4%
+     Best:     Objective 1=  48.81  Objective 2= -22.03
+     Mean:     Objective 1= -11.04  Objective 2=-267.14
+
+Gen  423/500 [██████████████████████████████████████████░░░░░░░░]  84.6%
+     Best:     Objective 1= 110.01  Objective 2= -20.77
+     Mean:     Objective 1=  -8.67  Objective 2=-240.24
+
+Gen  424/500 [██████████████████████████████████████████░░░░░░░░]  84.8%
+     Best:     Objective 1=  41.83  Objective 2= -23.25
+     Mean:     Objective 1=  -9.96  Objective 2=-256.13
+
+Gen  425/500 [██████████████████████████████████████████░░░░░░░░]  85.0%
+     Best:     Objective 1=  40.61  Objective 2= -22.52
+     Mean:     Objective 1= -12.09  Objective 2=-282.28
+
+Generation 425:	[ 60.16547851 -21.31538714]
+Mean fitness:	-128.03 +- 231.49
+Mean fitness per obj: ['-10.55 +-25.24', '-245.51 +-280.95']
+Gen  426/500 [██████████████████████████████████████████░░░░░░░░]  85.2%
+     Best:     Objective 1=  46.48  Objective 2= -22.54
+     Mean:     Objective 1= -10.55  Objective 2=-245.51
+
+Gen  427/500 [██████████████████████████████████████████░░░░░░░░]  85.4%
+     Best:     Objective 1=  54.53  Objective 2= -21.33
+     Mean:     Objective 1= -10.05  Objective 2=-251.74
+
+Gen  428/500 [██████████████████████████████████████████░░░░░░░░]  85.6%
+     Best:     Objective 1=  47.09  Objective 2= -22.29
+     Mean:     Objective 1= -12.20  Objective 2=-261.16
+
+Gen  429/500 [██████████████████████████████████████████░░░░░░░░]  85.8%
+     Best:     Objective 1=  37.68  Objective 2= -20.81
+     Mean:     Objective 1=  -8.94  Objective 2=-250.90
+
+Gen  430/500 [███████████████████████████████████████████░░░░░░░]  86.0%
+     Best:     Objective 1=  49.49  Objective 2= -21.25
+     Mean:     Objective 1= -10.17  Objective 2=-227.36
+
+Generation 430:	[ 60.16547851 -21.31538714]
+Mean fitness:	-131.47 +- 237.51
+Mean fitness per obj: ['-10.28 +-29.78', '-252.66 +-287.33']
+Gen  431/500 [███████████████████████████████████████████░░░░░░░]  86.2%
+     Best:     Objective 1=  43.22  Objective 2= -21.39
+     Mean:     Objective 1= -10.28  Objective 2=-252.66
+
+Gen  432/500 [███████████████████████████████████████████░░░░░░░]  86.4%
+     Best:     Objective 1=  48.92  Objective 2= -22.05
+     Mean:     Objective 1= -10.46  Objective 2=-244.12
+
+Gen  433/500 [███████████████████████████████████████████░░░░░░░]  86.6%
+     Best:     Objective 1=  54.65  Objective 2= -23.95
+     Mean:     Objective 1=  -8.33  Objective 2=-256.98
+
+Gen  434/500 [███████████████████████████████████████████░░░░░░░]  86.8%
+     Best:     Objective 1=  59.95  Objective 2= -25.29
+     Mean:     Objective 1=  -7.67  Objective 2=-281.21
+
+Gen  435/500 [███████████████████████████████████████████░░░░░░░]  87.0%
+     Best:     Objective 1=  57.92  Objective 2= -22.56
+     Mean:     Objective 1= -11.15  Objective 2=-289.41
+
+Generation 435:	[ 60.16547851 -21.31538714]
+Mean fitness:	-112.70 +- 209.86
+Mean fitness per obj: ['-8.56 +-19.53', '-216.84 +-256.93']
+Gen  436/500 [███████████████████████████████████████████░░░░░░░]  87.2%
+     Best:     Objective 1=  55.48  Objective 2= -22.90
+     Mean:     Objective 1=  -8.56  Objective 2=-216.84
+
+Gen  437/500 [███████████████████████████████████████████░░░░░░░]  87.4%
+     Best:     Objective 1=  39.63  Objective 2= -22.14
+     Mean:     Objective 1= -11.31  Objective 2=-258.03
+
+Gen  438/500 [███████████████████████████████████████████░░░░░░░]  87.6%
+     Best:     Objective 1=  46.24  Objective 2= -21.73
+     Mean:     Objective 1=  -8.96  Objective 2=-292.83
+
+Gen  439/500 [███████████████████████████████████████████░░░░░░░]  87.8%
+     Best:     Objective 1=  34.67  Objective 2= -20.80
+     Mean:     Objective 1= -12.13  Objective 2=-269.24
+
+Gen  440/500 [████████████████████████████████████████████░░░░░░]  88.0%
+     Best:     Objective 1=  75.54  Objective 2= -23.67
+     Mean:     Objective 1=  -9.43  Objective 2=-265.02
+
+Generation 440:	[ 60.16547851 -21.31538714]
+Mean fitness:	-125.29 +- 232.86
+Mean fitness per obj: ['-10.16 +-29.57', '-240.41 +-284.72']
+Gen  441/500 [████████████████████████████████████████████░░░░░░]  88.2%
+     Best:     Objective 1=  37.46  Objective 2= -20.52
+     Mean:     Objective 1= -10.16  Objective 2=-240.41
+
+Gen  442/500 [████████████████████████████████████████████░░░░░░]  88.4%
+     Best:     Objective 1=  85.84  Objective 2= -19.73
+     Mean:     Objective 1=  -8.48  Objective 2=-254.80
+
+Gen  443/500 [████████████████████████████████████████████░░░░░░]  88.6%
+     Best:     Objective 1=  54.18  Objective 2= -23.02
+     Mean:     Objective 1=  -7.60  Objective 2=-266.87
+
+Gen  444/500 [████████████████████████████████████████████░░░░░░]  88.8%
+     Best:     Objective 1=  40.83  Objective 2= -21.76
+     Mean:     Objective 1= -12.00  Objective 2=-284.38
+
+Gen  445/500 [████████████████████████████████████████████░░░░░░]  89.0%
+     Best:     Objective 1=  56.45  Objective 2= -22.71
+     Mean:     Objective 1=  -9.84  Objective 2=-278.14
+
+Generation 445:	[ 60.16547851 -21.31538714]
+Mean fitness:	-125.38 +- 220.99
+Mean fitness per obj: ['-13.39 +-32.22', '-237.36 +-267.50']
+Gen  446/500 [████████████████████████████████████████████░░░░░░]  89.2%
+     Best:     Objective 1=  61.77  Objective 2= -21.42
+     Mean:     Objective 1= -13.39  Objective 2=-237.36
+
+Gen  447/500 [████████████████████████████████████████████░░░░░░]  89.4%
+     Best:     Objective 1=  76.36  Objective 2= -23.12
+     Mean:     Objective 1=  -8.78  Objective 2=-278.82
+
+Gen  448/500 [████████████████████████████████████████████░░░░░░]  89.6%
+     Best:     Objective 1=  42.46  Objective 2= -20.76
+     Mean:     Objective 1=  -8.15  Objective 2=-260.42
+
+Gen  449/500 [████████████████████████████████████████████░░░░░░]  89.8%
+     Best:     Objective 1=  50.95  Objective 2= -20.03
+     Mean:     Objective 1=  -8.92  Objective 2=-252.70
+
+Gen  450/500 [█████████████████████████████████████████████░░░░░]  90.0%
+     Best:     Objective 1=  51.55  Objective 2= -21.03
+     Mean:     Objective 1=  -9.25  Objective 2=-250.22
+
+Generation 450:	[ 60.16547851 -21.31538714]
+Mean fitness:	-144.95 +- 261.90
+Mean fitness per obj: ['-10.79 +-25.67', '-279.11 +-317.06']
+Gen  451/500 [█████████████████████████████████████████████░░░░░]  90.2%
+     Best:     Objective 1=  44.26  Objective 2= -22.80
+     Mean:     Objective 1= -10.79  Objective 2=-279.11
+
+Gen  452/500 [█████████████████████████████████████████████░░░░░]  90.4%
+     Best:     Objective 1=  33.05  Objective 2= -20.85
+     Mean:     Objective 1= -10.70  Objective 2=-260.48
+
+Gen  453/500 [█████████████████████████████████████████████░░░░░]  90.6%
+     Best:     Objective 1=  45.15  Objective 2= -22.60
+     Mean:     Objective 1=  -8.92  Objective 2=-253.17
+
+Gen  454/500 [█████████████████████████████████████████████░░░░░]  90.8%
+     Best:     Objective 1=  55.96  Objective 2= -21.96
+     Mean:     Objective 1=  -9.45  Objective 2=-229.23
+
+Gen  455/500 [█████████████████████████████████████████████░░░░░]  91.0%
+     Best:     Objective 1=  63.63  Objective 2= -18.48
+     Mean:     Objective 1= -11.15  Objective 2=-225.44
+
+Generation 455:	[ 60.16547851 -21.31538714]
+Mean fitness:	-142.57 +- 256.13
+Mean fitness per obj: ['-9.19 +-18.49', '-275.95 +-308.68']
+Gen  456/500 [█████████████████████████████████████████████░░░░░]  91.2%
+     Best:     Objective 1=  43.21  Objective 2= -23.65
+     Mean:     Objective 1=  -9.19  Objective 2=-275.95
+
+Gen  457/500 [█████████████████████████████████████████████░░░░░]  91.4%
+     Best:     Objective 1=  65.83  Objective 2= -23.65
+     Mean:     Objective 1=  -9.10  Objective 2=-259.69
+
+Gen  458/500 [█████████████████████████████████████████████░░░░░]  91.6%
+     Best:     Objective 1=  58.53  Objective 2= -23.02
+     Mean:     Objective 1=  -9.20  Objective 2=-273.70
+
+Gen  459/500 [█████████████████████████████████████████████░░░░░]  91.8%
+     Best:     Objective 1=  32.09  Objective 2= -20.18
+     Mean:     Objective 1=  -9.62  Objective 2=-277.06
+
+Gen  460/500 [██████████████████████████████████████████████░░░░]  92.0%
+     Best:     Objective 1=  41.94  Objective 2= -22.52
+     Mean:     Objective 1=  -9.22  Objective 2=-263.17
+
+Generation 460:	[ 60.16547851 -21.31538714]
+Mean fitness:	-129.87 +- 234.46
+Mean fitness per obj: ['-9.38 +-23.03', '-250.35 +-283.51']
+Gen  461/500 [██████████████████████████████████████████████░░░░]  92.2%
+     Best:     Objective 1=  54.87  Objective 2= -21.76
+     Mean:     Objective 1=  -9.38  Objective 2=-250.35
+
+Gen  462/500 [██████████████████████████████████████████████░░░░]  92.4%
+     Best:     Objective 1=  74.88  Objective 2= -21.32
+     Mean:     Objective 1=  -7.59  Objective 2=-267.19
+
+Gen  463/500 [██████████████████████████████████████████████░░░░]  92.6%
+     Best:     Objective 1=  49.63  Objective 2= -21.68
+     Mean:     Objective 1=  -9.87  Objective 2=-240.87
+
+Gen  464/500 [██████████████████████████████████████████████░░░░]  92.8%
+     Best:     Objective 1=  28.99  Objective 2= -20.52
+     Mean:     Objective 1= -11.87  Objective 2=-282.78
+
+Gen  465/500 [██████████████████████████████████████████████░░░░]  93.0%
+     Best:     Objective 1=  52.40  Objective 2= -21.93
+     Mean:     Objective 1=  -8.22  Objective 2=-247.80
+
+Generation 465:	[ 60.16547851 -21.31538714]
+Mean fitness:	-137.02 +- 246.13
+Mean fitness per obj: ['-11.29 +-23.27', '-262.76 +-298.33']
+Gen  466/500 [██████████████████████████████████████████████░░░░]  93.2%
+     Best:     Objective 1=  62.45  Objective 2= -22.50
+     Mean:     Objective 1= -11.29  Objective 2=-262.76
+
+Gen  467/500 [██████████████████████████████████████████████░░░░]  93.4%
+     Best:     Objective 1=  53.01  Objective 2= -21.43
+     Mean:     Objective 1=  -8.65  Objective 2=-250.54
+
+Gen  468/500 [██████████████████████████████████████████████░░░░]  93.6%
+     Best:     Objective 1=  52.08  Objective 2= -18.35
+     Mean:     Objective 1= -12.05  Objective 2=-288.88
+
+Gen  469/500 [██████████████████████████████████████████████░░░░]  93.8%
+     Best:     Objective 1=  36.65  Objective 2= -20.60
+     Mean:     Objective 1=  -8.53  Objective 2=-233.80
+
+Gen  470/500 [███████████████████████████████████████████████░░░]  94.0%
+     Best:     Objective 1=  47.16  Objective 2= -23.70
+     Mean:     Objective 1= -10.45  Objective 2=-269.15
+
+Generation 470:	[ 60.16547851 -21.31538714]
+Mean fitness:	-136.78 +- 236.40
+Mean fitness per obj: ['-11.96 +-30.81', '-261.61 +-282.24']
+Gen  471/500 [███████████████████████████████████████████████░░░]  94.2%
+     Best:     Objective 1=  49.00  Objective 2= -18.37
+     Mean:     Objective 1= -11.96  Objective 2=-261.61
+
+Gen  472/500 [███████████████████████████████████████████████░░░]  94.4%
+     Best:     Objective 1=  59.30  Objective 2= -20.46
+     Mean:     Objective 1= -11.05  Objective 2=-244.33
+
+Gen  473/500 [███████████████████████████████████████████████░░░]  94.6%
+     Best:     Objective 1=  49.93  Objective 2= -21.90
+     Mean:     Objective 1=  -9.59  Objective 2=-257.79
+
+Gen  474/500 [███████████████████████████████████████████████░░░]  94.8%
+     Best:     Objective 1=  52.30  Objective 2= -18.58
+     Mean:     Objective 1= -10.01  Objective 2=-276.76
+
+Gen  475/500 [███████████████████████████████████████████████░░░]  95.0%
+     Best:     Objective 1=  35.32  Objective 2= -21.65
+     Mean:     Objective 1=  -9.66  Objective 2=-258.18
+
+Generation 475:	[ 60.16547851 -21.31538714]
+Mean fitness:	-139.65 +- 263.64
+Mean fitness per obj: ['-7.21 +-20.41', '-272.09 +-321.74']
+Gen  476/500 [███████████████████████████████████████████████░░░]  95.2%
+     Best:     Objective 1=  58.71  Objective 2= -22.87
+     Mean:     Objective 1=  -7.21  Objective 2=-272.09
+
+Gen  477/500 [███████████████████████████████████████████████░░░]  95.4%
+     Best:     Objective 1=  39.61  Objective 2= -20.88
+     Mean:     Objective 1=  -9.90  Objective 2=-248.37
+
+Gen  478/500 [███████████████████████████████████████████████░░░]  95.6%
+     Best:     Objective 1=  67.90  Objective 2= -20.56
+     Mean:     Objective 1=  -8.52  Objective 2=-252.29
+
+Gen  479/500 [███████████████████████████████████████████████░░░]  95.8%
+     Best:     Objective 1=  45.49  Objective 2= -20.10
+     Mean:     Objective 1=  -9.73  Objective 2=-275.93
+
+Gen  480/500 [████████████████████████████████████████████████░░]  96.0%
+     Best:     Objective 1=  40.15  Objective 2= -23.39
+     Mean:     Objective 1= -10.90  Objective 2=-235.10
+
+Generation 480:	[ 60.16547851 -21.31538714]
+Mean fitness:	-126.39 +- 237.49
+Mean fitness per obj: ['-7.65 +-23.19', '-245.14 +-289.94']
+Gen  481/500 [████████████████████████████████████████████████░░]  96.2%
+     Best:     Objective 1=  53.48  Objective 2= -21.73
+     Mean:     Objective 1=  -7.65  Objective 2=-245.14
+
+Gen  482/500 [████████████████████████████████████████████████░░]  96.4%
+     Best:     Objective 1=  49.42  Objective 2= -18.94
+     Mean:     Objective 1= -10.60  Objective 2=-247.01
+
+Gen  483/500 [████████████████████████████████████████████████░░]  96.6%
+     Best:     Objective 1=  51.32  Objective 2= -21.91
+     Mean:     Objective 1=  -8.53  Objective 2=-241.95
+
+Gen  484/500 [████████████████████████████████████████████████░░]  96.8%
+     Best:     Objective 1=  47.83  Objective 2= -21.44
+     Mean:     Objective 1=  -8.70  Objective 2=-262.11
+
+Gen  485/500 [████████████████████████████████████████████████░░]  97.0%
+     Best:     Objective 1=  43.77  Objective 2= -21.89
+     Mean:     Objective 1= -10.11  Objective 2=-291.57
+
+Generation 485:	[ 60.16547851 -21.31538714]
+Mean fitness:	-131.81 +- 237.90
+Mean fitness per obj: ['-9.57 +-25.61', '-254.05 +-287.50']
+Gen  486/500 [████████████████████████████████████████████████░░]  97.2%
+     Best:     Objective 1=  53.28  Objective 2= -16.04
+     Mean:     Objective 1=  -9.57  Objective 2=-254.05
+
+Gen  487/500 [████████████████████████████████████████████████░░]  97.4%
+     Best:     Objective 1=  44.32  Objective 2= -21.42
+     Mean:     Objective 1=  -9.21  Objective 2=-269.37
+
+Gen  488/500 [████████████████████████████████████████████████░░]  97.6%
+     Best:     Objective 1= 113.19  Objective 2= -17.11
+     Mean:     Objective 1= -10.22  Objective 2=-243.60
+
+Gen  489/500 [████████████████████████████████████████████████░░]  97.8%
+     Best:     Objective 1=  43.51  Objective 2= -21.48
+     Mean:     Objective 1= -11.08  Objective 2=-259.14
+
+Gen  490/500 [█████████████████████████████████████████████████░]  98.0%
+     Best:     Objective 1=  45.51  Objective 2= -20.87
+     Mean:     Objective 1=  -8.73  Objective 2=-275.07
+
+Generation 490:	[ 60.16547851 -21.31538714]
+Mean fitness:	-131.99 +- 250.25
+Mean fitness per obj: ['-9.22 +-21.50', '-254.75 +-307.64']
+Gen  491/500 [█████████████████████████████████████████████████░]  98.2%
+     Best:     Objective 1=  39.75  Objective 2= -20.51
+     Mean:     Objective 1=  -9.22  Objective 2=-254.75
+
+Gen  492/500 [█████████████████████████████████████████████████░]  98.4%
+     Best:     Objective 1=  46.04  Objective 2= -19.96
+     Mean:     Objective 1=  -9.42  Objective 2=-222.07
+
+Gen  493/500 [█████████████████████████████████████████████████░]  98.6%
+     Best:     Objective 1=  50.90  Objective 2= -21.11
+     Mean:     Objective 1=  -9.69  Objective 2=-272.47
+
+Gen  494/500 [█████████████████████████████████████████████████░]  98.8%
+     Best:     Objective 1=  33.14  Objective 2= -21.67
+     Mean:     Objective 1= -11.11  Objective 2=-275.78
+
+Gen  495/500 [█████████████████████████████████████████████████░]  99.0%
+     Best:     Objective 1=  41.63  Objective 2= -21.70
+     Mean:     Objective 1= -10.83  Objective 2=-258.49
+
+Generation 495:	[ 60.16547851 -21.31538714]
+Mean fitness:	-136.31 +- 249.48
+Mean fitness per obj: ['-8.52 +-27.06', '-264.09 +-301.81']
+Gen  496/500 [█████████████████████████████████████████████████░]  99.2%
+     Best:     Objective 1=  44.30  Objective 2= -22.91
+     Mean:     Objective 1=  -8.52  Objective 2=-264.09
+
+Gen  497/500 [█████████████████████████████████████████████████░]  99.4%
+     Best:     Objective 1=  78.38  Objective 2= -21.35
+     Mean:     Objective 1= -10.13  Objective 2=-264.97
+
+Gen  498/500 [█████████████████████████████████████████████████░]  99.6%
+     Best:     Objective 1=  66.67  Objective 2= -20.01
+     Mean:     Objective 1=  -9.36  Objective 2=-285.72
+
+Gen  499/500 [█████████████████████████████████████████████████░]  99.8%
+     Best:     Objective 1=  49.86  Objective 2= -19.94
+     Mean:     Objective 1= -10.48  Objective 2=-260.90
+
+Gen  500/500 [██████████████████████████████████████████████████] 100.0%
+     Best:     Objective 1=  44.95  Objective 2= -17.51
+     Mean:     Objective 1= -12.33  Objective 2=-244.30
+
+Fitness plot saved to: results/20260331_165444_nsga_ckpts/fitness_plot.pdf
+Pareto front plot saved to: results/20260331_165444_nsga_ckpts/pareto_fronts.pdf
+Loaded genotype from: results/20260331_165444_nsga_ckpts/499/x_best.npy  (shape: (560,))
+Controller: NeuralNetworkController  |  Parameters: 560
+
+Evaluating on flat terrain (256 episodes)...
+  Flat : mean=-11.45 +/- 27.04  best=71.73  worst=-189.49
+Evaluating on ice terrain (256 episodes)...
+  Ice  : mean=-182.33 +/- 278.83  best=-23.24  worst=-3273.21
+  Video saved to: results/20260331_165444_nsga_ckpts/evaluation_flat.mp4
+  Video saved to: results/20260331_165444_nsga_ckpts/evaluation_ice.mp4
+
+Score saved to: results/20260331_165444_nsga_ckpts/evaluation_score.txt
+
+==================================================
+  FLAT : -11.45 +/- 27.04  (best: 71.73)
+  ICE  : -182.33 +/- 278.83  (best: -23.24)
+==================================================

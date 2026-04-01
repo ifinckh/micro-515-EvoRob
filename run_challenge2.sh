@@ -20,7 +20,7 @@ conda activate evorob
 mkdir -p logs
 
 # Run Python script
-python Challenge2.py
+python Challenge2.py --num_generations 500 --population_size 300 --n_parents 30 --mutation_prob 0.3 --crossover_prob 0.5
 
 # conda init
 conda deactivate
