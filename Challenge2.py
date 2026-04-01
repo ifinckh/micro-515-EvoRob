@@ -1,8 +1,9 @@
 import os
 
-# os.environ.setdefault("MUJOCO_GL", "egl")
-# os.environ["MUJOCO_GL"] = "egl"
-
+import platform # added to detect OS for GL backend because error
+# Default the Mujoco GL backend per platform to avoid invalid configs (e.g., EGL on macOS).
+if "MUJOCO_GL" not in os.environ:
+    os.environ["MUJOCO_GL"] = "glfw" if platform.system() == "Darwin" else "egl"
 
 from datetime import datetime
 from pathlib import Path
@@ -808,46 +809,19 @@ def replay_checkpoint(checkpoint_path: str):
 if __name__ == "__main__":
     # Run unit tests first
     # test_exercise_implementation()
-    import argparse
-    
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("--num_generations", type=int, default=1000)
-    parser.add_argument("--population_size", type=int, default=300)
-    parser.add_argument("--mutation_prob", type=float, default=0.5)
-    parser.add_argument("--crossover_prob", type=float, default=0.5)
-    parser.add_argument("--n_parents", type=int, default=30)
-    args = parser.parse_args()
-
-    num_generations = args.num_generations
-    population_size = args.population_size
-    mutation_prob = args.mutation_prob
-    crossover_prob = args.crossover_prob
-    n_parents = args.n_parents
-    
-    # num_generations=100
-    # population_size=300
-    # mutation_prob=0.5
-    # crossover_prob=0.5
-    # n_parents= int(population_size*0.3)
-    
-    print("\n" + "#" * 70)
-    print("\nNum Generations:", num_generations, "| Population Size:", population_size, 
-          "| Parents:", n_parents, "| Mutation Prob:", mutation_prob, "| Crossover Prob:", crossover_prob)
-    print("\n" + "#" * 70)
 
     # Uncomment to run full NSGA-II evolution:
     run_evolution_nsga(
-        num_generations=num_generations,
-        population_size=population_size,
+        num_generations=500,
+        population_size=300, # 300, 400
         run_evaluation=False,
         compute_score=True,
-        random_seed=41,
+        random_seed=42,
         n_repeats=2,
-        mutation_prob=mutation_prob,
-        crossover_prob=crossover_prob,
+        mutation_prob=0.5, # 0.5, 0.3
+        crossover_prob=0.5, # 0.5, 0.9
         bounds=(-1, 1),
-        n_parents=n_parents,
+        n_parents=30, # test mathis 30 100
         ckpt_interval=5,
         checkpoint_path=None,
     )
@@ -861,3 +835,10 @@ if __name__ == "__main__":
     # plot_pareto_fronts_from_checkpoint(
     #     checkpoint_dir="./results/nsga_multi_terrain_ckpt/99"
     # )
+
+# Mathis tests
+# population_size 300 n_parents 30 mutation_prob 0.5 crossover_prob 0.5
+# population_size 300 n_parents 30 mutation_prob 0.3 crossover_prob 0.5
+# population_size 300 n_parents 100 mutation_prob 0.5 crossover_prob 0.5
+# population_size 300 n_parents 30 mutation_prob 0.5 crossover_prob 0.9
+# population_size 400 n_parents 50 mutation_prob 0.5 crossover_prob 0.5

@@ -126,23 +126,10 @@ class NSGAII(EA):
         else:
             combined_population = np.vstack([self.current_population, population])
             combined_fitness = np.vstack([self.fitness, fitness])
-            
-        #####################################################################################################################
-        ############## Added by Mathis ######################################################################################
-        # Normalize combined fitness before NSGA-II selection
-        normalized_fitness = combined_fitness.copy()
-        for obj in range(normalized_fitness.shape[1]):
-            f_min = normalized_fitness[:, obj].min()
-            f_max = normalized_fitness[:, obj].max()
-            r = f_max - f_min
-            if r > 1e-8:
-                normalized_fitness[:, obj] = (normalized_fitness[:, obj] - f_min) / r
-        #####################################################################################################################
-        #####################################################################################################################
-        
+
         # Select best n_pop individuals from combined population
         parents_population, parents_fitness = self.sort_and_select_parents(
-            combined_population, normalized_fitness, self.n_parents #self.n_pop
+            combined_population, combined_fitness, self.n_parents
         )
 
         self.current_population = parents_population
@@ -205,6 +192,9 @@ class NSGAII(EA):
         """
         new_offspring = np.empty((population_size, self.n_params))
 
+        # Use current parent pool size (selected in tell); not the target offspring size
+        parent_pool_size = len(self.current_population)
+
         # Compute ranks and crowding distances for tournament selection
         fronts, ranks = self.fast_nondominated_sort(self.fitness)
         crowding = np.zeros(len(self.fitness))
@@ -212,23 +202,22 @@ class NSGAII(EA):
             dist = self.compute_crowding_distance(self.fitness, front)
             for i, idx in enumerate(front):
                 crowding[idx] = dist[i]
-                
-        current_pop_size = len(self.current_population)
 
         for i in range(population_size):
             # Select parent using tournament selection
             parent_idx = self.tournament_selection(ranks, crowding, tournament_size=2)
 
             # Select 3 different individuals for differential evolution
+            # Sampling must stay within the current parent pool
             r0 = parent_idx
             while r0 == parent_idx:
-                r0 = np.random.randint(0, current_pop_size) # population_size)
+                r0 = np.random.randint(0, parent_pool_size)
             r1 = r0
             while r1 == r0 or r1 == parent_idx:
-                r1 = np.random.randint(0, current_pop_size) # population_size)
+                r1 = np.random.randint(0, parent_pool_size)
             r2 = r1
             while r2 == r1 or r2 == r0 or r2 == parent_idx:
-                r2 = np.random.randint(0, current_pop_size) # population_size)
+                r2 = np.random.randint(0, parent_pool_size)
 
             jrand = np.random.randint(0, self.n_params)
             for j in range(self.n_params):
@@ -306,19 +295,20 @@ class NSGAII(EA):
         # TODO: Implement Pareto dominance check
         # Use all() and any() to check the two conditions for dominance
         
-        individual = np.array(individual)
-        other_individual = np.array(other_individual)
-        if np.all(individual >= other_individual) and np.any(individual > other_individual):
+        # raise NotImplementedError(
+        #     "TODO: Implement dominance check.\n"
+        #     "Return True if 'individual' dominates 'other_individual'.\n"
+        #     "See Exercise 2a in challenge2.md for guidance."
+        # )
+        
+        at_least_as_good = all(x >= y for x, y in zip(individual, other_individual))
+        strictly_better = any(x > y for x, y in zip(individual, other_individual))
+        
+        if at_least_as_good and strictly_better:
             return True
-        else:            
+        else:
             return False
         
-        
-        raise NotImplementedError(
-            "TODO: Implement dominance check.\n"
-            "Return True if 'individual' dominates 'other_individual'.\n"
-            "See Exercise 2a in challenge2.md for guidance."
-        )
 
     def fast_nondominated_sort(self, fitness: np.ndarray) -> Tuple[List[List[int]], List[int]]:
         """Performs fast non-dominated sorting to rank solutions into Pareto fronts.
@@ -348,12 +338,15 @@ class NSGAII(EA):
                 # does individual_a dominate individual_b?
                 if self.dominates(fitness[individual_a], fitness[individual_b]):
                     # TODO: Track that individual_a dominates individual_b
+                    # pass  # Replace with your code
                     domination_lists[individual_a].append(individual_b)
 
                 # does individual_b dominate individual_a?
                 elif self.dominates(fitness[individual_b], fitness[individual_a]):
                     # TODO: Track that individual_a is dominated by individual_b
+                    # pass  # Replace with your code
                     domination_counts[individual_a] += 1
+
             # if solution dominates all
             if domination_counts[individual_a] == 0:
                 # placeholder solution rank
@@ -374,13 +367,13 @@ class NSGAII(EA):
                 for individual_b in domination_lists[individual_a]:
                     # TODO: Update domination count and check if individual_b
                     # should be added to the next front
+                    # pass  # Replace with your code
                     domination_counts[individual_b] -= 1
                     if domination_counts[individual_b] == 0:
                         population_rank[individual_b] = i + 1
                         next_front.append(individual_b)
 
             i += 1
-
             pareto_fronts.append(next_front)
 
         # removes last empty front
@@ -415,28 +408,48 @@ class NSGAII(EA):
         # 1. Sort the front by that objective
         # 2. Assign infinite distance to boundary solutions
         # 3. Compute normalized distance for interior solutions
-        for obj in range(n_objectives):
-            # sort along objective m in our front
-            idx_sort = np.argsort(fitness[front,obj])
-            
-            # set extremes to inf
-            distance[idx_sort[0]] = np.inf
-            distance[idx_sort[-1]] = np.inf
-            
-            # make sure the range of objectives is non-zero
-            obj_range = np.max(fitness[front,obj]) - np.min(fitness[front,obj])
-            if obj_range == 0: 
-                continue
-            
-            # fill the normalized distances
-            distance[idx_sort[1:-1]] += ( fitness[front,obj][idx_sort[2:]] - fitness[front,obj][idx_sort[:-2]] ) / obj_range
-            
-        return distance
         
-        raise NotImplementedError(
-            "TODO: Implement crowding distance calculation.\n"
-            "See Exercise 2c in challenge2.md for guidance."
-        )
+        # raise NotImplementedError(
+        #     "TODO: Implement crowding distance calculation.\n"
+        #     "See Exercise 2c in challenge2.md for guidance."
+        # )
+        
+        
+        # 1) sort front by obj
+        if n_solutions == 0: #no sol in front
+            return distance
+
+        # 2)boundary sol only, all => inf
+        if n_solutions <= 2: 
+            distance[:] = np.inf
+            return distance
+
+        # 3) normalized distance for interior solutions
+        for m in range(n_objectives):
+            # Sort idx of front by obj m
+            sorted_indices = np.argsort(fitness[front, m])
+
+            # Boundary points get infinite distance
+            distance[sorted_indices[0]] = np.inf
+            distance[sorted_indices[-1]] = np.inf 
+ 
+            obj_min = fitness[front[sorted_indices[0]], m] # min of objective m in front
+            obj_max = fitness[front[sorted_indices[-1]], m] # max " "         " "  "
+            obj_range = obj_max - obj_min
+
+            if obj_range == 0: # all solu have same value, can't cormalize => assigned to inf
+                continue
+
+            for i in range(1, n_solutions - 1): # iterate for each interior sols
+                if np.isinf(distance[sorted_indices[i]]):
+                    continue
+
+                prev_fitness = fitness[front[sorted_indices[i - 1]], m] # fitness of previous sol in sorted order for obj m
+                next_fitness = fitness[front[sorted_indices[i + 1]], m] # fitness of next sol in sorted order for obj m
+
+                distance[sorted_indices[i]] += (next_fitness - prev_fitness) / obj_range # normalized dist contribution for obj m
+
+        return distance
 
     def crowding_operator(self, individual_idx: int, other_individual_idx: int,
                           population_rank: List[int], crowding_distances: np.ndarray) -> int:
@@ -460,21 +473,24 @@ class NSGAII(EA):
         # 1. Prefer lower rank (better Pareto front)
         # 2. If same rank, prefer larger crowding distance
         
-        if population_rank[individual_idx] > population_rank[other_individual_idx]:
-            return other_individual_idx
-        elif population_rank[individual_idx] < population_rank[other_individual_idx]:
+        # raise NotImplementedError(
+        #     "TODO: Implement crowding operator.\n"
+        #     "See Exercise 2d in challenge2.md for guidance."
+        # )
+        
+        # Compare ranks first
+        if population_rank[individual_idx] < population_rank[other_individual_idx]:
             return individual_idx
+        
+        # If ranks are equal, compare crowding distances
+        elif population_rank[individual_idx] > population_rank[other_individual_idx]:
+            return other_individual_idx
         else:
             if crowding_distances[individual_idx] > crowding_distances[other_individual_idx]:
                 return individual_idx
-            else :
+            else:
                 return other_individual_idx
-            
         
-        raise NotImplementedError(
-            "TODO: Implement crowding operator.\n"
-            "See Exercise 2d in challenge2.md for guidance."
-        )
 
     def tournament_selection(self, population_rank: List[int],
                              crowding_distances: np.ndarray,
