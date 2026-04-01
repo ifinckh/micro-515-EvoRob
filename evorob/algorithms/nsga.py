@@ -142,7 +142,7 @@ class NSGAII(EA):
         
         # Select best n_pop individuals from combined population
         parents_population, parents_fitness = self.sort_and_select_parents(
-            combined_population, combined_fitness, self.n_parents #self.n_pop
+            combined_population, normalized_fitness, self.n_parents #self.n_pop
         )
 
         self.current_population = parents_population
