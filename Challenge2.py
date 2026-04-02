@@ -15,8 +15,8 @@ from evorob.utils.filesys import get_last_checkpoint_dir
 from evorob.world.ant_multi_world import AntMultiWorld
 from evorob.world.ant_world import AntFlatWorld
 from evorob.world.envs.ant_flat import AntFlatEnvironment
-# from evorob.world.robot.controllers.mlp import NeuralNetworkController
-from evorob.world.robot.controllers.sinoid import OscillatoryController as NeuralNetworkController
+from evorob.world.robot.controllers.mlp import NeuralNetworkController
+from evorob.world.robot.controllers.sinoid import OscillatoryController
 
 """
     Multi-objective optimisation: Ant two-terrains
@@ -749,6 +749,181 @@ def run_evolution_nsga(
             print("Skipping interactive evaluation (no display available).")
 
 
+def run_evolution_nsga_oscillatory(
+    num_generations: int,
+    population_size: int,
+    ckpt_interval: int,
+    run_evaluation: bool,
+    compute_score: bool,
+    random_seed: int,
+    n_repeats: int,
+    mutation_prob: float,
+    crossover_prob: float,
+    bounds: Tuple[float, float],
+    n_parents: int,
+    checkpoint_path: Optional[str] = None,
+) -> None:
+    """Run NSGA-II multi-objective evolutionary optimization."""
+    np.random.seed(random_seed)
+
+    # Create world for evaluation
+    world = AntMultiWorld(controller_cls=OscillatoryController, n_repeats=n_repeats)
+
+    # Setup checkpoint directory
+    dt_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+    if checkpoint_path is None:
+        checkpoint_path = f"results/{dt_str}_nsga_ckpts"
+    else:
+        checkpoint_path = str(
+            Path(checkpoint_path).parent / f"{dt_str}_{Path(checkpoint_path).name}"
+        )
+
+    ckpt_dir = Path(checkpoint_path)
+    ckpt_dir.mkdir(parents=True, exist_ok=True)
+
+    # NSGA-II hyperparameters
+    nsga_kwargs = dict(
+        population_size=population_size,
+        n_opt_params=world.n_params,
+        n_parents=n_parents,
+        bounds=bounds,
+        mutation_prob=mutation_prob,
+        crossover_prob=crossover_prob,
+    )
+    nsga = NSGAII(**nsga_kwargs, output_dir=ckpt_dir)
+
+    # Save metadata before training
+    metadata_path = ckpt_dir / "metadata.txt"
+    with open(metadata_path, "w") as f:
+        f.write("=" * 60 + "\n")
+        f.write("NSGA-II Training Metadata\n")
+        f.write("=" * 60 + "\n\n")
+        f.write(f"Date            : {dt_str}\n")
+        f.write(f"Generations     : {num_generations}\n")
+        f.write(f"Population size : {population_size}\n")
+        f.write(f"Random seed     : {random_seed}\n")
+        f.write(f"Num parameters  : {world.n_params}\n")
+        f.write(f"Repeats         : {world.n_repeats}\n")
+        f.write(f"Episode steps   : {world.max_episode_steps}\n")
+        f.write(f"Checkpoint dir  : {ckpt_dir}\n\n")
+        f.write("-" * 60 + "\n")
+        f.write("NSGA-II Hyperparameters\n")
+        f.write("-" * 60 + "\n")
+        for key, val in nsga_kwargs.items():
+            f.write(f"  {key:<20s}: {val}\n")
+        f.write("\n")
+    print(f"Metadata saved to: {metadata_path}")
+
+    # Print training header
+    print("\n" + "=" * 70)
+    print(f"{'MULTI-OBJECTIVE EVOLUTION - NSGA-II':^70}")
+    print("=" * 70)
+    print(
+        f"Population: {population_size} | Generations: {num_generations} | "
+        f"Parents: {nsga.n_parents}"
+    )
+    print(f"Objective 1: Flat Terrain Speed | Objective 2: Ice Terrain Speed")
+    print("=" * 70 + "\n")
+
+    # Evolution loop
+    for generation in range(num_generations):
+        population = nsga.ask()
+        multi_fitness = np.empty((len(population), 2))
+
+        for i, individual in enumerate(population):
+            multi_fitness[i] = world.evaluate_individual(individual)
+
+        save_checkpoint = (
+            (generation % ckpt_interval == 0) or (generation == num_generations - 1)
+        )
+        nsga.tell(population, multi_fitness, save_checkpoint=save_checkpoint)
+
+        # Logging
+        mean_obj1 = np.mean(multi_fitness[:, 0])
+        mean_obj2 = np.mean(multi_fitness[:, 1])
+        best_obj1 = np.max(multi_fitness[:, 0])
+        best_obj2 = np.max(multi_fitness[:, 1])
+
+        progress = (generation + 1) / num_generations
+        bar_length = 50
+        filled = int(bar_length * progress)
+        bar = "█" * filled + "░" * (bar_length - filled)
+
+        print(
+            f"Gen {generation + 1:4d}/{num_generations} [{bar}] {progress * 100:5.1f}%"
+        )
+        print(
+            f"     Best:     Objective 1={best_obj1:7.2f}  Objective 2={best_obj2:7.2f}"
+        )
+        print(
+            f"     Mean:     Objective 1={mean_obj1:7.2f}  Objective 2={mean_obj2:7.2f}"
+        )
+        print()
+
+    # --- Post-training outputs ---
+
+    # Fitness plot
+    plot_fitness(nsga.full_f, ckpt_dir)
+
+    # Pareto front plot
+    final_fitness = np.array(nsga.full_f)[-1]
+    plot_pareto_fronts(
+        final_fitness, ckpt_dir,
+        num_generations=num_generations,
+        population_size=population_size,
+    )
+
+    # Evaluation on both terrains
+    eval_results = None
+    if compute_score:
+        try:
+            eval_results = evaluate_checkpoint(
+                checkpoint_dir=str(ckpt_dir),
+                output_dir=str(ckpt_dir),
+            )
+        except Exception as e:
+            print(f"Warning: Evaluation failed: {e}")
+
+    # Interactive evaluation
+    # This only works, when run on a local machine with display capabilities and rendering support.
+    # If running in a headless environment (e.g. SCITAS cluster), this will be skipped with a warning.
+    if run_evaluation:
+        best_population = nsga.x
+        best_fitness = nsga.f
+        best_flat_idx = np.argmax(best_fitness[:, 0])
+        if os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY"):
+            try:
+                evaluation_env = world.create_env(render_mode="human")
+                evaluation_controller = world.controller
+                evaluation_controller.geno2pheno(best_population[best_flat_idx])
+
+                obs, _ = evaluation_env.reset()
+                trial_reward = 0.0
+                trial_count = 0
+
+                print("\nPress Ctrl+C to stop the evaluation...")
+                try:
+                    while True:
+                        action = evaluation_controller.get_action(obs)
+                        obs, reward, terminated, truncated, _ = evaluation_env.step(action)
+                        trial_reward += reward
+
+                        if np.logical_or(terminated, truncated):
+                            trial_count += 1
+                            print(f"Trial {trial_count} reward: {float(trial_reward):.2f}")
+                            trial_reward = 0.0
+                            obs, _ = evaluation_env.reset()
+                except KeyboardInterrupt:
+                    print(f"\n\nEvaluation stopped by user after {trial_count} trials.")
+                finally:
+                    evaluation_env.close()
+            except Exception as e:
+                print(f"Warning: Interactive evaluation skipped (rendering unavailable): {e}")
+        else:
+            print("Skipping interactive evaluation (no display available).")
+
+
+
 # ---------------------------------------------------------------------------
 # Standalone checkpoint utilities
 # ---------------------------------------------------------------------------
@@ -837,27 +1012,27 @@ if __name__ == "__main__":
     print("\n" + "#" * 70)
 
     # Uncomment to run full NSGA-II evolution:
-    run_evolution_nsga(
-        num_generations=num_generations,
-        population_size=population_size,
-        run_evaluation=False,
-        compute_score=True,
-        random_seed=40,
-        n_repeats=2,
-        mutation_prob=mutation_prob,
-        crossover_prob=crossover_prob,
-        bounds=(-0.2, 0.2),
-        n_parents=n_parents,
-        ckpt_interval=20,
-        checkpoint_path=None,
-    )
+    # run_evolution_nsga(
+    #     num_generations=num_generations,
+    #     population_size=population_size,
+    #     run_evaluation=False,
+    #     compute_score=True,
+    #     random_seed=40,
+    #     n_repeats=2,
+    #     mutation_prob=mutation_prob,
+    #     crossover_prob=crossover_prob,
+    #     bounds=(-0.2, 0.2),
+    #     n_parents=n_parents,
+    #     ckpt_interval=5,
+    #     checkpoint_path=None,
+    # )
 
     # Uncomment to replay your checkpoint
-    # replay_checkpoint(
-    #     checkpoint_path="./results/nsga_multi_terrain_ckpt/99"
-    # )
+    replay_checkpoint(
+        checkpoint_path="results"
+    )
 
     # Uncomment to plot Pareto fronts from checkpoint
-    # plot_pareto_fronts_from_checkpoint(
-    #     checkpoint_dir="./results/nsga_multi_terrain_ckpt/99"
-    # )
+    plot_pareto_fronts_from_checkpoint(
+        checkpoint_dir="results"
+    )
