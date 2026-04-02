@@ -1,8 +1,6 @@
 import os
 
-# os.environ.setdefault("MUJOCO_GL", "egl")
-# os.environ["MUJOCO_GL"] = "egl"
-
+os.environ.setdefault("MUJOCO_GL", "egl")
 
 from datetime import datetime
 from pathlib import Path
@@ -17,7 +15,8 @@ from evorob.utils.filesys import get_last_checkpoint_dir
 from evorob.world.ant_multi_world import AntMultiWorld
 from evorob.world.ant_world import AntFlatWorld
 from evorob.world.envs.ant_flat import AntFlatEnvironment
-from evorob.world.robot.controllers.mlp import NeuralNetworkController
+# from evorob.world.robot.controllers.mlp import NeuralNetworkController
+from evorob.world.robot.controllers.sinoid import OscillatoryController as NeuralNetworkController
 
 """
     Multi-objective optimisation: Ant two-terrains
@@ -803,6 +802,7 @@ def replay_checkpoint(checkpoint_path: str):
             controller=ant_flat_world.geno2pheno(population[best_flat_idx]),
         )
         print(f"Generated videos for iteration {idx_eval + 1}/{n_evals}")
+
 
 
 if __name__ == "__main__":
