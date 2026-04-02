@@ -257,6 +257,7 @@ class NSGAII(EA):
                 distances = self.compute_crowding_distance(fitness, front)
                 for idx, individual in enumerate(front):
                     crowding_distances[individual] = distances[idx]
+                    
         
         # Select individuals front by front, using crowding distance for tie-breaking
         selected_indices = []

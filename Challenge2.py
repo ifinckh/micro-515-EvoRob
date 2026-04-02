@@ -17,6 +17,8 @@ from evorob.world.ant_world import AntFlatWorld
 from evorob.world.envs.ant_flat import AntFlatEnvironment
 from evorob.world.robot.controllers.mlp import NeuralNetworkController
 from evorob.world.robot.controllers.sinoid import OscillatoryController
+from evorob.world.robot.controllers.mlp import NeuralNetworkController
+# from evorob.world.robot.controllers.sinoid import OscillatoryController as NeuralNetworkController
 
 """
     Multi-objective optimisation: Ant two-terrains
@@ -1017,7 +1019,7 @@ if __name__ == "__main__":
     #     population_size=population_size,
     #     run_evaluation=False,
     #     compute_score=True,
-    #     random_seed=40,
+    #     random_seed=39,
     #     n_repeats=2,
     #     mutation_prob=mutation_prob,
     #     crossover_prob=crossover_prob,
@@ -1029,10 +1031,10 @@ if __name__ == "__main__":
 
     # Uncomment to replay your checkpoint
     replay_checkpoint(
-        checkpoint_path="results"
+        checkpoint_path="results/20260402_142229_nsga_ckpts/170"
     )
 
     # Uncomment to plot Pareto fronts from checkpoint
     plot_pareto_fronts_from_checkpoint(
-        checkpoint_dir="results"
+        checkpoint_dir="results/20260402_142229_nsga_ckpts/170"
     )

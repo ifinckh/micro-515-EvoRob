@@ -1,0 +1,22 @@
+
+######################################################################
+
+Num Generations: 500 | Population Size: 300 | Parents: 150 | Mutation Prob: 0.5 | Crossover Prob: 0.5
+
+######################################################################
+Metadata saved to: results/20260402_141739_nsga_ckpts/metadata.txt
+
+======================================================================
+                 MULTI-OBJECTIVE EVOLUTION - NSGA-II                  
+======================================================================
+Population: 300 | Generations: 500 | Parents: 150
+Objective 1: Flat Terrain Speed | Objective 2: Ice Terrain Speed
+======================================================================
+
+Generation 0:	[451.48718071 420.72971631]
+Mean fitness:	254.31 +- 119.36
+Mean fitness per obj: ['229.64 +-133.15', '278.98 +-97.71']
+Gen    1/500 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.2%
+     Best:     Objective 1= 451.49  Objective 2= 455.25
+     Mean:     Objective 1= 229.64  Objective 2= 278.98
+
