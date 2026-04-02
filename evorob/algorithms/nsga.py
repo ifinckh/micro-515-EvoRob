@@ -199,6 +199,8 @@ class NSGAII(EA):
             dist = self.compute_crowding_distance(self.fitness, front)
             for i, idx in enumerate(front):
                 crowding[idx] = dist[i]
+                
+        population_size = self.current_population.shape[0]
 
         for i in range(population_size):
             # Select parent using tournament selection

@@ -1,6 +1,6 @@
 import os
 
-os.environ.setdefault("MUJOCO_GL", "egl")
+# os.environ.setdefault("MUJOCO_GL", "egl")
 
 from datetime import datetime
 from pathlib import Path
@@ -842,13 +842,13 @@ if __name__ == "__main__":
         population_size=population_size,
         run_evaluation=False,
         compute_score=True,
-        random_seed=41,
+        random_seed=40,
         n_repeats=2,
         mutation_prob=mutation_prob,
         crossover_prob=crossover_prob,
-        bounds=(-1, 1),
+        bounds=(-0.2, 0.2),
         n_parents=n_parents,
-        ckpt_interval=5,
+        ckpt_interval=20,
         checkpoint_path=None,
     )
 
