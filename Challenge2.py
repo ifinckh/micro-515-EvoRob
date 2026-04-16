@@ -932,7 +932,7 @@ def run_evolution_nsga_oscillatory(
 
 def replay_checkpoint(checkpoint_path: str):
     """Re-evaluate a checkpoint and generate videos."""
-    np.random.seed(31)
+    np.random.seed(30)
 
     population = np.load(f"{checkpoint_path}/x.npy")
     world = AntMultiWorld(controller_cls=NeuralNetworkController)
@@ -986,9 +986,17 @@ if __name__ == "__main__":
     # Run unit tests first
     # test_exercise_implementation()
     # import argparse
+    # import argparse
     
     # parser = argparse.ArgumentParser()
+    # parser = argparse.ArgumentParser()
 
+    # parser.add_argument("--num_generations", type=int, default=1000)
+    # parser.add_argument("--population_size", type=int, default=300)
+    # parser.add_argument("--mutation_prob", type=float, default=0.5)
+    # parser.add_argument("--crossover_prob", type=float, default=0.5)
+    # parser.add_argument("--n_parents", type=int, default=300/3)
+    # args = parser.parse_args()
     # parser.add_argument("--num_generations", type=int, default=1000)
     # parser.add_argument("--population_size", type=int, default=300)
     # parser.add_argument("--mutation_prob", type=float, default=0.5)
@@ -1001,13 +1009,27 @@ if __name__ == "__main__":
     # mutation_prob = args.mutation_prob
     # crossover_prob = args.crossover_prob
     # n_parents = args.n_parents
+    # num_generations = args.num_generations
+    # population_size = args.population_size
+    # mutation_prob = args.mutation_prob
+    # crossover_prob = args.crossover_prob
+    # n_parents = args.n_parents
     
     # # num_generations=100
     # # population_size=300
     # # mutation_prob=0.5
     # # crossover_prob=0.5
     # # n_parents= int(population_size*0.3)
+    # # num_generations=100
+    # # population_size=300
+    # # mutation_prob=0.5
+    # # crossover_prob=0.5
+    # # n_parents= int(population_size*0.3)
     
+    # print("\n" + "#" * 70)
+    # print("\nNum Generations:", num_generations, "| Population Size:", population_size, 
+    #       "| Parents:", n_parents, "| Mutation Prob:", mutation_prob, "| Crossover Prob:", crossover_prob)
+    # print("\n" + "#" * 70)
     # print("\n" + "#" * 70)
     # print("\nNum Generations:", num_generations, "| Population Size:", population_size, 
     #       "| Parents:", n_parents, "| Mutation Prob:", mutation_prob, "| Crossover Prob:", crossover_prob)
@@ -1030,11 +1052,16 @@ if __name__ == "__main__":
     # )
 
     # Uncomment to replay your checkpoint
-    replay_checkpoint(
-        checkpoint_path="results/20260402_142229_nsga_ckpts/600"
+    # replay_checkpoint(
+    #     checkpoint_path="results/485"
+    # )
+    
+    eval_results = evaluate_checkpoint(
+        checkpoint_dir="results/485",
+        output_dir="results/485",
     )
 
-    # # Uncomment to plot Pareto fronts from checkpoint
+    # Uncomment to plot Pareto fronts from checkpoint
     # plot_pareto_fronts_from_checkpoint(
-    #     checkpoint_dir="results/20260402_142229_nsga_ckpts/170"
+    #     checkpoint_dir="results"
     # )
