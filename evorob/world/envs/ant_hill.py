@@ -128,7 +128,7 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
         forward_reward = x_velocity * self._forward_reward_weight
         healthy_reward = 1
         ctrl_cost = np.sum(action**2)  * self._ctrl_cost_weight
-        cfrc_cost = np.sum( self.data.cfrc_ext[1:]**2) * self._cfrc_cost_weight
+        cfrc_cost = np.sum(self.data.cfrc_ext[1:]**2) * self._cfrc_cost_weight
 
         #TODO change the reward for hill terrain
         reward = healthy_reward + forward_reward -ctrl_cost -cfrc_cost
@@ -155,9 +155,9 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
             DOF = np.argwhere((np.isnan(qacc)) + (np.isinf(qacc)) + (np.abs(qacc) > 1e6)).squeeze()[0]
             print(ValueError(f'MuJoCo Warning: Nan, Inf or huge value in QACC at DOF {DOF}'))
             terminated = True
-        if self.data.qpos[2] < 0.2 or self.data.qpos[2] > 1.0:
+        if self.data.qpos[2] < 0.2 or self.data.qpos[2] > 1.0: # Check if the torso is too low or too high
             terminated = True
-        if terminated:
+        if terminated: # If the episode is terminated due to instability, assign a large negative reward
             info["healthy_reward"] = -10
 
         self.previous_state = observation
