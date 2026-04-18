@@ -129,9 +129,19 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
         healthy_reward = 1
         ctrl_cost = np.sum(action**2)  * self._ctrl_cost_weight
         cfrc_cost = np.sum(self.data.cfrc_ext[1:]**2) * self._cfrc_cost_weight
-
+        
+        # floor height estimation using feet contact forces
+        contact_zs = [self.data.contact[i].pos[2] for i in range(self.data.ncon)]
+        if len(contact_zs) == 0:
+            z_floor = self.data.qpos[2] - 0.5 # assume the floor is 0.5m below the torso if no contact
+        else:
+            z_floor = np.mean(contact_zs)
+            
+        # height reward, encourage the ant to climb the hill
+        height_reward = self.data.qpos[2] * 0.5 
+        
         #TODO change the reward for hill terrain
-        reward = healthy_reward + forward_reward -ctrl_cost -cfrc_cost
+        reward = healthy_reward + forward_reward -ctrl_cost -cfrc_cost + height_reward
         observation = self._get_obs()
 
         info = {
@@ -155,7 +165,7 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
             DOF = np.argwhere((np.isnan(qacc)) + (np.isinf(qacc)) + (np.abs(qacc) > 1e6)).squeeze()[0]
             print(ValueError(f'MuJoCo Warning: Nan, Inf or huge value in QACC at DOF {DOF}'))
             terminated = True
-        if self.data.qpos[2] < 0.2 or self.data.qpos[2] > 1.0: # Check if the torso is too low or too high
+        if self.data.qpos[2] - z_floor < 0.1 or self.data.qpos[2] - z_floor > 1.2: # Check if the torso is too low or too high, went from 0.2-1 to 0.1-1.2 to allow for more jumping, and bad floor estimation
             terminated = True
         if terminated: # If the episode is terminated due to instability, assign a large negative reward
             info["healthy_reward"] = -10
