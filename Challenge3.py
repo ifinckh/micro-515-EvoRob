@@ -12,7 +12,7 @@ from gymnasium.vector import AsyncVectorEnv
 from tqdm import trange
 
 #TODO: set for cmaes
-from evorob.algorithms.ea_api_sol import EvoAlgAPI
+from evorob.algorithms.ea_api import EvoAlgAPI
 from evorob.algorithms.nsga import NSGAII
 from evorob.utils.filesys import (
     get_distinct_filename,
@@ -20,7 +20,7 @@ from evorob.utils.filesys import (
     get_project_root,
 )
 from evorob.world.base import World
-from evorob.world.robot.controllers.mlp_sol import NeuralNetworkController
+from evorob.world.robot.controllers.mlp import NeuralNetworkController
 from evorob.world.robot.controllers.so2 import SO2Controller
 from evorob.world.robot.controllers.mlp_hebbian import HebbianController
 from evorob.world.robot.morphology.ant_custom_robot import AntRobot
@@ -479,25 +479,24 @@ def main():
     n_parameters = world.n_params
 
     #%% Understanding the world
-    genotype = np.random.uniform(-1, 1, n_parameters)
-    world.update_robot_xml(genotype)
-    world.visualise_individual(genotype)
+    # genotype = np.random.uniform(-1, 1, n_parameters)
+    # world.update_robot_xml(genotype)
+    # world.visualise_individual(genotype)
 
     # TODO Overwrite controller and load best run exercise 1
-    state_space = ...
-    action_space = ... # Change controller
-    world.controller = NeuralNetworkController(...,
-                                               ...,
-                                               ...)
+    action_space = 8  
+    state_space = 27
+    world.controller = NeuralNetworkController(state_space, action_space, hidden_size=16)
     world.n_weights = world.controller.n_params
     world.n_params = world.n_weights + world.n_body_params
 
-    result_dir = ...
-    prev_best = ... # load previous run
+    result_dir = "results"
+    prev_best = np.load("results/previous/x.npy") # load previous run
+    genotype = np.zeros(prev_best.shape[0]+8)
     genotype[:-8] = prev_best
 
-    genotype[-8::2] = 0.2  # fix upper leg length 0.2m
-    genotype[-7::2] = 0.4     # fix lower leg length 0.6m
+    genotype[-8::2] = np.sqrt(0.08)  # fix upper leg length 0.2m
+    genotype[-7::2] = np.sqrt(0.32)  # fix lower leg length 0.6m
     world.update_robot_xml(genotype)
     world.visualise_individual(genotype)
 
@@ -569,7 +568,6 @@ def main():
     # video_name = get_distinct_filename(join(results_dir, "best.mp4"))
     # print(f"Finished NSGAII run, generating video [{video_name}]...")
     # world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
-
 
 if __name__ == "__main__":
     main()
