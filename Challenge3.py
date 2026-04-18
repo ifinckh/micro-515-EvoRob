@@ -455,11 +455,23 @@ def evaluate_checkpoint(
 
 
 def run_EA_single(ea_single, world):
-    for _ in trange(ea_single.n_gen):
+    # for _ in trange(ea_single.n_gen):
+    #     pop = ea_single.ask()
+    #     fitnesses_gen = np.empty(len(pop))
+    #     for index, genotype in enumerate(pop):
+    #         fit_ind, _ = world.evaluate_individual(genotype)
+    #         fitnesses_gen[index] = fit_ind
+    #     ea_single.tell(pop, fitnesses_gen, save_checkpoint=True)
+    
+    for gen in trange(ea_single.n_gen):
         pop = ea_single.ask()
         fitnesses_gen = np.empty(len(pop))
+        n_steps = 200 if gen < 30 else 500
+        n_repeats = 3 if gen < 30 else 5
         for index, genotype in enumerate(pop):
-            fit_ind, _ = world.evaluate_individual(genotype)
+            fit_ind, _ = world.evaluate_individual(
+                genotype, n_repeats=n_repeats, n_steps=n_steps
+            )
             fitnesses_gen[index] = fit_ind
         ea_single.tell(pop, fitnesses_gen, save_checkpoint=True)
 
@@ -485,20 +497,20 @@ def main():
     # world.visualise_individual(genotype)
 
     # TODO Overwrite controller and load best run exercise 1
-    action_space = 8  
-    state_space = 27
-    world.controller = NeuralNetworkController(state_space, action_space, hidden_size=16)
-    world.n_weights = world.controller.n_params
-    world.n_params = world.n_weights + world.n_body_params
+    # action_space = 8  
+    # state_space = 27
+    # world.controller = NeuralNetworkController(state_space, action_space, hidden_size=16)
+    # world.n_weights = world.controller.n_params
+    # world.n_params = world.n_weights + world.n_body_params
 
-    result_dir = "results"
-    prev_best = np.load("results/previous/x_best.npy") # load previous run
-    genotype = np.zeros(prev_best.shape[0]+8)
-    genotype[:-8] = prev_best
+    # result_dir = "results"
+    # prev_best = np.load("results/previous/x_best.npy") # load previous run
+    # genotype = np.zeros(prev_best.shape[0]+8)
+    # genotype[:-8] = prev_best
 
-    genotype[-8::2] = 0.2  # fix upper leg length 0.2m
-    genotype[-7::2] = 0.4  # fix lower leg length 0.6m
-    world.update_robot_xml(genotype)
+    # genotype[-8::2] = 0.2  # fix upper leg length 0.2m
+    # genotype[-7::2] = 0.4  # fix lower leg length 0.6m
+    # world.update_robot_xml(genotype)
     # world.visualise_individual(genotype)
 
     #%% Evolve open-loop so2
@@ -529,46 +541,46 @@ def main():
 
 
     #%% Optimise multi-objective
-    world = AntWorld()
-    state_space = 27
-    action_space = 8 # Change controller
-    world.controller = NeuralNetworkController(input_size=state_space,
-                                               output_size=action_space,
-                                               hidden_size=action_space)
-    world.n_weights = world.controller.n_params
-    world.n_params = world.n_weights + world.n_body_params
-    n_parameters = world.n_params
-    print("Number of parameters:", n_parameters)
-    print("Number of weights:", world.n_weights)
-    population_size = 100
+    # world = AntWorld()
+    # state_space = 27
+    # action_space = 8 # Change controller
+    # world.controller = NeuralNetworkController(input_size=state_space,
+    #                                            output_size=action_space,
+    #                                            hidden_size=action_space)
+    # world.n_weights = world.controller.n_params
+    # world.n_params = world.n_weights + world.n_body_params
+    # n_parameters = world.n_params
+    # print("Number of parameters:", n_parameters)
+    # print("Number of weights:", world.n_weights)
+    # population_size = 100
 
-    opts = {}
-    opts["min"] = -1
-    opts["max"] = 1
-    opts["num_parents"] = population_size//2
-    opts["num_generations"] = 50
-    opts["mutation_prob"] = 0.2
-    opts["crossover_prob"] = 0.5
+    # opts = {}
+    # opts["min"] = -1
+    # opts["max"] = 1
+    # opts["num_parents"] = population_size//2
+    # opts["num_generations"] = 50
+    # opts["mutation_prob"] = 0.2
+    # opts["crossover_prob"] = 0.5
 
-    results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi")
-    ea_multi_obj = NSGAII(population_size,
-                          n_parameters,
-                          opts["num_parents"],
-                          opts["num_generations"],
-                          (opts["min"], opts["max"]),
-                          opts["mutation_prob"],
-                          opts["crossover_prob"])
-    ea_multi_obj.directory_name = results_dir
-    run_EA_multi(ea_multi_obj, world)
+    # results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi")
+    # ea_multi_obj = NSGAII(population_size,
+    #                       n_parameters,
+    #                       opts["num_parents"],
+    #                       opts["num_generations"],
+    #                       (opts["min"], opts["max"]),
+    #                       opts["mutation_prob"],
+    #                       opts["crossover_prob"])
+    # ea_multi_obj.directory_name = results_dir
+    # run_EA_multi(ea_multi_obj, world)
 
-    #%% visualise
-    checkpoint = get_last_checkpoint_dir(results_dir)
-    best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"), allow_pickle=True)
-    world.update_robot_xml(best_individual)
-    env = world.create_env(max_episode_steps=-1)
-    video_name = get_distinct_filename(join(results_dir, "best.mp4"))
-    print(f"Finished NSGAII run, generating video [{video_name}]...")
-    world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
+    # #%% visualise
+    # checkpoint = get_last_checkpoint_dir(results_dir)
+    # best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"), allow_pickle=True)
+    # world.update_robot_xml(best_individual)
+    # env = world.create_env(max_episode_steps=-1)
+    # video_name = get_distinct_filename(join(results_dir, "best.mp4"))
+    # print(f"Finished NSGAII run, generating video [{video_name}]...")
+    # world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
 
 if __name__ == "__main__":
     main()
