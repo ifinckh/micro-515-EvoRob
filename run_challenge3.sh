@@ -12,15 +12,16 @@
 
 export MUJOCO_GL=egl
 
-# Activate virtual environment
-# conda init
-conda activate evorob
-
-# Create logs directory
 mkdir -p logs
 
-# Run Python script
-python Challenge3.py
+# Use env directly (robust)
+PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
 
-# conda init
-conda deactivate
+echo "Python used:"
+$PYTHON -c "import sys; print(sys.executable)"
+
+# Optional debug
+$PYTHON -c "import PIL; print(PIL.__version__)"
+
+# Run
+$PYTHON Challenge3.py

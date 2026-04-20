@@ -501,74 +501,74 @@ def main():
     # world.update_robot_xml(genotype)
     # world.visualise_individual(genotype)
 
-    #%% Evolve open-loop so2
-    # world = AntWorld()
-    # world.n_weights = world.controller.n_params
-    # world.n_params = world.n_weights + world.n_body_params
-    # n_parameters = world.n_params
-    # population_size = 150
-    # opts = {} # supposed to be the same as CMAES_opts.copy()
-    # opts["min"] = -1
-    # opts["max"] = 1
-    # opts["mutation_sigma"] = 0.3
-    # opts["num_generations"] = 100
-
-    # results_dir = join(ROOT_DIR, "results", ENV_NAME, "single")
-    # ea_single = EvoAlgAPI(n_parameters, population_size, opts["num_generations"], results_dir) # same as : CMAES
-
-    # run_EA_single(ea_single, world)
-
-    # #%% visualise
-    # checkpoint = get_last_checkpoint_dir(results_dir)
-    # best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"))
-    # world.update_robot_xml(best_individual)
-    # env = world.create_env(max_episode_steps=-1)
-    # video_name = get_distinct_filename(join(results_dir, "best.mp4"))
-    # print(f"Finished ES run, generating video [{video_name}]...")
-    # world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
-
-
-    # %% Optimise multi-objective
+    # %% Evolve open-loop so2
     world = AntWorld()
-    state_space = 27
-    action_space = 8 # Change controller
-    world.controller = NeuralNetworkController(input_size=state_space,
-                                               output_size=action_space,
-                                               hidden_size=action_space)
     world.n_weights = world.controller.n_params
     world.n_params = world.n_weights + world.n_body_params
     n_parameters = world.n_params
-    print("Number of parameters:", n_parameters)
-    print("Number of weights:", world.n_weights)
-    population_size = 100
-
-    opts = {}
+    population_size = 300
+    opts = {} # supposed to be the same as CMAES_opts.copy()
     opts["min"] = -1
     opts["max"] = 1
-    opts["num_parents"] = population_size//2
-    opts["num_generations"] = 50
-    opts["mutation_prob"] = 0.2
-    opts["crossover_prob"] = 0.5
+    opts["mutation_sigma"] = 0.3
+    opts["num_generations"] = 400
 
-    results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi")
-    ea_multi_obj = NSGAII(population_size,
-                          n_parameters,
-                          opts["num_parents"],
-                          opts["num_generations"],
-                          (opts["min"], opts["max"]),
-                          opts["mutation_prob"],
-                          opts["crossover_prob"])
-    ea_multi_obj.directory_name = results_dir
-    run_EA_multi(ea_multi_obj, world)
+    results_dir = join(ROOT_DIR, "results", ENV_NAME, "single")
+    ea_single = EvoAlgAPI(n_parameters, population_size, opts["num_generations"], results_dir) # same as : CMAES
+
+    run_EA_single(ea_single, world)
 
     #%% visualise
     checkpoint = get_last_checkpoint_dir(results_dir)
-    best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"), allow_pickle=True)
+    best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"))
     world.update_robot_xml(best_individual)
     env = world.create_env(max_episode_steps=-1)
     video_name = get_distinct_filename(join(results_dir, "best.mp4"))
-    print(f"Finished NSGAII run, generating video [{video_name}]...")
+    print(f"Finished ES run, generating video [{video_name}]...")
     world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
+
+
+    # %% Optimise multi-objective
+    # world = AntWorld()
+    # state_space = 27
+    # action_space = 8 # Change controller
+    # world.controller = NeuralNetworkController(input_size=state_space,
+    #                                            output_size=action_space,
+    #                                            hidden_size=action_space)
+    # world.n_weights = world.controller.n_params
+    # world.n_params = world.n_weights + world.n_body_params
+    # n_parameters = world.n_params
+    # print("Number of parameters:", n_parameters)
+    # print("Number of weights:", world.n_weights)
+    # population_size = 100
+
+    # opts = {}
+    # opts["min"] = -1
+    # opts["max"] = 1
+    # opts["num_parents"] = population_size//2
+    # opts["num_generations"] = 50
+    # opts["mutation_prob"] = 0.2
+    # opts["crossover_prob"] = 0.5
+
+    # results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi")
+    # ea_multi_obj = NSGAII(population_size,
+    #                       n_parameters,
+    #                       opts["num_parents"],
+    #                       opts["num_generations"],
+    #                       (opts["min"], opts["max"]),
+    #                       opts["mutation_prob"],
+    #                       opts["crossover_prob"])
+    # ea_multi_obj.directory_name = results_dir
+    # run_EA_multi(ea_multi_obj, world)
+
+    # #%% visualise
+    # checkpoint = get_last_checkpoint_dir(results_dir)
+    # best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"), allow_pickle=True)
+    # world.update_robot_xml(best_individual)
+    # env = world.create_env(max_episode_steps=-1)
+    # video_name = get_distinct_filename(join(results_dir, "best.mp4"))
+    # print(f"Finished NSGAII run, generating video [{video_name}]...")
+    # world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
 
 if __name__ == "__main__":
     main()
