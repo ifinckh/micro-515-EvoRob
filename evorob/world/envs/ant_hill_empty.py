@@ -131,7 +131,7 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
         cfrc_cost = np.sum( self.data.cfrc_ext[1:]**2) * self._cfrc_cost_weight
 
         #TODO change the reward for hill terrain
-        reward = healthy_reward + self.data.body(self._main_body).xpos[0] -ctrl_cost -cfrc_cost
+        reward = healthy_reward + forward_reward -ctrl_cost -cfrc_cost
         observation = self._get_obs()
 
         info = {
@@ -145,8 +145,6 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
             "x_velocity": x_velocity,
             "y_velocity": y_velocity,
             "z_velocity": z_velocity,
-            # "reward_healthy_forward_height": healthy_reward + forward_reward + height_reward, # old implementation => bad results
-            # "ctrl_cfrc_cost": ctrl_cost + cfrc_cost,
         }
         terminated = False
         # Check for NaN, Inf, or huge values
@@ -157,23 +155,11 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
             DOF = np.argwhere((np.isnan(qacc)) + (np.isinf(qacc)) + (np.abs(qacc) > 1e6)).squeeze()[0]
             print(ValueError(f'MuJoCo Warning: Nan, Inf or huge value in QACC at DOF {DOF}'))
             terminated = True
-        # if self.data.qpos[2] < 0.2 or self.data.qpos[2] > 1.0:
-        #     terminated = True
-        if self.torso_upside_down():
+        if self.data.qpos[2] < 0.2 or self.data.qpos[2] > 1.0:
             terminated = True
-        if np.isinf(observation).any():
-            terminated = True
-        if np.linalg.norm(xyz_velocity) < 1e-2:
-            self.stuck += 1
-            if self.stuck > 10 / self.dt:
-                terminated = True
-        else:
-            self.stuck = 0
         if terminated:
             info["healthy_reward"] = -10
-            # info["reward_healthy_forward_height"] = (info["healthy_reward"] + forward_reward + height_reward)
-            # info["ctrl_cfrc_cost"] = ctrl_cost + cfrc_cost
-            reward -=10
+
         self.previous_state = observation
 
         if self.render_mode == "human":
