@@ -135,6 +135,8 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
         #TODO change the reward for hill terrain
         reward = healthy_reward + self.data.body(self._main_body).xpos[0] -ctrl_cost -cfrc_cost
         observation = self._get_obs()
+        
+        height_reward = self.data.body(self._main_body).xpos[2]
 
         info = {
             "reward_forward": forward_reward,
