@@ -1,8 +1,0 @@
-Python used:
-/home/finckh/miniconda3/envs/evorob/bin/python
-11.3.0
-Number of parameters: 288
-Number of weights: 280
-Generation 0:	[-2.8848404  -0.65040809]
-Mean fitness:	-4.48 +- 3.55
-Mean fitness per obj: ['-7.79 +-1.63', '-1.16 +-0.72']

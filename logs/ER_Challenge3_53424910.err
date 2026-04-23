@@ -1,3 +1,0 @@
-/home/finckh/ER_course/micro-515-EvoRob/Challenge3.py:187: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
-  img = Image.fromarray(terrain_normalized, mode='L')
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [01:15<1:01:54, 75.81s/it]  4%|▍         | 2/50 [02:28<59:17, 74.12s/it]  
