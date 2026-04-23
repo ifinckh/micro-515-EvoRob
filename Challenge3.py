@@ -207,7 +207,7 @@ class AntWorld(World):
             rewards_full[step, ~done_mask] = rewards[~done_mask]
 
             # TODO: design appropriate moo-rewards
-            multi_obj_reward = np.array([infos["reward_forward"]+infos["healthy_reward"], -infos["ctrl_cost"]]).T
+            multi_obj_reward = np.array([infos["reward_healthy_forward_height"], -infos["ctrl_cfrc_cost"]]).T
             multi_obj_rewards_full[step, ~done_mask] = multi_obj_reward[~done_mask]
 
             # Update the done mask based on the "done" and "truncated" flags
@@ -231,8 +231,8 @@ def _run_episodes_hill(world, genotype, n_episodes, max_episode_steps, seed):
 
     Returns:
         episode_rewards: total reward per episode
-        episode_obj1:    cumulative (reward_forward + healthy_reward) per episode
-        episode_obj2:    cumulative (-ctrl_cost) per episode
+        episode_obj1:    cumulative (reward_healthy_forward_height) per episode
+        episode_obj2:    cumulative (-ctrl_cfrc_cost) per episode
     """
     world.update_robot_xml(genotype)
     env = gym.make(
@@ -264,8 +264,8 @@ def _run_episodes_hill(world, genotype, n_episodes, max_episode_steps, seed):
                 - float(info.get("cfrc_cost", 0.0))
             )
             total_reward += neutral_reward
-            total_obj1 += float(info.get("reward_forward", 0.0)) + float(info.get("healthy_reward", 0.0))
-            total_obj2 += -float(info.get("ctrl_cost", 0.0))
+            total_obj1 += float(info.get("reward_healthy_forward_height", 0.0))
+            total_obj2 += -float(info.get("ctrl_cfrc_cost", 0.0))
             if terminated or truncated:
                 break
 
@@ -373,8 +373,8 @@ def plot_pareto_fronts(fitness, output_dir, num_generations=None, population_siz
                 zorder=2,
             )
 
-    ax.set_xlabel("Fitness — reward_forward + healthy_reward", fontsize=11)
-    ax.set_ylabel("Fitness — -ctrl_cost", fontsize=11)
+    ax.set_xlabel("Fitness — reward_healthy_forward_height", fontsize=11)
+    ax.set_ylabel("Fitness — -ctrl_cfrc_cost", fontsize=11)
     info = [f"{n_fronts} front{'s' if n_fronts > 1 else ''}"]
     if num_generations is not None:
         info.insert(0, f"gen {num_generations}")
@@ -489,7 +489,7 @@ def evaluate_checkpoint(
 
     The controller type and genotype size are taken from the AntWorld default
     (whatever the student configured), so no hardcoded assumptions are made.
-    Objectives: [reward_forward + healthy_reward,  -ctrl_cost].
+    Objectives: [reward_healthy_forward_height,  -ctrl_cfrc_cost].
 
     Args:
         checkpoint_dir: Path to your NSGA-II checkpoint folder.
@@ -520,12 +520,12 @@ def evaluate_checkpoint(
 
     if (population is not None and fitness is not None
             and fitness.ndim == 2 and fitness.shape[1] >= 2):
-        spec1_idx = int(np.argmax(fitness[:, 0]))           # best forward+healthy
-        spec2_idx = int(np.argmax(fitness[:, 1]))           # best efficiency
+        spec1_idx = int(np.argmax(fitness[:, 0]))           # best healthy+forward+height
+        spec2_idx = int(np.argmax(fitness[:, 1]))           # best low ctrl+cfrc cost
         gen_idx   = int(np.argmax(np.sum(fitness, axis=1))) # pareto-knee proxy
         spec1_g, spec2_g, gen_g = population[spec1_idx], population[spec2_idx], population[gen_idx]
-        print(f"Specialist obj1 (forward): idx={spec1_idx}  f={fitness[spec1_idx]}")
-        print(f"Specialist obj2 (effic.) : idx={spec2_idx}  f={fitness[spec2_idx]}")
+        print(f"Specialist obj1 (healthy+forward+height): idx={spec1_idx}  f={fitness[spec1_idx]}")
+        print(f"Specialist obj2 (low ctrl+cfrc cost)    : idx={spec2_idx}  f={fitness[spec2_idx]}")
         print(f"Generalist (best sum)    : idx={gen_idx}    f={fitness[gen_idx]}")
     else:
         print("Warning: population/fitness not found — using x_best for all three roles.")
@@ -589,7 +589,7 @@ def evaluate_checkpoint(
         f.write(f"Checkpoint      : {checkpoint_dir}\n")
         f.write(f"Episodes/indiv. : {n_episodes}\n")
         f.write("Neutral reward  : healthy_reward + x_position - ctrl_cost - cfrc_cost (from info)\n")
-        f.write(f"Objectives      : [reward_forward+healthy_reward, -ctrl_cost]\n\n")
+        f.write(f"Objectives      : [reward_healthy_forward_height, -ctrl_cfrc_cost]\n\n")
 
         f.write("=" * 72 + "\n")
         f.write("SUMMARY\n")

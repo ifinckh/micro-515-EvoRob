@@ -175,6 +175,8 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
             self.stuck = 0
         if terminated:
             info["healthy_reward"] = -10
+            info["reward_healthy_forward_height"] = (info["healthy_reward"] + forward_reward + height_reward) # adapted for slope env
+            info["ctrl_cfrc_cost"] = ctrl_cost + cfrc_cost
             reward -=10
         self.previous_state = observation
 
