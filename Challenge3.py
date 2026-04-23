@@ -708,13 +708,13 @@ def main():
     n_parameters = world.n_params
     print("Number of parameters:", n_parameters)
     print("Number of weights:", world.n_weights)
-    population_size = 100
+    population_size = 200
 
     opts = {}
     opts["min"] = -1
     opts["max"] = 1
-    opts["num_parents"] = population_size # //2
-    opts["num_generations"] = 30 # 50
+    opts["num_parents"] = population_size//2
+    opts["num_generations"] = 300 # 50
     opts["mutation_prob"] = 0.3 #0.2
     opts["crossover_prob"] = 0.9 #0.5
 
