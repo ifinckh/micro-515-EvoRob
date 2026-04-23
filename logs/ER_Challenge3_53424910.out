@@ -6,3 +6,32 @@ Number of weights: 280
 Generation 0:	[-2.8848404  -0.65040809]
 Mean fitness:	-4.48 +- 3.55
 Mean fitness per obj: ['-7.79 +-1.63', '-1.16 +-0.72']
+Generation 5:	[-2.03103665 -0.56445578]
+Mean fitness:	-3.51 +- 3.43
+Mean fitness per obj: ['-6.53 +-2.29', '-0.49 +-0.25']
+Generation 10:	[-2.03103665 -0.56445578]
+Mean fitness:	-3.03 +- 3.25
+Mean fitness per obj: ['-5.70 +-2.60', '-0.35 +-0.28']
+Generation 15:	[-1.45588573 -0.41755159]
+Mean fitness:	-2.78 +- 3.21
+Mean fitness per obj: ['-5.25 +-2.88', '-0.30 +-0.28']
+Generation 20:	[-1.45588573 -0.41755159]
+Mean fitness:	-2.46 +- 2.89
+Mean fitness per obj: ['-4.70 +-2.58', '-0.23 +-0.18']
+Generation 25:	[-1.20501542 -0.32471732]
+Mean fitness:	-2.72 +- 3.15
+Mean fitness per obj: ['-5.29 +-2.58', '-0.16 +-0.18']
+Generation 30:	[-1.20501542 -0.32471732]
+Mean fitness:	-2.56 +- 3.07
+Mean fitness per obj: ['-4.96 +-2.73', '-0.17 +-0.18']
+Generation 35:	[-1.12993527 -0.28585272]
+Mean fitness:	-2.55 +- 3.06
+Mean fitness per obj: ['-4.95 +-2.66', '-0.14 +-0.15']
+Generation 40:	[-1.12993527 -0.28585272]
+Mean fitness:	-2.37 +- 2.82
+Mean fitness per obj: ['-4.58 +-2.47', '-0.17 +-0.20']
+Generation 45:	[-0.96380197 -0.28313445]
+Mean fitness:	-2.50 +- 2.92
+Mean fitness per obj: ['-4.86 +-2.42', '-0.13 +-0.17']
+Finished NSGAII run, generating video [/home/finckh/ER_course/micro-515-EvoRob/results/AntHill-v0/multi/best.mp4]...
+Achieved reward: 649.0132847425268

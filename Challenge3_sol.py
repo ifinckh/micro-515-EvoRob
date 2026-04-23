@@ -12,7 +12,7 @@ from gymnasium.vector import AsyncVectorEnv
 from tqdm import trange
 
 #TODO: set for cmaes
-from evorob.algorithms.ea_api import EvoAlgAPI
+from evorob.algorithms.ea_api import EvoAlgAPI as CMAES
 from evorob.algorithms.nsga import NSGAII
 from evorob.utils.filesys import (
     get_distinct_filename,
@@ -20,7 +20,7 @@ from evorob.utils.filesys import (
     get_project_root,
 )
 from evorob.world.base import World
-from evorob.world.robot.controllers.mlp import NeuralNetworkController
+from evorob.world.robot.controllers.mlp_sol import NeuralNetworkController
 from evorob.world.robot.controllers.so2 import SO2Controller
 from evorob.world.robot.controllers.mlp_hebbian import HebbianController
 from evorob.world.robot.morphology.ant_custom_robot import AntRobot
@@ -39,17 +39,16 @@ class AntWorld(World):
         action_space = 8  # https://gymnasium.farama.org/environments/mujoco/ant/#action-space
         state_space = 27  # https://gymnasium.farama.org/environments/mujoco/ant/#observation-space
 
-        self.controller = SO2Controller(input_size=state_space,
-                                        output_size=action_space,
-                                        hidden_size=action_space)
-        
-        # self.controller = NeuralNetworkController(input_size=state_space,
-        #                                     output_size=action_space,
-        #                                     hidden_size=action_space)
+
+        # self.controller = SO2Controller(input_size=state_space,
+        #                                 output_size=action_space,
+        #                                 hidden_size=action_space)
+        self.controller = NeuralNetworkController(input_size=state_space,
+                                            output_size=action_space,
+                                            hidden_size=action_space)
         # self.controller = HebbianController(input_size=state_space,
         #                                     output_size=action_space,
         #                                     hidden_size=action_space,)
-
         self.n_weights = self.controller.n_params
         self.n_body_params = 8
 
@@ -70,13 +69,12 @@ class AntWorld(World):
                       ]
 
     def update_robot_xml(self, genotype: np.ndarray):
-        genotype = np.clip(genotype, -1, 1)
         points, connectivity_mat = self.geno2pheno(genotype)
         robot = AntRobot(points, connectivity_mat, self.joint_limits, self.joint_axis, verbose=False)
         robot.xml = robot.define_robot()
         robot.write_xml(self.temp_dir.name)
 
-        #y % Defining the Robot environment in MuJoCo
+        # % Defining the Robot environment in MuJoCo #TODO
         world = xml.parse(self.base_xml_path)
         robot_env = world.getroot()
 
@@ -105,7 +103,6 @@ class AntWorld(World):
         body_params = (genotype[self.n_weights:]+1)/4+0.1
         assert len(body_params) == self.n_body_params
         assert len(control_weights) == self.n_weights
-        # print(body_params)
         assert not np.any(body_params <= 0)
 
         self.controller.geno2pheno(control_weights)
@@ -165,9 +162,9 @@ class AntWorld(World):
         # 1. Create the Slope (Gradient along X)
         # 0.0 at the back, 1.0 at the front
         # TODO: Change the terrain parameters
-        slope_deg = 5.0
-        bump_scale = 0.1
-        sigma = 3.0
+        slope_deg = 5.0  # Angle in degrees (set to 0.0 for flat)
+        bump_scale = 0.1  # Magnitude of bumps (0.0 to 1.0 relative to max height)
+        sigma = 3.0  # Smoothness of bumps
 
         # 1. Create Linear Slope (Gradient along X)
         rise = np.tan(np.deg2rad(slope_deg))
@@ -200,7 +197,6 @@ class AntWorld(World):
 
 
     def evaluate_individual(self, genotype, n_repeats=10, n_steps=500):
-        genotype = np.clip(genotype, -1, 1)
         self.update_robot_xml(genotype)
         envs = self.create_env(n_envs=n_repeats, max_episode_steps=n_steps)
         self.controller.reset_controller(batch_size=n_repeats)
@@ -219,7 +215,7 @@ class AntWorld(World):
             rewards_full[step, ~done_mask] = rewards[~done_mask]
 
             # TODO: design appropriate moo-rewards
-            multi_obj_reward = np.array([infos["reward_healthy_forward_height"], -infos["ctrl_cfrc_cost"]]).T # TODO
+            multi_obj_reward = np.array([infos["reward_forward"]+infos["healthy_reward"], -infos["ctrl_cost"]]).T # TODO
             multi_obj_rewards_full[step, ~done_mask] = multi_obj_reward[~done_mask]
 
             # Update the done mask based on the "done" and "truncated" flags
@@ -267,7 +263,13 @@ def _run_episodes_hill(world, genotype, n_episodes, max_episode_steps, seed):
             if action.ndim > 1:
                 action = action.squeeze(0)
             obs, reward, terminated, truncated, info = env.step(action)
-            total_reward += reward
+            # Neutral reward computed from info so students' custom reward strategies
+            # do not affect leaderboard comparisons.
+            neutral_reward = (float(info.get("healthy_reward", 1.0))
+                              + float(info.get("x_position", 0.0))
+                              - float(info.get("ctrl_cost", 0.0))
+                              - float(info.get("cfrc_cost", 0.0)))
+            total_reward += neutral_reward
             total_obj1 += float(info.get("reward_forward", 0.0)) + float(info.get("healthy_reward", 0.0))
             total_obj2 += -float(info.get("ctrl_cost", 0.0))
             if terminated or truncated:
@@ -430,6 +432,7 @@ def evaluate_checkpoint(
         f.write(f"Genotype size   : {world.n_params}  (weights={world.controller.n_params}, body={world.n_body_params})\n")
         f.write(f"Checkpoint      : {checkpoint_dir}\n")
         f.write(f"Episodes/indiv. : {n_episodes}\n")
+        f.write(f"Neutral reward  : healthy_reward + x_position - ctrl_cost - cfrc_cost (from info)\n")
         f.write(f"Objectives      : [reward_forward+healthy_reward, -ctrl_cost]\n\n")
 
         f.write("=" * 72 + "\n")
@@ -489,56 +492,57 @@ def main():
     n_parameters = world.n_params
 
     #%% Understanding the world
-    # genotype = np.random.uniform(-1, 1, n_parameters)
-    # world.update_robot_xml(genotype)
-    # world.visualise_individual(genotype)
+    genotype = np.random.uniform(-1, 1, n_parameters)
+    world.update_robot_xml(genotype)
+    world.visualise_individual(genotype)
 
     # TODO Overwrite controller and load best run exercise 1
-    # action_space = 8  
-    # state_space = 27
-    # world.controller = NeuralNetworkController(state_space, action_space, hidden_size=16)
-    # world.n_weights = world.controller.n_params
-    # world.n_params = world.n_weights + world.n_body_params
+    state_space = 27
+    action_space = 8  # Change controller
+    world.controller = NeuralNetworkController(input_size=state_space,
+                                               output_size=action_space,
+                                               hidden_size=16)
+    world.n_weights = world.controller.n_params
+    world.n_params = world.n_weights + world.n_body_params
 
-    # result_dir = "results"
-    # prev_best = np.load("results/previous/x_best.npy") # load previous run
-    # genotype = np.zeros(prev_best.shape[0]+8)
-    # genotype[:-8] = prev_best
+    results_dir = join(ROOT_DIR, "results", ENV_NAME, "ES")
+    checkpoint = get_last_checkpoint_dir(results_dir)
+    prev_best = np.load(join(results_dir, checkpoint, "x_best.npy"))  # load previous run
+    genotype[:-8] = prev_best
 
-    # genotype[-8::2] = 0.2  # fix upper leg length 0.2m
-    # genotype[-7::2] = 0.4  # fix lower leg length 0.6m
-    # world.update_robot_xml(genotype)
-    # world.visualise_individual(genotype)
+    genotype[-8::2] = -0.6  # fix upper leg length 0.2
+    genotype[-7::2] = 1  # fix lower leg length 0.6
+    world.update_robot_xml(genotype)
+    world.visualise_individual(genotype)
 
-    # %% Evolve open-loop so2
-    # world = AntWorld()
-    # world.n_weights = world.controller.n_params
-    # world.n_params = world.n_weights + world.n_body_params
-    # n_parameters = world.n_params
-    # population_size = 300
-    # opts = {} # supposed to be the same as CMAES_opts.copy()
-    # opts["min"] = -1
-    # opts["max"] = 1
-    # opts["mutation_sigma"] = 0.3
-    # opts["num_generations"] = 400
+    #%% Evolve open-loop so2
+    world = AntWorld()
+    world.n_weights = world.controller.n_params
+    world.n_params = world.n_weights + world.n_body_params
+    n_parameters = world.n_params
+    population_size = 150
+    opts = {}
+    opts["min"] = -1
+    opts["max"] = 1
+    opts["mutation_sigma"] = 0.3
+    opts["num_generations"] = 100
 
-    # results_dir = join(ROOT_DIR, "results", ENV_NAME, "single")
-    # # ea_single = EvoAlgAPI(n_parameters, population_size, opts["num_generations"], results_dir) # same as : CMAES
+    results_dir = join(ROOT_DIR, "results", ENV_NAME, "single")
+    ea_single = CMAES(n_parameters, population_size, opts["num_generations"], results_dir)
 
-    # # run_EA_single(ea_single, world)
+    run_EA_single(ea_single, world)
 
-    # #%% visualise
-    # checkpoint = get_last_checkpoint_dir(results_dir)
-    # best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"))
-    # print(best_individual.shape)
-    # world.update_robot_xml(best_individual)
-    # env = world.create_env(max_episode_steps=-1)
-    # video_name = get_distinct_filename(join(results_dir, "best.mp4"))
-    # print(f"Finished ES run, generating video [{video_name}]...")
-    # world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
+    #%% visualise
+    checkpoint = get_last_checkpoint_dir(results_dir)
+    best_individual = np.load(join(results_dir, checkpoint, "x_best.npy"))
+    world.update_robot_xml(best_individual)
+    env = world.create_env(max_episode_steps=-1)
+    video_name = get_distinct_filename(join(results_dir, "best.mp4"))
+    print(f"Finished ES run, generating video [{video_name}]...")
+    world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
 
 
-    # %% Optimise multi-objective
+    #%% Optimise multi-objective
     world = AntWorld()
     state_space = 27
     action_space = 8 # Change controller
@@ -550,17 +554,17 @@ def main():
     n_parameters = world.n_params
     print("Number of parameters:", n_parameters)
     print("Number of weights:", world.n_weights)
-    population_size = 300
+    population_size = 250
 
     opts = {}
     opts["min"] = -1
     opts["max"] = 1
-    opts["num_parents"] = population_size//2
-    opts["num_generations"] = 300
+    opts["num_parents"] = population_size
+    opts["num_generations"] = 100
     opts["mutation_prob"] = 0.3
-    opts["crossover_prob"] = 0.7
+    opts["crossover_prob"] = 0.9
 
-    results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi2")
+    results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi")
     ea_multi_obj = NSGAII(population_size,
                           n_parameters,
                           opts["num_parents"],
@@ -580,5 +584,32 @@ def main():
     print(f"Finished NSGAII run, generating video [{video_name}]...")
     world.generate_best_individual_video(env, video_name=video_name, n_steps=500)
 
+
 if __name__ == "__main__":
-    main()
+    np.random.seed(42)
+    world = AntWorld()
+    print(f"n_params={world.n_params}  n_weights={world.n_weights}  n_body={world.n_body_params}")
+
+    population_size = 6
+    results_dir = join(ROOT_DIR, "results", ENV_NAME, "test_multi")
+
+    ea = NSGAII(
+        population_size=population_size,
+        n_opt_params=world.n_params,
+        n_parents=population_size,
+        num_generations=2,
+        bounds=(-1, 1),
+        mutation_prob=0.3,
+        crossover_prob=0.5,
+        output_dir=results_dir,
+    )
+
+    # print("\n--- Running 2 generations of NSGA-II ---")
+    # run_EA_multi(ea, world)
+
+    print("\n--- Calling evaluate_checkpoint (2 episodes) ---")
+    evaluate_checkpoint(
+        checkpoint_dir=results_dir,
+        output_dir=join(results_dir, "eval"),
+        n_episodes=2,
+    )
