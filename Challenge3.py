@@ -703,15 +703,19 @@ def main():
     n_parameters = world.n_params
     print("Number of parameters:", n_parameters)
     print("Number of weights:", world.n_weights)
-    population_size = 2 #300
+    population_size = 200 #300
 
     opts = {}
     opts["min"] = -1
     opts["max"] = 1
     opts["num_parents"] = population_size//2
-    opts["num_generations"] = 2 # 300
+    opts["num_generations"] = 300 # 300
     opts["mutation_prob"] = 0.3
     opts["crossover_prob"] = 0.7
+    
+    print("Running NSGA-II with population size", population_size)
+    print("Options:", opts)
+    
 
     results_dir = join(ROOT_DIR, "results", ENV_NAME, "multi2")
     ea_multi_obj = NSGAII(population_size,

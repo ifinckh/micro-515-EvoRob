@@ -155,8 +155,8 @@ class AntHillEnv(MujocoEnv, utils.EzPickle):
             "x_velocity": x_velocity,
             "y_velocity": y_velocity,
             "z_velocity": z_velocity,
-            "reward": healthy_reward + forward_reward + height_reward,
-            "cost": ctrl_cost + cfrc_cost,
+            "reward_healthy_forward_height": healthy_reward + forward_reward + height_reward,
+            "ctrl_cfrc_cost": ctrl_cost + cfrc_cost,
         }
         terminated = False
         # Check for NaN, Inf, or huge values
