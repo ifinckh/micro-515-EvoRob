@@ -323,42 +323,98 @@ def _stats(values):
 
 
 
-def save_pareto_front(checkpoint_dir: str, output_dir: str):
-    last_gen = get_last_checkpoint_dir(checkpoint_dir)
-    if last_gen is None:
-        print(f"Warning: no checkpoint found in '{checkpoint_dir}', Pareto plot skipped.")
-        return None
-
-    fitness_path = join(last_gen, "f.npy")
-    if not os.path.isfile(fitness_path):
-        print(f"Warning: could not find '{fitness_path}', Pareto plot skipped.")
-        return None
-
-    fitness = np.load(fitness_path, allow_pickle=True)
-    if fitness.ndim != 2 or fitness.shape[1] < 2:
-        print("Warning: fitness is not multi-objective, Pareto plot skipped.")
-        return None
-
+def plot_pareto_fronts(fitness, output_dir, num_generations=None, population_size=None):
+    """Plot Pareto fronts for a 2-objective fitness array."""
     try:
         import matplotlib.pyplot as plt
     except Exception as e:
         print(f"Warning: matplotlib unavailable, Pareto plot skipped ({e}).")
         return None
 
+    dummy_nsga = NSGAII(population_size=fitness.shape[0], n_opt_params=1)
+    fronts, _ = dummy_nsga.fast_nondominated_sort(fitness)
+
+    fig, ax = plt.subplots(figsize=(9, 6))
+    n_fronts = len(fronts)
+
+    top_colors = ["#B51F1F", "#007480", "#4B0082"]
+    n_top = min(3, n_fronts)
+    for i in range(n_top):
+        fi = fitness[fronts[i]]
+        si = np.argsort(fi[:, 0])
+        fi_sorted = fi[si]
+        ax.plot(
+            fi_sorted[:, 0], fi_sorted[:, 1],
+            color=top_colors[i], alpha=0.5, linewidth=1.2, zorder=3,
+        )
+        ax.scatter(
+            fi[:, 0], fi[:, 1],
+            label=f"Front {i}",
+            color=top_colors[i],
+            s=50,
+            edgecolors="white",
+            linewidths=0.5,
+            zorder=4,
+        )
+
+    if n_fronts > 3:
+        remaining_cmap = plt.cm.coolwarm
+        for i in range(3, n_fronts):
+            fi = fitness[fronts[i]]
+            t = (i - 3) / max(n_fronts - 4, 1)
+            ax.scatter(
+                fi[:, 0], fi[:, 1],
+                label=f"Front {i}" if i <= 6 else None,
+                color=remaining_cmap(t),
+                s=25,
+                alpha=0.5,
+                edgecolors="white",
+                linewidths=0.3,
+                zorder=2,
+            )
+
+    ax.set_xlabel("Fitness — reward_forward + healthy_reward", fontsize=11)
+    ax.set_ylabel("Fitness — -ctrl_cost", fontsize=11)
+    info = [f"{n_fronts} front{'s' if n_fronts > 1 else ''}"]
+    if num_generations is not None:
+        info.insert(0, f"gen {num_generations}")
+    if population_size is not None:
+        info.insert(1 if num_generations else 0, f"pop {population_size}")
+    ax.set_title(f"Challenge 3 Pareto Fronts  ({',  '.join(info)})", fontsize=12)
+    ax.legend(fontsize=9, framealpha=0.9)
+    ax.grid(True, alpha=0.2)
+    fig.tight_layout()
+
     os.makedirs(output_dir, exist_ok=True)
-    plot_path = join(output_dir, "pareto_front.png")
+    pareto_path = os.path.join(output_dir, "pareto_fronts.pdf")
+    fig.savefig(pareto_path, dpi=150)
+    plt.close(fig)
+    print(f"Pareto front plot saved to: {pareto_path}")
+    return pareto_path
 
-    plt.figure(figsize=(6, 5))
-    plt.scatter(fitness[:, 0], fitness[:, 1], s=18, alpha=0.8)
-    plt.xlabel("reward_forward + healthy_reward")
-    plt.ylabel("-ctrl_cost")
-    plt.title("Challenge 3 Pareto Front")
-    plt.tight_layout()
-    plt.savefig(plot_path, dpi=200)
-    plt.close()
 
-    print(f"Pareto front saved to: {plot_path}")
-    return plot_path
+def plot_pareto_fronts_from_checkpoint(checkpoint_dir: str, output_dir: str | None = None):
+    """Load fitness data from a checkpoint directory and plot Pareto fronts."""
+    fitness_path = f"{checkpoint_dir}/full_f.npy"
+    try:
+        all_fitness = np.load(fitness_path)
+    except Exception as e:
+        print(f"Could not load fitness data from {fitness_path}: {e}")
+        return None
+
+    fitness = all_fitness[-1] if all_fitness.ndim == 3 else all_fitness
+    num_generations = all_fitness.shape[0] if all_fitness.ndim == 3 else None
+    population_size = fitness.shape[0] if fitness.ndim == 2 else None
+    return plot_pareto_fronts(
+        fitness,
+        output_dir or checkpoint_dir,
+        num_generations=num_generations,
+        population_size=population_size,
+    )
+
+
+def save_pareto_front(checkpoint_dir: str, output_dir: str):
+    return plot_pareto_fronts_from_checkpoint(checkpoint_dir, output_dir)
 
 
 
