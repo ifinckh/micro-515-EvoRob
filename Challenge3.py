@@ -708,7 +708,7 @@ def main():
     n_parameters = world.n_params
     print("Number of parameters:", n_parameters)
     print("Number of weights:", world.n_weights)
-    population_size = 200
+    population_size = 100
 
     opts = {}
     opts["min"] = -1
