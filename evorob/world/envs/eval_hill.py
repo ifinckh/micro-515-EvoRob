@@ -42,8 +42,8 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
             ctrl_cost_weight, cfrc_cost_weight, reset_noise_scale, **kwargs,
         )
 
-        self._ctrl_cost_weight = ctrl_cost_weight
-        self._cfrc_cost_weight = cfrc_cost_weight
+        # self._ctrl_cost_weight = ctrl_cost_weight
+        # self._cfrc_cost_weight = cfrc_cost_weight
         self._reset_noise_scale = reset_noise_scale
         self._stuck_count = 0
 
@@ -68,21 +68,37 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         xyz_before = self.data.body(1).xpos[:3].copy()
         self.do_simulation(action, self.frame_skip)
         xyz_after = self.data.body(1).xpos[:3].copy()
+        
+        weights = {
+            "x_pos": 1.0,
+            "z_pos": 1.0,
+            "ctrl": 0.1,
+            "cfrc": 1e-4,
+            "healthy": 1.0,
+        }
 
         xyz_velocity = (xyz_after - xyz_before) / self.dt
         x_velocity = float(xyz_velocity[0])
         x_position = float(xyz_after[0])
+        z_position = float(xyz_after[2])
 
         healthy_reward = 1.0
-        ctrl_cost = float(np.sum(action ** 2) * self._ctrl_cost_weight)
-        cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2) * self._cfrc_cost_weight)
+        ctrl_cost = float(np.sum(action ** 2) )
+        cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2))
 
         terminated = self._is_terminated(xyz_velocity)
-        reward = healthy_reward + x_position - ctrl_cost - cfrc_cost
-
+        # reward = healthy_reward + x_position - ctrl_cost - cfrc_cost
+        reward = (
+            weights["healthy"] * healthy_reward
+            + weights["x_pos"] * x_position
+            + weights["z_pos"] * z_position
+            - weights["ctrl"] * ctrl_cost
+            - weights["cfrc"] * cfrc_cost
+        )
         info = {
             "healthy_reward": -10.0 if terminated else healthy_reward,
             "x_position": x_position,
+            "z_position": z_position,
             "ctrl_cost": ctrl_cost,
             "cfrc_cost": cfrc_cost,
             "x_velocity": x_velocity,

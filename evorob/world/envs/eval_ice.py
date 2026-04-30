@@ -45,10 +45,11 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             ctrl_cost_weight, cfrc_cost_weight, reset_noise_scale, **kwargs,
         )
 
-        self._ctrl_cost_weight = ctrl_cost_weight
-        self._cfrc_cost_weight = cfrc_cost_weight
+        # self._ctrl_cost_weight = ctrl_cost_weight
+        # self._cfrc_cost_weight = cfrc_cost_weight
         self._reset_noise_scale = reset_noise_scale
-
+        self._stuck_count = 0
+        
         MujocoEnv.__init__(
             self, xml_file_path, frame_skip,
             observation_space=None,
@@ -67,21 +68,38 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
         )
 
     def step(self, action):
-        x_before = self.data.qpos[0]
+        xyz_before = self.data.body(1).xpos[:3].copy()
         self.do_simulation(action, self.frame_skip)
-        x_after = self.data.qpos[0]
-
-        x_velocity = (x_after - x_before) / self.dt
+        xyz_after = self.data.body(1).xpos[:3].copy()
+        
+        weights = {
+            "x_pos": 1.0,
+            "ctrl": 0.8,
+            "cfrc": 5e-3,
+            "healthy": 1.0,
+        }
+        
+        xyz_velocity = (xyz_after - xyz_before) / self.dt
+        x_velocity = float(xyz_velocity[0])
+        # x_velocity = (x_after - x_before) / self.dt
+        x_forward = float(xyz_after[0])
         healthy_reward = 1.0
-        ctrl_cost = float(np.sum(action ** 2) * self._ctrl_cost_weight)
-        cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2) * self._cfrc_cost_weight)
+        ctrl_cost = float(np.sum(action ** 2))
+        cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2))
 
-        terminated = self._is_terminated()
-        reward = healthy_reward + x_velocity - ctrl_cost - cfrc_cost
+        terminated = self._is_terminated(xyz_velocity)
+        # reward = healthy_reward + x_velocity - ctrl_cost - cfrc_cost
+        
+        reward = (
+            weights["healthy"] * healthy_reward
+            + weights["x_pos"] * x_forward
+            - weights["ctrl"] * ctrl_cost
+            - weights["cfrc"] * cfrc_cost
+        )
 
         info = {
             "healthy_reward": -10.0 if terminated else healthy_reward,
-            "x_position": float(x_after),
+            "x_position": x_forward,
             "ctrl_cost": ctrl_cost,
             "cfrc_cost": cfrc_cost,
             "x_velocity": x_velocity,
@@ -91,13 +109,28 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             self.render()
         return self._get_obs(), reward, terminated, False, info
 
-    def _is_terminated(self) -> bool:
+    def _is_terminated(self, xyz_velocity: np.ndarray) -> bool:
         z = float(self.data.qpos[2])
-        return (
-            not np.isfinite(self.state_vector()).all()
-            or z < 0.2
-            or z > 1.0
-        )
+        qacc = self.data.qacc
+        if z < 0.2 or z > 1.0:
+            return True
+        if not np.isfinite(self.state_vector()).all():
+            return True
+        if np.any(np.isnan(qacc) | np.isinf(qacc) | (np.abs(qacc) > 1e6)):
+            return True
+        if self._torso_upside_down():
+            return True
+        if np.linalg.norm(xyz_velocity) < 1e-2:
+            self._stuck_count += 1
+            if self._stuck_count > 10 / self.dt:
+                return True
+        else:
+            self._stuck_count = 0
+        return False
+    
+    def _torso_upside_down(self) -> bool:
+        R = self.data.body(1).xmat.reshape(3, 3)
+        return float(R[2, 2]) < 0.0
 
     def _get_obs(self):
         return np.concatenate((self.data.qpos.flat[2:], self.data.qvel.flat.copy()))
