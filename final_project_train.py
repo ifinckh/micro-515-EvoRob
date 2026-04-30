@@ -20,7 +20,12 @@ import shutil
 import xml.etree.ElementTree as xml
 from os.path import join
 from tempfile import TemporaryDirectory
+# library for date and time manipulation (used for timestamping checkpoints)
+import datetime
+import tqdm  # for progress bars during training
 
+from evorob.algorithms.nsga import NSGAII
+from evorob.algorithms.ea_api import CMAESAPI as CMA_ES
 import gymnasium as gym
 import numpy as np
 import scipy.ndimage
@@ -28,10 +33,10 @@ from PIL import Image
 from gymnasium.vector import AsyncVectorEnv
 
 import evorob.world                         # registers EvalEnv-v0
-from evorob.algorithms.nsga_sol import NSGAII
+# from evorob.algorithms.nsga import NSGAII
 from evorob.utils.filesys import get_last_checkpoint_dir, get_project_root
 from evorob.world.base import World
-from evorob.world.robot.controllers.mlp_sol import NeuralNetworkController
+from evorob.world.robot.controllers.mlp import NeuralNetworkController
 from evorob.world.robot.morphology.ant_custom_robot import AntRobot
 
 ROOT_DIR = get_project_root()
@@ -59,11 +64,11 @@ class FinalWorld(World):
         # from evorob.world.robot.controllers.so2 import SO2Controller
         # self.controller = SO2Controller(input_size=27, output_size=8, hidden_size=8)
         self.controller = NeuralNetworkController(
-            input_size=27, output_size=8, hidden_size=8
+            input_size=27, output_size=8, hidden_size=16
         )
 
         self.n_weights     = self.controller.n_params
-        self.n_body_params = 8          # 4 legs × (upper + lower segment length)
+        self.n_body_params = 2          # leg and ankle lengths (previously : 4 legs × (upper + lower segment length))
         self.n_params      = self.n_weights + self.n_body_params
 
         # Temporary directory holds AntRobot.xml + one combined world XML per terrain
@@ -116,24 +121,27 @@ class FinalWorld(World):
         body_params    = (genotype[self.n_weights:] + 1) / 4 + 0.1
         self.controller.geno2pheno(control_params)
 
-        front_left_leg, front_left_ankle, front_right_leg, front_right_ankle, back_left_leg, back_left_ankle, back_right_leg, back_right_ankle, = body_params
+        # front_left_leg, front_left_ankle, front_right_leg, front_right_ankle, back_left_leg, back_left_ankle, back_right_leg, back_right_ankle, = body_params
+        
+        # introduce symmetry by sharing leg lengths
+        leg, ankle = body_params
 
         # Define the 3D coordinates of the relative tree structure
         front_left_hip_xyz = np.array([0.2, 0.2, 0])
-        front_left_knee_xyz = np.array([np.sqrt(0.5 * front_left_leg ** 2), np.sqrt(0.5 * front_left_leg ** 2), 0]) + front_left_hip_xyz
-        front_left_toe_xyz = np.array([np.sqrt(0.5 * front_left_ankle ** 2), np.sqrt(0.5 * front_left_ankle ** 2), 0]) + front_left_knee_xyz
+        front_left_knee_xyz = np.array([np.sqrt(0.5 * leg ** 2), np.sqrt(0.5 * leg ** 2), 0]) + front_left_hip_xyz
+        front_left_toe_xyz = np.array([np.sqrt(0.5 * ankle ** 2), np.sqrt(0.5 * ankle ** 2), 0]) + front_left_knee_xyz
 
         front_right_hip_xyz = np.array([-0.2, 0.2, 0])
-        front_right_knee_xyz = np.array([-np.sqrt(0.5 * front_right_leg ** 2), np.sqrt(0.5 * front_right_leg ** 2), 0]) + front_right_hip_xyz
-        front_right_toe_xyz = np.array([-np.sqrt(0.5 * front_right_ankle ** 2), np.sqrt(0.5 * front_right_ankle ** 2), 0]) + front_right_knee_xyz
+        front_right_knee_xyz = np.array([-np.sqrt(0.5 * leg ** 2), np.sqrt(0.5 * leg ** 2), 0]) + front_right_hip_xyz
+        front_right_toe_xyz = np.array([-np.sqrt(0.5 * ankle ** 2), np.sqrt(0.5 * ankle ** 2), 0]) + front_right_knee_xyz
 
         back_left_hip_xyz = np.array([-0.2, -0.2, 0])
-        back_left_knee_xyz = np.array([-np.sqrt(0.5 * back_left_leg ** 2), -np.sqrt(0.5 * back_left_leg ** 2), 0]) + back_left_hip_xyz
-        back_left_toe_xyz = np.array([-np.sqrt(0.5 * back_left_ankle ** 2), -np.sqrt(0.5 * back_left_ankle ** 2), 0]) + back_left_knee_xyz
+        back_left_knee_xyz = np.array([-np.sqrt(0.5 * leg ** 2), -np.sqrt(0.5 * leg ** 2), 0]) + back_left_hip_xyz
+        back_left_toe_xyz = np.array([-np.sqrt(0.5 * ankle ** 2), -np.sqrt(0.5 * ankle ** 2), 0]) + back_left_knee_xyz
 
         back_right_hip_xyz = np.array([0.2, -0.2, 0])
-        back_right_knee_xyz = np.array([np.sqrt(0.5 * back_right_leg ** 2), -np.sqrt(0.5 * back_right_leg ** 2), 0]) + back_right_hip_xyz
-        back_right_toe_xyz = np.array([np.sqrt(0.5 * back_right_ankle ** 2), -np.sqrt(0.5 * back_right_ankle ** 2), 0]) + back_right_knee_xyz
+        back_right_knee_xyz = np.array([np.sqrt(0.5 * leg ** 2), -np.sqrt(0.5 * leg ** 2), 0]) + back_right_hip_xyz
+        back_right_toe_xyz = np.array([np.sqrt(0.5 * ankle ** 2), -np.sqrt(0.5 * ankle ** 2), 0]) + back_right_knee_xyz
 
         points = np.vstack([front_left_hip_xyz,
                             front_left_knee_xyz,
@@ -466,7 +474,7 @@ def evaluate_checkpoint(
 # Main training loop
 # ---------------------------------------------------------------------------
 
-def run_multi_task_evolution(
+def run_multi_task_evolution_NSGA(
     num_generations: int = 100,
     population_size: int = 100,
     n_parents:       int = 50,
@@ -551,14 +559,141 @@ def run_multi_task_evolution(
     print(f"\nTraining summary saved to: {score_path}")
 
 
+def run_multi_task_evolution_CMA_ES(
+    num_generations: int = 100,
+    population_size: int = 100,
+    n_repeats:       int = 4,
+    n_steps:         int = 500,
+    sigma:           float = 0.3,
+    bounds:          tuple = (-1, 1),
+    ckpt_interval:   int = 10,
+    results_dir:     str = None,
+    random_seed:     int = 40,
+) -> None:
+    np.random.seed(random_seed)
+
+    world = FinalWorld()
+    print(f"Genotype : {world.n_params} params"
+          f"  (controller={world.n_weights}, body={world.n_body_params})")
+
+    if results_dir is None:
+        results_dir = join(ROOT_DIR, "results", "final_project")
+
+    ea = CMA_ES(
+        n_params = world.n_params,
+        population_size=population_size,
+        num_generations=num_generations,
+        sigma=sigma,
+        bounds=bounds,
+        output_dir=results_dir,
+    )
+
+    n_obj = 1  # CMA-ES optimizes a single scalar fitness, so we will sum the objectives
+    print(f"\nRunning {num_generations} generations  pop={population_size}")
+    print(f"Objectives : flat & ice & hill (min)")
+    print(f"Checkpoints: {results_dir}\n")
+
+    os.makedirs(results_dir, exist_ok=True)
+    _best_xml_stage = join(results_dir, "_best_robot.xml")  # staging copy of best robot
+    _best_scalar = -np.inf
+    _best_full_fitness = np.array([0.0, 0.0, 0.0])  # track [flat, ice, hill] for best individual
+    
+    # progress bar for generations
+    pbar = tqdm.tqdm(range(num_generations), desc="Generations")
+
+    for gen in range(num_generations):
+        pop = ea.ask()
+        fitnesses = np.empty(len(pop))
+        for idx, genotype in enumerate(pop):
+            pbar.update(1)  # Update progress bar
+
+            # take the minimum of the three objectives as the fitness for CMA-ES (worst-case performance)
+            # to encourage all 3 obj to improve simultaneously
+            full_fitness = world.evaluate_individual(
+                genotype, n_repeats=n_repeats, n_steps=n_steps
+            )
+            fitnesses[idx] = float(full_fitness.min())
+            scalar = fitnesses[idx]
+            if scalar > _best_scalar:
+                _best_scalar = scalar
+                _best_full_fitness = full_fitness
+                shutil.copy2(
+                    join(world.temp_dir.name, "Robot.xml"),
+                    _best_xml_stage,
+                )
+        save_ckpt = (gen % ckpt_interval == 0)
+        ea.tell(pop, fitnesses, save_checkpoint=save_ckpt)
+        if save_ckpt:
+            shutil.copy2(
+                _best_xml_stage,
+                join(results_dir, str(gen), "Robot.xml"),
+            )
+
+    pbar.close()
+    
+    # --- Training summary ---
+    score_path = join(results_dir, "training_score.txt")
+    with open(score_path, "w") as f:
+        f.write("=" * 60 + "\n")
+        f.write("MICRO-515 Final Project — Training Summary\n")
+        f.write("=" * 60 + "\n\n")
+        f.write(f"Generations     : {num_generations}\n")
+        f.write(f"Population size : {population_size}\n")
+        f.write(f"Controller      : {type(world.controller).__name__}"
+                f"  ({world.n_weights} params)\n")
+        f.write(f"Genotype size   : {world.n_params}"
+                f"  (controller={world.n_weights}, body={world.n_body_params})\n\n")
+        f.write("Best individual (highest minimum fitness across objectives):\n")
+        labels = ["flat", "ice", "hill"]
+        for label, val in zip(labels, _best_full_fitness):
+            f.write(f"  {label:<6}: {float(val):10.2f}\n")
+        f.write(f"  {'min':<6}: {float(_best_full_fitness.min()):10.2f}\n")
+        f.write(f"  {'mean':<6}: {float(_best_full_fitness.mean()):10.2f}\n")
+    print(f"\nTraining summary saved to: {score_path}")
+
 if __name__ == "__main__":
     # Quick smoke-test — 2 generations, tiny population
-    run_multi_task_evolution(
-        num_generations=100,
-        population_size=32,
-        n_parents=32,
+    
+    # call the output folder using the date and time to avoid overwriting previous results
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    results_dir = join(ROOT_DIR, "results", f"{timestamp}_final_test")
+    
+    params = {
+        "num_generations": 100,
+        "population_size": 32,
+        "n_repeats": 2,
+        "n_steps": 100,
+        "ckpt_interval": 1,
+        "sigma": 0.5,
+        "results_dir": results_dir,
+    }
+    
+    # print number of generations, population size, sigma
+    print(f"Running CMA-ES with {params['num_generations']} generations, "
+          f"population size {params['population_size']}, "
+          f"sigma {params['sigma']}, "
+          f"checkpoint interval {params['ckpt_interval']} generations, "
+          f"results saved to '{params['results_dir']}'\n")
+    
+    run_multi_task_evolution_CMA_ES(
+        num_generations=2,
+        population_size=2,
         n_repeats=2,
-        n_steps=100,
+        sigma=0.5,
         ckpt_interval=1,
-        results_dir=join(ROOT_DIR, "results", "final_test"),
+        results_dir=results_dir,
     )
+    
+    
+    
+    
+     # run_multi_task_evolution(
+    #     num_generations=100,
+    #     population_size=32,
+    #     n_parents=32,
+    #     n_repeats=2,
+    #     n_steps=100,
+    #     ckpt_interval=1,
+    #     results_dir=results_dir,
+    # )
+    

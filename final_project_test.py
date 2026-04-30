@@ -43,7 +43,7 @@ import argparse
 import os
 import numpy as np
 
-os.environ.setdefault("MUJOCO_GL", "egl")
+os.environ.setdefault("MUJOCO_GL", "glfw")  # "osmesa" for macOS, "egl" for Linux
 
 import evorob.world          # registers EvalEnv-v0
 import gymnasium as gym
@@ -58,13 +58,13 @@ from evorob.world.eval_world import EvalWorld
 # Set this to the controller you used during training.
 # Leave None to use the default (mlp_sol, input=27, output=8, hidden=8).
 #
-# from evorob.world.robot.controllers.mlp import NeuralNetworkController
-# MY_CONTROLLER = NeuralNetworkController(input_size=27, output_size=8, hidden_size=8)
+from evorob.world.robot.controllers.mlp import NeuralNetworkController
+MY_CONTROLLER = NeuralNetworkController(input_size=27, output_size=8, hidden_size=16)
 #
 # from evorob.world.robot.controllers.so2 import SO2Controller
 # MY_CONTROLLER = SO2Controller(input_size=27, output_size=8, hidden_size=8)
 
-MY_CONTROLLER = None
+# MY_CONTROLLER = None
 
 # --- Paths ---
 # Option A: directory that contains x_best.npy (recommended)
@@ -181,7 +181,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     checkpoint_dir = args.best_dir_path if args.best_dir_path is not None else CHECKPOINT_DIR
-
+    # ROBOT_XML_PATH = os.path.join(checkpoint_dir, "_best_robot.xml")
+    
     world = EvalWorld()
 
     if MY_CONTROLLER is not None:
