@@ -659,8 +659,8 @@ if __name__ == "__main__":
     results_dir = join(ROOT_DIR, "results", f"{timestamp}_final_test")
     
     params = {
-        "num_generations": 100,
-        "population_size": 32,
+        "num_generations": 200,
+        "population_size": 300,
         "n_repeats": 2,
         "n_steps": 100,
         "ckpt_interval": 1,
@@ -676,12 +676,12 @@ if __name__ == "__main__":
           f"results saved to '{params['results_dir']}'\n")
     
     run_multi_task_evolution_CMA_ES(
-        num_generations=2,
-        population_size=2,
-        n_repeats=2,
-        sigma=0.5,
-        ckpt_interval=1,
-        results_dir=results_dir,
+        num_generations=params['num_generations'],
+        population_size=params['population_size'],
+        n_repeats=params['n_repeats'],
+        sigma=params['sigma'],
+        ckpt_interval=params['ckpt_interval'],
+        results_dir=params['results_dir'],
     )
     
     
