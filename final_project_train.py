@@ -44,6 +44,8 @@ ROOT_DIR = get_project_root()
 _ASSETS  = join(ROOT_DIR, "evorob", "world", "robot", "assets")
 MAX_EPISODE_STEPS = 1000  # fixed for leaderboard — do not change
 
+OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
+
 
 # ---------------------------------------------------------------------------
 # FinalWorld — body + brain co-evolution across multiple terrains
@@ -65,7 +67,7 @@ class FinalWorld(World):
         # from evorob.world.robot.controllers.so2 import SO2Controller
         # self.controller = SO2Controller(input_size=27, output_size=8, hidden_size=8)
         self.controller = NeuralNetworkController(
-            input_size=27, output_size=8, hidden_size=16
+            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=16
         )
 
         self.n_weights     = self.controller.n_params
@@ -644,7 +646,7 @@ def run_multi_task_evolution_CMA_ES(
                 f"  ({world.n_weights} params)\n")
         f.write(f"Genotype size   : {world.n_params}"
                 f"  (controller={world.n_weights}, body={world.n_body_params})\n\n")
-        f.write("Best individual (highest minimum fitness across objectives):\n")
+        f.write("Best individual (highest sum of fitness across objectives):\n")
         labels = ["flat", "ice", "hill"]
         for label, val in zip(labels, _best_full_fitness):
             f.write(f"  {label:<6}: {float(val):10.2f}\n")

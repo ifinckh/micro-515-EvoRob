@@ -61,7 +61,7 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
             "render_fps": int(np.round(1.0 / self.dt)),
         }
 
-        obs_size = (self.data.qpos.size - 2) + self.data.qvel.size
+        obs_size = self.data.qpos.size + self.data.qvel.size + self.data.qfrc_actuator.size # (self.data.qpos.size - 2) + self.data.qvel.size
         self.observation_space = Box(
             low=-np.inf, high=np.inf, shape=(obs_size,), dtype=np.float64
         )
@@ -76,12 +76,14 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
             "ctrl": 0.5,
             "cfrc": 5e-4,
             "healthy": 1.0,
+            "y_dev": 0.2,
         }
 
         xyz_velocity = (xyz_after - xyz_before) / self.dt
         x_velocity = float(xyz_velocity[0])
         # x_velocity = (x_after - x_before) / self.dt
         x_forward = float(xyz_after[0])
+        y_deviation = float(xyz_after[1])
         healthy_reward = 1.0
         ctrl_cost = float(np.sum(action ** 2))
         cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2))
@@ -96,6 +98,7 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
             + weights["x_pos"] * x_forward
             - weights["ctrl"] * ctrl_cost
             - weights["cfrc"] * cfrc_cost
+            - weights["y_dev"] * abs(y_deviation)
         )
 
         info = {
@@ -104,6 +107,7 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
             "ctrl_cost": ctrl_cost,
             "cfrc_cost": cfrc_cost,
             "x_velocity": x_velocity,
+            "y_deviation": y_deviation,
         }
 
         if self.render_mode == "human":
@@ -134,9 +138,9 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
         return float(R[2, 2]) < 0.0
 
     def _get_obs(self):
-        print(f"qpos: {len(self.data.qpos.flat)}, qvel: {len(self.data.qvel.flat)}, qfrc_actuator: {len(self.data.qfrc_actuator.flat)}\n")
+        # print(f"qpos: {len(self.data.qpos.flat)}, qvel: {len(self.data.qvel.flat)}, qfrc_actuator: {len(self.data.qfrc_actuator.flat)}\n")
         obs = np.concatenate((self.data.qpos.flat.copy(), self.data.qvel.flat.copy(), self.data.qfrc_actuator.flat.copy()))
-        print("Concatenated obs shape:", obs.shape())
+        # print("Concatenated obs shape:", obs.shape())
         return obs
 
     def reset_model(self):

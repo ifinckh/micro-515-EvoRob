@@ -1,0 +1,5 @@
+/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py:234: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  img = Image.fromarray((terrain * 255).astype(np.uint8), mode="L")
+Generations:   0%|          | 0/2 [00:00<?, ?it/s]Generations: 100%|██████████| 2/2 [00:04<00:00,  2.47s/it]/home/finckh/miniconda3/envs/evorob/lib/python3.10/site-packages/cma/utilities/utils.py:369: UserWarning:   1 special injected samples with popsize 2, popsize 3 will be used (time=May  7 11:59:51 2026)
+  warnings.warn(msg + ' (time={}'.format(time.asctime()[4:]) +
+Generations: 100%|██████████| 2/2 [00:08<00:00,  4.12s/it]
