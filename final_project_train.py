@@ -23,6 +23,7 @@ from tempfile import TemporaryDirectory
 # library for date and time manipulation (used for timestamping checkpoints)
 import datetime
 import tqdm  # for progress bars during training
+import argparse
 
 from evorob.algorithms.nsga import NSGAII
 from evorob.algorithms.ea_api import CMAESAPI as CMA_ES
@@ -602,17 +603,17 @@ def run_multi_task_evolution_CMA_ES(
     pbar = tqdm.tqdm(range(num_generations), desc="Generations")
 
     for gen in range(num_generations):
+        pbar.update(1)
         pop = ea.ask()
         fitnesses = np.empty(len(pop))
         for idx, genotype in enumerate(pop):
-            pbar.update(1)  # Update progress bar
-
             # take the minimum of the three objectives as the fitness for CMA-ES (worst-case performance)
             # to encourage all 3 obj to improve simultaneously
             full_fitness = world.evaluate_individual(
                 genotype, n_repeats=n_repeats, n_steps=n_steps
             )
-            fitnesses[idx] = float(full_fitness.min())
+            # sum the 3 objective rewards to get a single scalar fitness for CMA-ES
+            fitnesses[idx] = float(full_fitness.sum())
             scalar = fitnesses[idx]
             if scalar > _best_scalar:
                 _best_scalar = scalar
@@ -654,17 +655,24 @@ def run_multi_task_evolution_CMA_ES(
 if __name__ == "__main__":
     # Quick smoke-test — 2 generations, tiny population
     
+    # parse arguments for num_generations, population_size, sigma
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--num_generations", type=int, default=300)
+    parser.add_argument("--population_size", type=int, default=300)
+    parser.add_argument("--sigma", type=float, default=0.6)
+    args = parser.parse_args()
+
     # call the output folder using the date and time to avoid overwriting previous results
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     results_dir = join(ROOT_DIR, "results", f"{timestamp}_final_test")
     
     params = {
-        "num_generations": 200,
-        "population_size": 300,
+        "num_generations": args.num_generations,
+        "population_size": args.population_size,
         "n_repeats": 2,
         "n_steps": 100,
         "ckpt_interval": 1,
-        "sigma": 0.5,
+        "sigma": args.sigma,
         "results_dir": results_dir,
     }
     

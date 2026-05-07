@@ -43,7 +43,7 @@ import argparse
 import os
 import numpy as np
 
-os.environ.setdefault("MUJOCO_GL", "glfw")  # "osmesa" for macOS, "egl" for Linux
+os.environ.setdefault("MUJOCO_GL", "egl")  # "osmesa" for macOS, "egl" for Linux
 
 import evorob.world          # registers EvalEnv-v0
 import gymnasium as gym
@@ -68,14 +68,14 @@ MY_CONTROLLER = NeuralNetworkController(input_size=27, output_size=8, hidden_siz
 
 # --- Paths ---
 # Option A: directory that contains x_best.npy (recommended)
-CHECKPOINT_DIR = "results/final_project"
+CHECKPOINT_DIR = "results/2026-05-04_21-54-46_final_test"
 
 # Option B: provide the robot XML and genotype as separate files
-ROBOT_XML_PATH = None   # e.g. "/abs/path/to/Robot.xml"
+ROBOT_XML_PATH = None  # e.g. "/abs/path/to/Robot.xml"
 GENOTYPE_PATH  = None   # e.g. "/abs/path/to/x_best.npy"
 
 # --- Output ---
-OUTPUT_DIR = "evaluation_output"
+OUTPUT_DIR = CHECKPOINT_DIR # "evaluation_output"
 N_EPISODES = 10     # increase to 256 for the final leaderboard submission
 SEED       = 0      # fixed — do NOT change for a fair comparison
 MAX_STEPS  = 1000   # fixed — do NOT change

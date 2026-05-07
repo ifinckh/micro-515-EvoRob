@@ -43,7 +43,7 @@ class EvalWorld(World):
     def __init__(self):
         self.controller = self._default_controller()
         self.n_weights = self.controller.n_params
-        self.n_body_params = 8          # 4 legs × (upper, lower)
+        self.n_body_params = 2          # 4 legs × (upper, lower)
         self.n_params = self.n_weights + self.n_body_params
 
         self.temp_dir = TemporaryDirectory()
@@ -74,7 +74,7 @@ class EvalWorld(World):
     @staticmethod
     def _default_controller():
         from evorob.world.robot.controllers.mlp import NeuralNetworkController
-        return NeuralNetworkController(input_size=27, output_size=8, hidden_size=8)
+        return NeuralNetworkController(input_size=27, output_size=8, hidden_size=16)
 
     def set_controller(self, controller: Controller) -> None:
         """Override the default MLP controller.

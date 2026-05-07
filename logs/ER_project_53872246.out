@@ -1,0 +1,14 @@
+Python used:
+/home/finckh/miniconda3/envs/evorob/bin/python
+11.3.0
+Running CMA-ES with 300 generations, population size 300, sigma 0.6, checkpoint interval 1 generations, results saved to '/home/finckh/ER_course/micro-515-EvoRob/results/2026-05-04_21-54-46_final_test'
+
+Genotype : 562 params  (controller=560, body=2)
+(150_w,300)-aCMA-ES (mu_w=78.0,w_1=3%) in dimension 562 (seed=998052, Mon May  4 21:54:49 2026)
+
+Running 300 generations  pop=300
+Objectives : flat & ice & hill (min)
+Checkpoints: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-04_21-54-46_final_test
+
+
+Training summary saved to: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-04_21-54-46_final_test/training_score.txt

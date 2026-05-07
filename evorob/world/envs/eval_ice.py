@@ -74,8 +74,8 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.8,
-            "cfrc": 5e-3,
+            "ctrl": 1.0,
+            "cfrc": 1e-2,
             "healthy": 1.0,
         }
         
@@ -133,7 +133,10 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
         return float(R[2, 2]) < 0.0
 
     def _get_obs(self):
-        return np.concatenate((self.data.qpos.flat[2:], self.data.qvel.flat.copy()))
+        print(f"qpos: {len(self.data.qpos.flat)}, qvel: {len(self.data.qvel.flat)}, qfrc_actuator: {len(self.data.qfrc_actuator.flat)}\n")
+        obs = np.concatenate((self.data.qpos.flat.copy(), self.data.qvel.flat.copy(), self.data.qfrc_actuator.flat.copy()))
+        print("Concatenated obs shape:", obs.shape())
+        return obs
 
     def reset_model(self):
         noise = self._reset_noise_scale

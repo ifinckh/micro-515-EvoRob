@@ -44,6 +44,7 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
 
         # self._ctrl_cost_weight = ctrl_cost_weight
         # self._cfrc_cost_weight = cfrc_cost_weight
+                
         self._reset_noise_scale = reset_noise_scale
         self._stuck_count = 0
 
@@ -68,14 +69,6 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         xyz_before = self.data.body(1).xpos[:3].copy()
         self.do_simulation(action, self.frame_skip)
         xyz_after = self.data.body(1).xpos[:3].copy()
-        
-        weights = {
-            "x_pos": 1.0,
-            "z_pos": 1.0,
-            "ctrl": 0.1,
-            "cfrc": 1e-4,
-            "healthy": 1.0,
-        }
 
         xyz_velocity = (xyz_after - xyz_before) / self.dt
         x_velocity = float(xyz_velocity[0])
@@ -88,6 +81,14 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
 
         terminated = self._is_terminated(xyz_velocity)
         # reward = healthy_reward + x_position - ctrl_cost - cfrc_cost
+        
+        weights = {
+            "x_pos": 1.0,
+            "z_pos": 0.5,
+            "ctrl": 0.1,
+            "cfrc": 1e-4,
+            "healthy": 1.0,
+        }
         reward = (
             weights["healthy"] * healthy_reward
             + weights["x_pos"] * x_position
@@ -95,6 +96,7 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
             - weights["ctrl"] * ctrl_cost
             - weights["cfrc"] * cfrc_cost
         )
+        
         info = {
             "healthy_reward": -10.0 if terminated else healthy_reward,
             "x_position": x_position,
@@ -127,7 +129,10 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         return float(R[2, 2]) < 0.0
 
     def _get_obs(self):
-        return np.concatenate((self.data.qpos.flat[2:], self.data.qvel.flat.copy()))
+        print(f"qpos: {len(self.data.qpos.flat)}, qvel: {len(self.data.qvel.flat)}, qfrc_actuator: {len(self.data.qfrc_actuator.flat)}\n")
+        obs = np.concatenate((self.data.qpos.flat.copy(), self.data.qvel.flat.copy(), self.data.qfrc_actuator.flat.copy()))
+        print("Concatenated obs shape:", obs.shape())
+        return obs
 
     def reset_model(self):
         noise = self._reset_noise_scale
@@ -139,3 +144,4 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
 
     def _get_reset_info(self):
         return {"x_position": float(self.data.qpos[0])}
+    
