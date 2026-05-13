@@ -103,9 +103,12 @@ class EvalEnv(MujocoEnv, utils.EzPickle):
         return bool(np.any(np.isnan(qacc) | np.isinf(qacc) | (np.abs(qacc) > 1e6)))
 
     def _get_obs(self):
-        # Skip root xy (first 2 qpos elements) to keep observations translation-invariant
-        return np.concatenate((self.data.qpos.flat[2:], self.data.qvel.flat.copy()))
-
+        # print(f"qpos: {len(self.data.qpos.flat)}, qvel: {len(self.data.qvel.flat)}, qfrc_actuator: {len(self.data.qfrc_actuator.flat)}\n")
+        obs = np.concatenate((self.data.qpos.flat.copy(), self.data.qvel.flat.copy(), self.data.qfrc_actuator.flat.copy()))
+        # print("Concatenated obs shape:", obs.shape())
+        return obs
+    
+    
     def reset_model(self):
         noise = self._reset_noise_scale
         qpos = self.init_qpos + self.np_random.uniform(-noise, noise, size=self.model.nq)

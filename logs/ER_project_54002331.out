@@ -1,9 +1,0 @@
-Running CMA-ES with 2 generations, population size 2, sigma 0.6, checkpoint interval 1 generations, results saved to '/home/finckh/ER_course/micro-515-EvoRob/results/2026-05-07_11-51-00_final_test'
-
-Genotype : 818 params  (controller=816, body=2)
-(1,2mirr1)-aCMA-ES (mu_w=1.0,w_1=100%) in dimension 818 (seed=293954, Thu May  7 11:51:00 2026)
-
-Running 2 generations  pop=2
-Objectives : flat & ice & hill (min)
-Checkpoints: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-07_11-51-00_final_test
-

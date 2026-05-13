@@ -23,5 +23,11 @@ PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
 # # Optional debug
 # $PYTHON -c "import PIL; print(PIL.__version__)"
 
-# Run
-$PYTHON final_project_train.py --num_generations 500 --population_size 300 --sigma 0.4
+
+####### Run
+
+# loading checkpoint and training from there
+# $PYTHON final_project_train.py --num_generations 300 --population_size 300 --sigma 0.4 --best_dir_path results/2026-05-07_12-06-36_final_test
+
+# from scratch
+$PYTHON final_project_train.py --num_generations 400 --population_size 300 --sigma 0.4

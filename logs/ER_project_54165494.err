@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 906, in <module>
+    run_multi_task_evolution_CMA_ES_from_checkpoint(**params)
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 806, in run_multi_task_evolution_CMA_ES_from_checkpoint
+    ea.tell(loaded_population, loaded_fitness_scalar, save_checkpoint=False)
+  File "/home/finckh/ER_course/micro-515-EvoRob/evorob/algorithms/ea_api.py", line 45, in tell
+    self.es.tell(population.tolist(), (-fitnesses).tolist())
+  File "/home/finckh/miniconda3/envs/evorob/lib/python3.10/site-packages/cma/evolution_strategy.py", line 2507, in tell
+    return self.tell2(solutions, function_values,
+  File "/home/finckh/miniconda3/envs/evorob/lib/python3.10/site-packages/cma/evolution_strategy.py", line 2518, in tell2
+    raise RuntimeError('tell can currently only be called once per iteration')
+RuntimeError: tell can currently only be called once per iteration

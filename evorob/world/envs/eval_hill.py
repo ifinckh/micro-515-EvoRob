@@ -86,8 +86,8 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         weights = {
             "x_pos": 1.0,
             "z_pos": 0.5,
-            "ctrl": 0.1,
-            "cfrc": 1e-4,
+            "ctrl": 0.05,
+            "cfrc": 5e-5,
             "healthy": 1.0,
             "y_dev": 0.2,
         }

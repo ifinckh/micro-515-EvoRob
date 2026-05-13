@@ -4,7 +4,7 @@ import xml.etree.ElementTree as xml
 from os.path import join, basename, isfile
 from tempfile import TemporaryDirectory
 
-from final_project_test import OBS_SPACE_SIZE
+# from final_project_test import OBS_SPACE_SIZE
 import numpy as np
 
 os.environ.setdefault("MUJOCO_GL", "egl")
@@ -22,7 +22,7 @@ _EVAL_TERRAIN_IMAGE = join(
     ROOT_DIR, "evorob", "world", "robot", "assets", "hilly_hfield.png"
 )
 
-OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
+# OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
 
 
 class EvalWorld(World):
@@ -77,7 +77,7 @@ class EvalWorld(World):
     @staticmethod
     def _default_controller():
         from evorob.world.robot.controllers.mlp import NeuralNetworkController
-        return NeuralNetworkController(input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=16)
+        return NeuralNetworkController(input_size=43, output_size=8, hidden_size=16)
 
     def set_controller(self, controller: Controller) -> None:
         """Override the default MLP controller.

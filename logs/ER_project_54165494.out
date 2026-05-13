@@ -1,0 +1,19 @@
+Running CMA-ES with 300 generations, population size 300, sigma 0.4, checkpoint interval 5 generations, results saved to '/home/finckh/ER_course/micro-515-EvoRob/results/2026-05-12_18-40-45_final_test'
+
+Loading checkpoint from 'results/2026-05-07_12-06-36_final_test' and continuing training...
+
+DEBUG: loaded_population_all_gens shape=(400, 300, 818), dtype=float64, ndim=3
+DEBUG: loaded_fitness_all_gens shape=(400, 300), dtype=float64, ndim=2
+DEBUG: 3D array detected, extracting last generation
+DEBUG: After extraction: loaded_population shape=(300, 818)
+DEBUG: After extraction: loaded_fitness_full shape=(300,)
+Loaded population from checkpoint: shape=(300, 818)
+Loaded fitness (full objectives): shape=(300,)
+Genotype : 818 params  (controller=816, body=2)
+(150_w,300)-aCMA-ES (mu_w=78.0,w_1=3%) in dimension 818 (seed=703612, Tue May 12 18:40:56 2026)
+
+Continuing from checkpoint with 300 individuals
+Running 300 generations  pop=300
+Objectives : flat & ice & hill (summed)
+Checkpoints: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-12_18-40-45_final_test
+
