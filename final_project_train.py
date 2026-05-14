@@ -782,6 +782,7 @@ def run_multi_task_evolution_CMA_ES(
 
 
 def run_multi_task_evolution_CMA_ES_from_checkpoint(
+    checkpoint_dir: str,
     num_generations: int = 100,
     population_size: int = 100,
     n_repeats:       int = 4,
@@ -1014,7 +1015,7 @@ if __name__ == "__main__":
     
     if checkpoint_dir is not None:
         print(f"Loading checkpoint from '{checkpoint_dir}' and continuing training...\n")
-        run_multi_task_evolution_CMA_ES_from_checkpoint(**params)
+        run_multi_task_evolution_CMA_ES_from_checkpoint(checkpoint_dir=checkpoint_dir, **params)
     else:
         run_multi_task_evolution_CMA_ES(
             num_generations=params['num_generations'],
