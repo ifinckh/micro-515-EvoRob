@@ -73,7 +73,6 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         xyz_velocity = (xyz_after - xyz_before) / self.dt
         x_velocity = float(xyz_velocity[0])
         x_position = float(xyz_after[0])
-        z_position = float(xyz_after[2])
         y_deviation = float(xyz_after[1])
 
         healthy_reward = 1.0
@@ -85,16 +84,14 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "z_pos": 0.5,
-            "ctrl": 0.05,
-            "cfrc": 5e-5,
+            "ctrl": 0.3,
+            "cfrc": 1e-4,
             "healthy": 1.0,
             "y_dev": 0.2,
         }
         reward = (
             weights["healthy"] * healthy_reward
             + weights["x_pos"] * x_position
-            + weights["z_pos"] * z_position
             - weights["ctrl"] * ctrl_cost
             - weights["cfrc"] * cfrc_cost
             - weights["y_dev"] * abs(y_deviation)
@@ -103,7 +100,6 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         info = {
             "healthy_reward": -10.0 if terminated else healthy_reward,
             "x_position": x_position,
-            "z_position": z_position,
             "ctrl_cost": ctrl_cost,
             "cfrc_cost": cfrc_cost,
             "x_velocity": x_velocity,
