@@ -46,6 +46,16 @@ MAX_EPISODE_STEPS = 1000  # fixed for leaderboard — do not change
 
 OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
 
+# helper: combine the three terrain scores into a single scalar fitness for CMA-ES optimization
+def generalist_scalar_fitness(full_fitness: np.ndarray) -> float:
+    """
+    Worst-terrain objective with a small overall-performance tie-break.
+    Keeps pressure on the weakest terrain to obtain best generalist by taking minimum fitness across
+    terrains, and also adds a small contribution from the mean to encourage overall improvement.
+    """
+    full_fitness = np.asarray(full_fitness, dtype=float)
+    return float(full_fitness.min() + 0.1 * full_fitness.mean())
+
 
 # ---------------------------------------------------------------------------
 # FinalWorld — body + brain co-evolution across multiple terrains
@@ -725,13 +735,10 @@ def run_multi_task_evolution_CMA_ES(
             pop = ea.ask()
         fitnesses = np.empty(len(pop))
         for idx, genotype in enumerate(pop):
-            # take the minimum of the three objectives as the fitness for CMA-ES (worst-case performance)
-            # to encourage all 3 obj to improve simultaneously
             full_fitness = world.evaluate_individual(
                 genotype, n_repeats=n_repeats, n_steps=n_steps
             )
-            # take the minimum of the three objectives as the fitness for CMA-ES (worst-case performance for best generalist)
-            fitnesses[idx] = float(full_fitness.min()) # CHANGED from .sum() to .min() SAME AT LINES 874 and 928
+            fitnesses[idx] = generalist_scalar_fitness(full_fitness)
             scalar = fitnesses[idx]
             if scalar > _best_scalar:
                 _best_scalar = scalar
@@ -772,12 +779,13 @@ def run_multi_task_evolution_CMA_ES(
                 f"  ({world.n_weights} params)\n")
         f.write(f"Genotype size   : {world.n_params}"
                 f"  (controller={world.n_weights}, body={world.n_body_params})\n\n")
-        f.write("Best individual (highest minimum fitness across objectives):\n")
+        f.write("Best individual (highest generalist scalar fitness):\n")
         labels = ["flat", "ice", "hill"]
         for label, val in zip(labels, _best_full_fitness):
             f.write(f"  {label:<6}: {float(val):10.2f}\n")
         f.write(f"  {'min':<6}: {float(_best_full_fitness.min()):10.2f}\n")
         f.write(f"  {'mean':<6}: {float(_best_full_fitness.mean()):10.2f}\n")
+        f.write(f"  {'scalar':<6}: {generalist_scalar_fitness(_best_full_fitness):10.2f}\n")
     print(f"\nTraining summary saved to: {score_path}")
 
 
@@ -871,13 +879,13 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
         output_dir=results_dir,
     )
 
-    # Convert full fitness (3 objectives) to scalar fitness using the minimum
-    loaded_fitness_scalar = np.array([f.min() for f in loaded_fitness_full])
+    # Convert full fitness (3 objectives) to the scalar CMA-ES objective
+    loaded_fitness_scalar = np.array([generalist_scalar_fitness(f) for f in loaded_fitness_full])
     
-    n_obj = 1  # CMA-ES optimizes a single scalar fitness, using the minimum terrain score
+    n_obj = 1  # CMA-ES optimizes a single scalar fitness derived from the 3 terrain scores
     print(f"\nContinuing from checkpoint with {len(loaded_population)} individuals")
     print(f"Running {num_generations} generations  pop={population_size}")
-    print(f"Objectives : flat & ice & hill (min)")
+    print(f"Objectives : flat & ice & hill (min + 0.1 * mean)")
     print(f"Checkpoints: {results_dir}\n")
 
     os.makedirs(results_dir, exist_ok=True)
@@ -925,8 +933,7 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
             full_fitness = world.evaluate_individual(
                 genotype, n_repeats=n_repeats, n_steps=n_steps
             )
-            # take min of the 3 objective rewards to get a single scalar fitness for CMA-ES
-            fitnesses[idx] = float(full_fitness.min())
+            fitnesses[idx] = generalist_scalar_fitness(full_fitness)
             scalar = fitnesses[idx]
             if scalar > _best_scalar:
                 _best_scalar = scalar
@@ -968,12 +975,13 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
                 f"  ({world.n_weights} params)\n")
         f.write(f"Genotype size   : {world.n_params}"
                 f"  (controller={world.n_weights}, body={world.n_body_params})\n\n")
-        f.write("Best individual (highest minimum fitness across objectives):\n")
+        f.write("Best individual (highest generalist scalar fitness):\n")
         labels = ["flat", "ice", "hill"]
         for label, val in zip(labels, _best_full_fitness):
             f.write(f"  {label:<6}: {float(val):10.2f}\n")
         f.write(f"  {'min':<6}: {float(_best_full_fitness.min()):10.2f}\n")
         f.write(f"  {'mean':<6}: {float(_best_full_fitness.mean()):10.2f}\n")
+        f.write(f"  {'scalar':<6}: {generalist_scalar_fitness(_best_full_fitness):10.2f}\n")
     print(f"\nTraining summary saved to: {score_path}")
 
 

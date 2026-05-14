@@ -198,7 +198,7 @@ if __name__ == "__main__":
             raise FileNotFoundError(f"Genotype not found: {GENOTYPE_PATH}")
         world.update_robot_xml(ROBOT_XML_PATH)
         genotype = np.load(GENOTYPE_PATH, allow_pickle=True)
-        world.controller.geno2pheno(genotype[:world.n_weights])
+        world.controller.geno2pheno(genotype[:world.n_weights]) # inconsistent without the * 0.1 scaling used in training
         print(f"Robot  : {ROBOT_XML_PATH}")
         print(f"Geno   : {GENOTYPE_PATH}  shape={genotype.shape}")
     else:
