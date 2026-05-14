@@ -43,7 +43,10 @@ import argparse
 import os
 import numpy as np
 
-os.environ.setdefault("MUJOCO_GL", "egl")  # "osmesa" for macOS, "egl" for Linux
+import platform # added to detect OS for GL backend because error
+# Default the Mujoco GL backend per platform to avoid invalid configs (e.g., EGL on macOS).
+if "MUJOCO_GL" not in os.environ:
+    os.environ["MUJOCO_GL"] = "glfw" if platform.system() == "Darwin" else "egl"
 
 import evorob.world          # registers EvalEnv-v0
 import gymnasium as gym
