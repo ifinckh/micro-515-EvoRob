@@ -54,7 +54,7 @@ def generalist_scalar_fitness(full_fitness: np.ndarray) -> float:
     terrains, and also adds a small contribution from the mean to encourage overall improvement.
     """
     full_fitness = np.asarray(full_fitness, dtype=float)
-    return float(full_fitness.min() + 0.1 * full_fitness.mean())
+    return float(full_fitness.min() + 0.2 * full_fitness.mean())
 
 
 # ---------------------------------------------------------------------------
@@ -686,7 +686,7 @@ def run_multi_task_evolution_CMA_ES(
     population_size: int = 100,
     n_repeats:       int = 4,
     n_steps:         int = 500,
-    sigma:           float = 0.3,
+    sigma:           float = 0.25,
     bounds:          tuple = (-1, 1),
     ckpt_interval:   int = 10,
     results_dir:     str = None,
@@ -795,7 +795,7 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
     population_size: int = 100,
     n_repeats:       int = 4,
     n_steps:         int = 500,
-    sigma:           float = 0.3,
+    sigma:           float = 0.25,
     bounds:          tuple = (-1, 1),
     ckpt_interval:   int = 10,
     results_dir:     str = None,
@@ -991,9 +991,11 @@ if __name__ == "__main__":
     # parse arguments for num_generations, population_size, sigma
     parser = argparse.ArgumentParser()
     parser.add_argument("--num_generations", type=int, default=300)
-    parser.add_argument("--population_size", type=int, default=300)
-    parser.add_argument("--sigma", type=float, default=0.6)
+    parser.add_argument("--population_size", type=int, default=200)
+    parser.add_argument("--sigma", type=float, default=0.25) # reduced from 0.4 to 0.25
     parser.add_argument("--best_dir_path", type=str, default=None)
+    parser.add_argument("--n_repeats", type=int, default=4) # augmented from 2 to 4
+    parser.add_argument("--n_steps", type=int, default=500) # augmented from 100 to 500
     args = parser.parse_args()
     
     # load pre-trained checkpoint and train from there
@@ -1006,8 +1008,8 @@ if __name__ == "__main__":
     params = {
         "num_generations": args.num_generations,
         "population_size": args.population_size,
-        "n_repeats": 2,
-        "n_steps": 100,
+        "n_repeats": args.n_repeats, 
+        "n_steps": args.n_steps, 
         "ckpt_interval": 5,
         "sigma": args.sigma,
         "results_dir": results_dir,
@@ -1015,11 +1017,13 @@ if __name__ == "__main__":
     
     
     # print number of generations, population size, sigma
-    print(f"Running CMA-ES with {params['num_generations']} generations, "
-          f"population size {params['population_size']}, "
-          f"sigma {params['sigma']}, "
-          f"checkpoint interval {params['ckpt_interval']} generations, "
-          f"results saved to '{params['results_dir']}'\n")
+    print(f"\nRunning CMA-ES with:\n   - {params['num_generations']} generations"
+          f"\n   - population size {params['population_size']}"
+          f"\n   - n_repeats {params['n_repeats']}"
+          f"\n   - n_steps {params['n_steps']}"
+          f"\n   - sigma {params['sigma']}"
+          f"\n   - checkpoint interval {params['ckpt_interval']} generations"
+          f"\nResults saved to '{params['results_dir']}' .\n")
     
     if checkpoint_dir is not None:
         print(f"Loading checkpoint from '{checkpoint_dir}' and continuing training...\n")
