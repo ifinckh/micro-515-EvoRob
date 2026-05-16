@@ -6,6 +6,7 @@ from gymnasium.envs.mujoco import MujocoEnv
 from gymnasium.spaces import Box
 
 DEFAULT_CAMERA_CONFIG = {"distance": 5.0}
+Y_EDGE_LIMIT = 5.0
 
 
 class EvalIceEnv(MujocoEnv, utils.EzPickle):
@@ -77,7 +78,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             "ctrl": 0.6,
             "cfrc": 5e-4,
             "healthy": 1.0,
-            "y_dev": 0.2,
+            "y_dev": 1.0,
         }
         
         xyz_velocity = (xyz_after - xyz_before) / self.dt
@@ -89,7 +90,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
         ctrl_cost = float(np.sum(action ** 2))
         cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2))
 
-        terminated = self._is_terminated(xyz_velocity)
+        terminated = self._is_terminated(xyz_velocity, y_deviation)
         # reward = healthy_reward + x_velocity - ctrl_cost - cfrc_cost
         
         reward = (
@@ -97,7 +98,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             + weights["x_pos"] * x_forward
             - weights["ctrl"] * ctrl_cost
             - weights["cfrc"] * cfrc_cost
-            - weights["y_dev"] * abs(y_deviation)
+            - weights["y_dev"] * (y_deviation ** 2)
         )
 
         info = {
@@ -113,10 +114,12 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             self.render()
         return self._get_obs(), reward, terminated, False, info
 
-    def _is_terminated(self, xyz_velocity: np.ndarray) -> bool:
+    def _is_terminated(self, xyz_velocity: np.ndarray, y_deviation: float) -> bool:
         z = float(self.data.qpos[2])
         qacc = self.data.qacc
         if z < 0.2 or z > 1.0:
+            return True
+        if abs(y_deviation) > Y_EDGE_LIMIT:
             return True
         if not np.isfinite(self.state_vector()).all():
             return True

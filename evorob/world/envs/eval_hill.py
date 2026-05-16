@@ -6,6 +6,7 @@ from gymnasium.envs.mujoco import MujocoEnv
 from gymnasium.spaces import Box
 
 DEFAULT_CAMERA_CONFIG = {"distance": 5.0}
+Y_EDGE_LIMIT = 5.0
 
 
 class EvalHillEnv(MujocoEnv, utils.EzPickle):
@@ -74,27 +75,30 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         x_velocity = float(xyz_velocity[0])
         x_position = float(xyz_after[0])
         y_deviation = float(xyz_after[1])
+        # z_position = float(xyz_after[2])
 
         healthy_reward = 1.0
         ctrl_cost = float(np.sum(action ** 2) )
         cfrc_cost = float(np.sum(self.data.cfrc_ext[1:] ** 2))
 
-        terminated = self._is_terminated(xyz_velocity)
+        terminated = self._is_terminated(xyz_velocity, y_deviation)
         # reward = healthy_reward + x_position - ctrl_cost - cfrc_cost
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.3,
-            "cfrc": 1e-4,
+            # "z_pos": 0.5,
+            "ctrl": 0.3,    # 0.3,
+            "cfrc": 1e-4,   # 5e-5,
             "healthy": 1.0,
-            "y_dev": 0.2,
+            "y_dev": 1.0,
         }
         reward = (
             weights["healthy"] * healthy_reward
             + weights["x_pos"] * x_position
+            # + weights["z_pos"] * z_position
             - weights["ctrl"] * ctrl_cost
             - weights["cfrc"] * cfrc_cost
-            - weights["y_dev"] * abs(y_deviation)
+            - weights["y_dev"] * (y_deviation ** 2)
         )
         
         info = {
@@ -104,15 +108,18 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
             "cfrc_cost": cfrc_cost,
             "x_velocity": x_velocity,
             "y_deviation": y_deviation,
+            # "z_position": z_position,
         }
 
         if self.render_mode == "human":
             self.render()
         return self._get_obs(), reward, terminated, False, info
 
-    def _is_terminated(self, xyz_velocity: np.ndarray) -> bool:
+    def _is_terminated(self, xyz_velocity: np.ndarray, y_deviation: float) -> bool:
         qacc = self.data.qacc
         if np.any(np.isnan(qacc) | np.isinf(qacc) | (np.abs(qacc) > 1e6)):
+            return True
+        if abs(y_deviation) > Y_EDGE_LIMIT:
             return True
         if self._torso_upside_down():
             return True
