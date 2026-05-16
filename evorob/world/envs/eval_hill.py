@@ -6,7 +6,7 @@ from gymnasium.envs.mujoco import MujocoEnv
 from gymnasium.spaces import Box
 
 DEFAULT_CAMERA_CONFIG = {"distance": 5.0}
-Y_EDGE_LIMIT = 5.0
+Y_EDGE_LIMIT = 4.0
 
 
 class EvalHillEnv(MujocoEnv, utils.EzPickle):
