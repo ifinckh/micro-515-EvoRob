@@ -68,7 +68,7 @@ class EvalWorld(World):
 
         # Mirror FinalWorld.sensor_fn — set this if your training used a custom
         # sensor function so the eval run sees the same transformed observations.
-        self.sensor_fn = None
+        self.sensor_fn = lambda obs: obs[..., :29]
 
     # ------------------------------------------------------------------
     # Controller management
@@ -77,7 +77,7 @@ class EvalWorld(World):
     @staticmethod
     def _default_controller():
         from evorob.world.robot.controllers.mlp import NeuralNetworkController
-        return NeuralNetworkController(input_size=43, output_size=8, hidden_size=16)
+        return NeuralNetworkController(input_size=29, output_size=8, hidden_size=8)
 
     def set_controller(self, controller: Controller) -> None:
         """Override the default MLP controller.

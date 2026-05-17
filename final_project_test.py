@@ -60,11 +60,11 @@ from evorob.world.eval_world import EvalWorld
 
 # --- Controller ---
 # Set this to the controller you used during training.
-# Leave None to use the default (mlp_sol, input=27, output=8, hidden=8).
+# Leave None to use the default controller from EvalWorld.
 #
 from evorob.world.robot.controllers.mlp import NeuralNetworkController
-OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
-MY_CONTROLLER = NeuralNetworkController(input_size=43, output_size=8, hidden_size=16)
+OBS_SPACE_SIZE = 15 + 14  # qpos + qvel
+MY_CONTROLLER = NeuralNetworkController(input_size=29, output_size=8, hidden_size=8)
 #
 # from evorob.world.robot.controllers.so2 import SO2Controller
 # MY_CONTROLLER = SO2Controller(input_size=27, output_size=8, hidden_size=8)

@@ -44,7 +44,7 @@ ROOT_DIR = get_project_root()
 _ASSETS  = join(ROOT_DIR, "evorob", "world", "robot", "assets")
 MAX_EPISODE_STEPS = 1000  # fixed for leaderboard — do not change
 
-OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
+OBS_SPACE_SIZE = 15 + 14  # qpos + qvel
 
 # helper: combine the three terrain scores into a single scalar fitness for CMA-ES optimization
 def generalist_scalar_fitness(full_fitness: np.ndarray) -> float:
@@ -77,7 +77,7 @@ class FinalWorld(World):
         # from evorob.world.robot.controllers.so2 import SO2Controller
         # self.controller = SO2Controller(input_size=27, output_size=8, hidden_size=8)
         self.controller = NeuralNetworkController(
-            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=16
+            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=8
         )
 
         self.n_weights     = self.controller.n_params
@@ -110,10 +110,8 @@ class FinalWorld(World):
         # augment, or reshape observations.  The controller input_size must match
         # the output of this function.
         #
-        # Example — use only joint angles and velocities (14 values):
-        #   self.sensor_fn = lambda obs: obs[:14]
-        #   self.controller = NeuralNetworkController(input_size=14, ...)
-        self.sensor_fn = None
+        # Keep only qpos + qvel and drop actuator-force channels.
+        self.sensor_fn = lambda obs: obs[..., :OBS_SPACE_SIZE]
 
         self._create_terrain_file("terrain.png")
 
