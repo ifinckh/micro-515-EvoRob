@@ -1,0 +1,37 @@
+Running CMA-ES with 400 generations, population size 300, sigma 0.4, checkpoint interval 5 generations, results saved to '/home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test'
+
+Genotype : 818 params  (controller=816, body=2)
+(150_w,300)-aCMA-ES (mu_w=78.0,w_1=3%) in dimension 818 (seed=771426, Wed May 13 12:10:30 2026)
+
+Running 400 generations  pop=300
+Objectives : flat & ice & hill (min)
+Checkpoints: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test
+
+Recording terrain videos for generation 50...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0050/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0050/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0050/hill.mp4
+Recording terrain videos for generation 100...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0100/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0100/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0100/hill.mp4
+Recording terrain videos for generation 150...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0150/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0150/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0150/hill.mp4
+Recording terrain videos for generation 200...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0200/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0200/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0200/hill.mp4
+Recording terrain videos for generation 250...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0250/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0250/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0250/hill.mp4
+Recording terrain videos for generation 300...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0300/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0300/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0300/hill.mp4
+Recording terrain videos for generation 350...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0350/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0350/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-13_12-10-23_final_test/videos/gen_0350/hill.mp4
