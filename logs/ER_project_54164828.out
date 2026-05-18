@@ -1,6 +1,0 @@
-Running CMA-ES with 300 generations, population size 300, sigma 0.4, checkpoint interval 5 generations, results saved to '/home/finckh/ER_course/micro-515-EvoRob/results/2026-05-12_17-52-54_final_test'
-
-Loading checkpoint from 'results/2026-05-07_12-06-36_final_test' and continuing training...
-
-Loaded population: shape=(400, 300, 818)
-Loaded fitness (full objectives): shape=(400, 300)

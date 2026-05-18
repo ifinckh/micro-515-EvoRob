@@ -22,6 +22,7 @@ from os.path import isfile, join
 from tempfile import TemporaryDirectory
 # library for date and time manipulation (used for timestamping checkpoints)
 import datetime
+import pickle
 import tqdm  # for progress bars during training
 import argparse
 
@@ -719,10 +720,7 @@ def run_multi_task_evolution_CMA_ES(
 
     for gen in range(num_generations):
         pbar.update(1)
-        if gen == 0 and 'initial_population_override' in locals():
-            pop = initial_population_override
-        else:
-            pop = ea.ask()
+        pop = ea.ask()
         fitnesses = np.empty(len(pop))
         for idx, genotype in enumerate(pop):
             # take the minimum of the three objectives as the fitness for CMA-ES (worst-case performance)
@@ -748,6 +746,9 @@ def run_multi_task_evolution_CMA_ES(
                 _best_xml_stage,
                 join(results_dir, str(gen), "Robot.xml"),
             )
+            # Save pickle state at checkpoints
+            pickle_ckpt = join(results_dir, f"state_gen_{gen}.pkl")
+            ea.save_pickle_state(pickle_ckpt)
         if (gen + 1) % video_interval == 0 and _best_genotype is not None:
             print(f"Recording terrain videos for generation {gen + 1}...")
             world.record_terrain_videos(
@@ -759,7 +760,7 @@ def run_multi_task_evolution_CMA_ES(
             )
 
     pbar.close()
-    
+
     # --- Training summary ---
     score_path = join(results_dir, "training_score.txt")
     with open(score_path, "w") as f:
@@ -768,6 +769,130 @@ def run_multi_task_evolution_CMA_ES(
         f.write("=" * 60 + "\n\n")
         f.write(f"Generations     : {num_generations}\n")
         f.write(f"Population size : {population_size}\n")
+        f.write(f"Controller      : {type(world.controller).__name__}"
+                f"  ({world.n_weights} params)\n")
+        f.write(f"Genotype size   : {world.n_params}"
+                f"  (controller={world.n_weights}, body={world.n_body_params})\n\n")
+        f.write("Best individual (highest sum of fitness across objectives):\n")
+        labels = ["flat", "ice", "hill"]
+        for label, val in zip(labels, _best_full_fitness):
+            f.write(f"  {label:<6}: {float(val):10.2f}\n")
+        f.write(f"  {'min':<6}: {float(_best_full_fitness.min()):10.2f}\n")
+        f.write(f"  {'mean':<6}: {float(_best_full_fitness.mean()):10.2f}\n")
+    print(f"\nTraining summary saved to: {score_path}")
+
+    # Save final pickle state
+    pickle_final = join(results_dir, "state_final.pkl")
+    ea.save_pickle_state(pickle_final)
+    print(f"Final state saved to: {pickle_final}\nTo resume: python final_project_train.py --pickle_path {pickle_final} --num_generations 2000")
+
+
+def run_multi_task_evolution_CMA_ES_from_pickle(
+    pickle_path: str,
+    num_generations: int = 100,
+    n_repeats:       int = 4,
+    n_steps:         int = 500,
+    ckpt_interval:   int = 10,
+    results_dir:     str = None,
+) -> None:
+    """Resume CMA-ES training from a pickled state."""
+    np.random.seed(42)
+
+    world = FinalWorld()
+
+    # Load pickled EA state
+    ea = CMA_ES(n_params=world.n_params, population_size=1, num_generations=1, sigma=0.3)
+    ea.load_pickle_state(pickle_path)
+
+    # Use the results_dir from pickle if not overridden
+    if results_dir is None:
+        results_dir = ea.directory_name
+    else:
+        ea.directory_name = results_dir
+
+    # Update world with first genotype from loaded state
+    world.update_robot_xml(ea.x[0])
+    print(f"Genotype : {world.n_params} params"
+          f"  (controller={world.n_weights}, body={world.n_body_params})")
+
+    os.makedirs(results_dir, exist_ok=True)
+    _best_xml_stage = join(results_dir, "_best_robot.xml")
+    _best_scalar = float(ea.f_best_so_far)
+    _best_full_fitness = np.array([0.0, 0.0, 0.0])
+    _best_genotype = ea.x_best_so_far.copy()
+    video_interval = 50
+    video_seconds = 20
+    video_fps = 20
+
+    # Load best robot XML from last checkpoint if available
+    last_gen_checkpoint = join(results_dir, str(ea.current_gen))
+    if isfile(join(last_gen_checkpoint, "Robot.xml")):
+        shutil.copy2(join(last_gen_checkpoint, "Robot.xml"), _best_xml_stage)
+
+    print(f"\nResuming from generation {ea.current_gen}")
+    print(f"Running {num_generations} more generations  pop={ea.population_size}")
+    print(f"Objectives : flat & ice & hill (summed)")
+    print(f"Checkpoints: {results_dir}\n")
+
+    pbar = tqdm.tqdm(range(num_generations), desc="Generations")
+
+    for gen_offset in range(num_generations):
+        pbar.update(1)
+        pop = ea.ask()
+        fitnesses = np.empty(len(pop))
+        for idx, genotype in enumerate(pop):
+            full_fitness = world.evaluate_individual(
+                genotype, n_repeats=n_repeats, n_steps=n_steps
+            )
+            fitnesses[idx] = float(full_fitness.sum())
+            scalar = fitnesses[idx]
+            if scalar > _best_scalar:
+                _best_scalar = scalar
+                _best_full_fitness = full_fitness
+                _best_genotype = genotype.copy()
+                shutil.copy2(
+                    join(world.temp_dir.name, "Robot.xml"),
+                    _best_xml_stage,
+                )
+
+        save_ckpt = ((ea.current_gen + 1) % ckpt_interval == 0)
+        ea.tell(pop, fitnesses, save_checkpoint=save_ckpt)
+
+        if save_ckpt:
+            shutil.copy2(
+                _best_xml_stage,
+                join(results_dir, str(ea.current_gen), "Robot.xml"),
+            )
+            # Also save pickle state after each checkpoint
+            pickle_ckpt = join(results_dir, f"state_gen_{ea.current_gen}.pkl")
+            ea.save_pickle_state(pickle_ckpt)
+
+        if (ea.current_gen + 1) % video_interval == 0 and _best_genotype is not None:
+            print(f"Recording terrain videos for generation {ea.current_gen}...")
+            world.record_terrain_videos(
+                _best_genotype,
+                results_dir,
+                ea.current_gen,
+                seconds=video_seconds,
+                fps=video_fps,
+            )
+
+    pbar.close()
+
+    # Save final state
+    pickle_final = join(results_dir, "state_final.pkl")
+    ea.save_pickle_state(pickle_final)
+
+    # --- Training summary ---
+    score_path = join(results_dir, "training_score_resumed.txt")
+    with open(score_path, "w") as f:
+        f.write("=" * 60 + "\n")
+        f.write("MICRO-515 Final Project — Training Summary (Resumed from Pickle)\n")
+        f.write("=" * 60 + "\n\n")
+        f.write(f"Resumed from: {pickle_path}\n")
+        f.write(f"Generations continued : {num_generations}\n")
+        f.write(f"Total generations so far: {ea.current_gen}\n")
+        f.write(f"Population size : {ea.population_size}\n")
         f.write(f"Controller      : {type(world.controller).__name__}"
                 f"  ({world.n_weights} params)\n")
         f.write(f"Genotype size   : {world.n_params}"
@@ -981,7 +1106,7 @@ if __name__ == "__main__":
     
     # parse arguments for num_generations, population_size, sigma
     parser = argparse.ArgumentParser()
-    parser.add_argument("--num_generations", type=int, default=300)
+    parser.add_argument("--num_generations", type=int, default=2000)
     parser.add_argument("--population_size", type=int, default=300)
     parser.add_argument("--sigma", type=float, default=0.6)
     parser.add_argument("--best_dir_path", type=str, default=None)
@@ -1027,8 +1152,7 @@ if __name__ == "__main__":
     
     
     
-    
-     # run_multi_task_evolution(
+    # run_multi_task_evolution(
     #     num_generations=100,
     #     population_size=32,
     #     n_parents=32,

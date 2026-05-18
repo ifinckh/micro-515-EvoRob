@@ -77,7 +77,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             "ctrl": 0.6,
             "cfrc": 5e-4,
             "healthy": 1.0,
-            "y_dev": 0.2,
+            "y_dev": 0.3,
         }
         
         xyz_velocity = (xyz_after - xyz_before) / self.dt

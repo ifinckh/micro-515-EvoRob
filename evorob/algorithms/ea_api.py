@@ -1,4 +1,5 @@
 import os
+import pickle
 
 import numpy as np
 
@@ -69,6 +70,43 @@ class CMAESAPI(EA):
         self.x_best_so_far = np.load(os.path.join(curr_gen_path, "x_best.npy"))
         self.x = np.load(os.path.join(curr_gen_path, "x.npy"))
         self.f = np.load(os.path.join(curr_gen_path, "f.npy"))
+
+    def save_pickle_state(self, pickle_path: str) -> None:
+        """Save complete EA state including CMA-ES internals to pickle file."""
+        state = {
+            'current_gen': self.current_gen,
+            'population_size': self.population_size,
+            'n_gen': self.n_gen,
+            'n_params': self.n_params,
+            'full_x': self.full_x,
+            'full_f': self.full_f,
+            'x_best_so_far': self.x_best_so_far,
+            'f_best_so_far': self.f_best_so_far,
+            'x': self.x,
+            'f': self.f,
+            'es': self.es,  # CMA-ES internal state
+        }
+        os.makedirs(os.path.dirname(pickle_path) or '.', exist_ok=True)
+        with open(pickle_path, 'wb') as f:
+            pickle.dump(state, f)
+        print(f"Saved EA state to {pickle_path}")
+
+    def load_pickle_state(self, pickle_path: str) -> None:
+        """Load complete EA state from pickle file."""
+        with open(pickle_path, 'rb') as f:
+            state = pickle.load(f)
+        self.current_gen = state['current_gen']
+        self.population_size = state['population_size']
+        self.n_gen = state['n_gen']
+        self.n_params = state['n_params']
+        self.full_x = state['full_x']
+        self.full_f = state['full_f']
+        self.x_best_so_far = state['x_best_so_far']
+        self.f_best_so_far = state['f_best_so_far']
+        self.x = state['x']
+        self.f = state['f']
+        self.es = state['es']  # Restore CMA-ES internal state
+        print(f"Loaded EA state from {pickle_path}, resuming from generation {self.current_gen}")
 
 
 class EvosaxAPI(EA):

@@ -73,10 +73,10 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.3,
+            "ctrl": 0.1,
             "cfrc": 1e-4,
             "healthy": 1.0,
-            "y_dev": 0.2,
+            "y_dev": 0.3,
         }
 
         xyz_velocity = (xyz_after - xyz_before) / self.dt

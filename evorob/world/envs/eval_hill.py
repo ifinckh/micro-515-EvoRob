@@ -86,10 +86,10 @@ class EvalHillEnv(MujocoEnv, utils.EzPickle):
         weights = {
             "x_pos": 1.0,
             "z_pos": 0.5,
-            "ctrl": 0.05,
+            "ctrl": 0.03,
             "cfrc": 5e-5,
             "healthy": 1.0,
-            "y_dev": 0.2,
+            "y_dev": 0.3,
         }
         reward = (
             weights["healthy"] * healthy_reward
