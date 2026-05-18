@@ -1,0 +1,17 @@
+Generations:   0%|          | 0/2000 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 1144, in <module>
+    run_multi_task_evolution_CMA_ES(
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 728, in run_multi_task_evolution_CMA_ES
+    full_fitness = world.evaluate_individual(
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 347, in evaluate_individual
+    self.update_robot_xml(genotype)
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 191, in update_robot_xml
+    points, connectivity_mat = self.geno2pheno(genotype)
+  File "/home/finckh/ER_course/micro-515-EvoRob/final_project_train.py", line 126, in geno2pheno
+    self.controller.geno2pheno(control_params)
+  File "/home/finckh/ER_course/micro-515-EvoRob/evorob/world/robot/controllers/mlp.py", line 45, in geno2pheno
+    self.set_weights(genotype)
+  File "/home/finckh/ER_course/micro-515-EvoRob/evorob/world/robot/controllers/mlp.py", line 38, in set_weights
+    self.bias_hidden = encoding[start:end].reshape(self.n_hidden,)
+ValueError: cannot reshape array of size 0 into shape (12,)
+Generations:   0%|          | 1/2000 [00:00<01:54, 17.40it/s]

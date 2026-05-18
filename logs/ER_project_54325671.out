@@ -1,0 +1,9 @@
+Running CMA-ES with 2000 generations, population size 300, sigma 0.4, checkpoint interval 5 generations, results saved to '/home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-36-27_final_test'
+
+Genotype : 614 params  (controller=612, body=2)
+(150_w,300)-aCMA-ES (mu_w=78.0,w_1=3%) in dimension 614 (seed=304295, Mon May 18 18:36:28 2026)
+
+Running 2000 generations  pop=300
+Objectives : flat & ice & hill (min)
+Checkpoints: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-36-27_final_test
+

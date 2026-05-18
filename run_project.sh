@@ -17,12 +17,6 @@ mkdir -p logs
 # Use env directly (robust)
 PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
 
-# echo "Python used:"
-# $PYTHON -c "import sys; print(sys.executable)"
-
-# # Optional debug
-# $PYTHON -c "import PIL; print(PIL.__version__)"
-
 
 ####### Run
 

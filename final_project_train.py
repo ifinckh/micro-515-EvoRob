@@ -68,7 +68,7 @@ class FinalWorld(World):
         # from evorob.world.robot.controllers.so2 import SO2Controller
         # self.controller = SO2Controller(input_size=27, output_size=8, hidden_size=8)
         self.controller = NeuralNetworkController(
-            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=16
+            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=12
         )
 
         self.n_weights     = self.controller.n_params
@@ -122,6 +122,12 @@ class FinalWorld(World):
         Returns (points, connectivity_mat) for AntRobot construction.
         """
         control_params = genotype[:self.n_weights] * 0.1
+        # Backwards-compatibility: if an older genotype lacks newly added bias
+        # parameters, pad the controller vector with zeros so set_weights() succeeds.
+        expected_ctrl_len = self.controller.get_num_params()
+        if control_params.size < expected_ctrl_len:
+            pad = expected_ctrl_len - control_params.size
+            control_params = np.pad(control_params, (0, pad), constant_values=0.0)
         body_params    = (genotype[self.n_weights:] + 1) / 4 + 0.1
         self.controller.geno2pheno(control_params)
 
