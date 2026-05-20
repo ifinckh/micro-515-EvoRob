@@ -9,3 +9,81 @@ Checkpoints: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04
 
 Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_0.pkl
 Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_5.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_10.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_15.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_20.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_25.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_30.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_35.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_40.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_45.pkl
+Recording terrain videos for generation 50...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0050/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0050/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0050/hill.mp4
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_50.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_55.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_60.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_65.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_70.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_75.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_80.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_85.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_90.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_95.pkl
+Recording terrain videos for generation 100...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0100/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0100/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0100/hill.mp4
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_100.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_105.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_110.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_115.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_120.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_125.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_130.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_135.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_140.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_145.pkl
+Recording terrain videos for generation 150...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0150/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0150/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0150/hill.mp4
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_150.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_155.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_160.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_165.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_170.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_175.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_180.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_185.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_190.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_195.pkl
+Recording terrain videos for generation 200...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0200/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0200/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0200/hill.mp4
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_200.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_205.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_210.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_215.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_220.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_225.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_230.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_235.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_240.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_245.pkl
+Recording terrain videos for generation 250...
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0250/flat.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0250/ice.mp4
+  Video saved: /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/videos/gen_0250/hill.mp4
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_250.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_255.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_260.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_265.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_270.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_275.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_280.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_285.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_290.pkl
+Saved EA state to /home/finckh/ER_course/micro-515-EvoRob/results/2026-05-18_18-42-04_final_test/state_gen_295.pkl
