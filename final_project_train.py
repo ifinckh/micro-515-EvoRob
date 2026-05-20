@@ -993,6 +993,31 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
         print(f"Using loaded population size: {len(loaded_population)}")
         population_size = len(loaded_population)
 
+    # Initialize CMA-ES with the mean of the last checkpoint generation
+    # to avoid starting from random x0 which could confuse feed_for_resume
+    checkpoint_mean = loaded_population.mean(axis=0)
+    checkpoint_mean = np.clip(checkpoint_mean, bounds[0], bounds[1])  # ensure within bounds
+    
+    
+    # Convert full fitness (3 objectives) to scalar fitness by summing
+    loaded_fitness_scalar = np.array([f.sum() for f in loaded_fitness_full])
+    
+    os.makedirs(results_dir, exist_ok=True)
+    _best_xml_stage = join(results_dir, "_best_robot.xml")  # staging copy of best robot
+    _best_scalar = float(loaded_fitness_scalar.max())
+    _best_genotype = loaded_population[int(np.argmax(loaded_fitness_scalar))].copy()
+    video_interval = 50
+    video_seconds = 20
+    video_fps = 20
+
+    # Find best individual from loaded population for tracking
+    best_idx = np.argmax(loaded_fitness_scalar)
+    _best_full_fitness = loaded_fitness_full[best_idx].copy()
+
+    import cma
+    opts = {"popsize": population_size, "bounds": list(bounds)}
+    es = cma.CMAEvolutionStrategy(x0=_best_genotype, sigma0=sigma, inopts=opts)
+
     ea = CMA_ES(
         n_params = world.n_params,
         population_size=population_size,
@@ -1001,9 +1026,8 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
         bounds=bounds,
         output_dir=results_dir,
     )
-
-    # Convert full fitness (3 objectives) to scalar fitness by summing
-    loaded_fitness_scalar = np.array([f.sum() for f in loaded_fitness_full])
+    # Replace the random initialization with the informed one
+    ea.es = es
 
     # Restore CMA-ES state from all checkpoint generations using feed_for_resume
     print(f"Restoring CMA-ES state from evolution history...")
@@ -1026,24 +1050,14 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
 
     # Update EA state to reflect restored evolution
     ea.current_gen = len(loaded_population_all_gens)
-    
+
     n_obj = 1  # CMA-ES optimizes a single scalar fitness, so we will sum the objectives
     print(f"\nContinuing from checkpoint with {len(loaded_population)} individuals")
-    print(f"Running {num_generations} generations  pop={population_size}")
+    print(f"Running {num_generations} more generations (starting from gen {ea.current_gen})")
     print(f"Objectives : flat & ice & hill (summed)")
     print(f"Checkpoints: {results_dir}\n")
 
-    os.makedirs(results_dir, exist_ok=True)
-    _best_xml_stage = join(results_dir, "_best_robot.xml")  # staging copy of best robot
-    _best_scalar = float(loaded_fitness_scalar.max())
-    _best_genotype = loaded_population[int(np.argmax(loaded_fitness_scalar))].copy()
-    video_interval = 50
-    video_seconds = 20
-    video_fps = 20
     
-    # Find best individual from loaded population for tracking
-    best_idx = np.argmax(loaded_fitness_scalar)
-    _best_full_fitness = loaded_fitness_full[best_idx].copy()
 
     # Preserve EA history after feed_for_resume
     if loaded_population_all_gens.dtype == object:
@@ -1060,20 +1074,21 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
     best_idx = int(np.argmax(loaded_fitness_scalar))
     ea.x_best_so_far = loaded_population[best_idx].copy()
     ea.f_best_so_far = float(loaded_fitness_scalar[best_idx])
-    initial_population_override = loaded_population
+    # After feed_for_resume, start fresh from next generation (don't re-evaluate checkpoint)
+    initial_population_override = None
 
     # Store the best robot XML from checkpoint
     best_robot_in_checkpoint = join(last_gen_dir, "Robot.xml")
     if isfile(best_robot_in_checkpoint):
         shutil.copy2(best_robot_in_checkpoint, _best_xml_stage)
         print(f"Loaded best robot from checkpoint: {best_robot_in_checkpoint}\n")
-    
+
     # progress bar for generations
     pbar = tqdm.tqdm(range(num_generations), desc="Generations")
 
     for gen in range(num_generations):
-        pbar.update(1)
-        if gen == 0 and 'initial_population_override' in locals():
+        actual_gen = ea.current_gen + gen
+        if gen == 0 and 'initial_population_override' in locals() and initial_population_override is not None:
             pop = initial_population_override
         else:
             pop = ea.ask()
@@ -1094,19 +1109,19 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
                     join(world.temp_dir.name, "Robot.xml"),
                     _best_xml_stage,
                 )
-        save_ckpt = (gen % ckpt_interval == 0)
+        save_ckpt = (ea.current_gen % ckpt_interval == 0)
         ea.tell(pop, fitnesses, save_checkpoint=save_ckpt)
         if save_ckpt:
             shutil.copy2(
                 _best_xml_stage,
-                join(results_dir, str(gen), "Robot.xml"),
+                join(results_dir, str(ea.current_gen-1), "Robot.xml"),
             )
-        if (gen + 1) % video_interval == 0 and _best_genotype is not None:
-            print(f"Recording terrain videos for generation {gen + 1}...")
+        if (ea.current_gen + 1) % video_interval == 0 and _best_genotype is not None:
+            print(f"Recording terrain videos for generation {ea.current_gen + 1}...")
             world.record_terrain_videos(
                 _best_genotype,
                 results_dir,
-                gen + 1,
+                ea.current_gen + 1,
                 seconds=video_seconds,
                 fps=video_fps,
             )
