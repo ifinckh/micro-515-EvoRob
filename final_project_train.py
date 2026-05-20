@@ -68,7 +68,7 @@ class FinalWorld(World):
         # from evorob.world.robot.controllers.so2 import SO2Controller
         # self.controller = SO2Controller(input_size=27, output_size=8, hidden_size=8)
         self.controller = NeuralNetworkController(
-            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=12
+            input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=16
         )
 
         self.n_weights     = self.controller.n_params
@@ -913,6 +913,7 @@ def run_multi_task_evolution_CMA_ES_from_pickle(
 
 
 def run_multi_task_evolution_CMA_ES_from_checkpoint(
+    checkpoint_dir:  str,
     num_generations: int = 100,
     population_size: int = 100,
     n_repeats:       int = 4,
@@ -1003,6 +1004,28 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
 
     # Convert full fitness (3 objectives) to scalar fitness by summing
     loaded_fitness_scalar = np.array([f.sum() for f in loaded_fitness_full])
+
+    # Restore CMA-ES state from all checkpoint generations using feed_for_resume
+    print(f"Restoring CMA-ES state from evolution history...")
+    if loaded_population_all_gens.dtype == object:
+        # Object array containing generations of different shapes
+        for gen_idx, (pop, fit) in enumerate(zip(loaded_population_all_gens, loaded_fitness_all_gens)):
+            pop = np.array(pop)
+            fit_scalar = np.array([f.sum() for f in fit])
+            # Feed to CMA-ES: negate fitnesses (CMA-ES minimizes)
+            ea.es.feed_for_resume(pop.tolist(), (-fit_scalar).tolist())
+            print(f"  Fed generation {gen_idx}: pop_size={len(pop)}, best_fitness={fit_scalar.max():.2f}")
+    else:
+        # 3D array [n_generations, pop_size, n_params]
+        for gen_idx in range(loaded_population_all_gens.shape[0]):
+            pop = loaded_population_all_gens[gen_idx]
+            fit_scalar = np.array([f.sum() for f in loaded_fitness_all_gens[gen_idx]])
+            # Feed to CMA-ES: negate fitnesses (CMA-ES minimizes)
+            ea.es.feed_for_resume(pop.tolist(), (-fit_scalar).tolist())
+            print(f"  Fed generation {gen_idx}: pop_size={len(pop)}, best_fitness={fit_scalar.max():.2f}")
+
+    # Update EA state to reflect restored evolution
+    ea.current_gen = len(loaded_population_all_gens)
     
     n_obj = 1  # CMA-ES optimizes a single scalar fitness, so we will sum the objectives
     print(f"\nContinuing from checkpoint with {len(loaded_population)} individuals")
@@ -1021,12 +1044,17 @@ def run_multi_task_evolution_CMA_ES_from_checkpoint(
     # Find best individual from loaded population for tracking
     best_idx = np.argmax(loaded_fitness_scalar)
     _best_full_fitness = loaded_fitness_full[best_idx].copy()
-    
-    # Warm-start internal records WITHOUT calling es.tell (pycma restricts tell usage).
-    # We set the EA bookkeeping structures and will use the loaded population
-    # as the first generation's population in the main loop.
-    ea.full_x = [loaded_population]
-    ea.full_f = [loaded_fitness_scalar]
+
+    # Preserve EA history after feed_for_resume
+    if loaded_population_all_gens.dtype == object:
+        ea.full_x = [np.array(x) for x in loaded_population_all_gens]
+        ea.full_f = [np.array([f.sum() for f in fit]) for fit in loaded_fitness_all_gens]
+    else:
+        ea.full_x = [loaded_population_all_gens[i] for i in range(loaded_population_all_gens.shape[0])]
+        ea.full_f = [np.array([f.sum() for f in loaded_fitness_all_gens[i]])
+                     for i in range(loaded_fitness_all_gens.shape[0])]
+
+    # Set current x, f, and best so far from last generation
     ea.x = loaded_population
     ea.f = loaded_fitness_scalar
     best_idx = int(np.argmax(loaded_fitness_scalar))
@@ -1145,6 +1173,7 @@ if __name__ == "__main__":
     
     if checkpoint_dir is not None:
         print(f"Loading checkpoint from '{checkpoint_dir}' and continuing training...\n")
+        params['checkpoint_dir'] = checkpoint_dir
         run_multi_task_evolution_CMA_ES_from_checkpoint(**params)
     else:
         run_multi_task_evolution_CMA_ES(

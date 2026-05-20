@@ -4,54 +4,60 @@ from evorob.world.robot.controllers.base import Controller
 
 
 class NeuralNetworkController(Controller):
-    def __init__(self, input_size: int, output_size: int, hidden_size: int = 16):
+    def __init__(
+        self,
+        input_size: int,
+        output_size: int,
+        hidden_size: int = 16,
+    ):
+        """
+        A minimalistic Neural Network, using numpy.
+        - One hidden layer with tanh activation
+        - Output layer with tanh activation
+
+        :param int input_size: Size of input vector
+        :param int hidden_size: Size of hidden layer
+        :param int output_size: Size of output vector
+        """
         self.n_input = input_size
         self.n_output = output_size
         self.n_hidden = hidden_size
-
-        self.input_to_hidden = np.random.uniform(-1, 1, (hidden_size, input_size))
-        self.hidden_to_output = np.random.uniform(-1, 1, (output_size, hidden_size))
-        # biases for hidden and output layers
-        self.bias_hidden = np.random.uniform(-1, 1, (hidden_size,))
-        self.bias_output = np.random.uniform(-1, 1, (output_size,))
-
-        self.n_params_i2h = input_size * hidden_size
-        self.n_params_h2o = hidden_size * output_size   
-        self.n_params_bh = hidden_size
-        self.n_params_bo = output_size
-
+        self.n_con1 = input_size * hidden_size
+        self.n_con2 = hidden_size * output_size
+        self.lin = np.random.uniform(-1, 1, (hidden_size, input_size))
+        self.output = np.random.uniform(-1, 1, (output_size, hidden_size))
         self.n_params = self.get_num_params()
 
     def get_action(self, state):
-        hidden = np.tanh(state @ self.input_to_hidden.T + self.bias_hidden)
-        output = np.tanh(hidden @ self.hidden_to_output.T + self.bias_output)
-        return np.clip(output, -1, 1)
+        assert state.shape[-1] == self.n_input, (
+            "State does not correspond with expected input size"
+        )
 
-    def set_weights(self, encoding):
-        if encoding.size != self.get_num_params():
-            raise ValueError(
-                f"Encoding length {encoding.size} does not match expected {self.get_num_params()} "
-                f"(i2h={self.n_params_i2h}, h2o={self.n_params_h2o}, bh={self.n_params_bh}, bo={self.n_params_bo})"
-            )
+        hid_l = np.tanh(state @ self.lin.T)
+        output_l = np.tanh(hid_l @ self.output.T)
+        return np.clip(output_l, -1.0, 1.0)
 
-        self.input_to_hidden = encoding[:self.n_params_i2h].reshape(self.n_hidden, self.n_input)
-        start = self.n_params_i2h
-        end = start + self.n_params_h2o
-        self.hidden_to_output = encoding[start:end].reshape(self.n_output, self.n_hidden)
+    def set_weights(self, weights):
+        """
+        Set weights of NN.
 
-        start = end
-        end = start + self.n_params_bh
-        self.bias_hidden = encoding[start:end].reshape(self.n_hidden,)
-
-        start = end
-        end = start + self.n_params_bo
-        self.bias_output = encoding[start:end].reshape(self.n_output,)
+        :param np.ndarray weights: Vector of weights
+        """
+        assert len(weights) == self.n_con1 + self.n_con2, (
+            f"Got {len(weights)} but expected {self.n_con1 + self.n_con2}"
+        )
+        weight_matrix1 = weights[: self.n_con1].reshape(self.lin.shape)
+        weight_matrix2 = weights[-self.n_con2 :].reshape(self.output.shape)
+        self.lin = weight_matrix1
+        self.output = weight_matrix2
 
     def geno2pheno(self, genotype):
+        """Alias for set_weights (genotype to phenotype mapping)."""
         self.set_weights(genotype)
 
     def get_num_params(self):
-        return self.n_params_i2h + self.n_params_h2o + self.n_params_bh + self.n_params_bo
+        """Return the total number of parameters in the network."""
+        return self.n_con1 + self.n_con2
 
     def reset_controller(self, batch_size=1) -> None:
         pass
