@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 # from final_project_test import OBS_SPACE_SIZE
 import numpy as np
 
-os.environ.setdefault("MUJOCO_GL", "egl")
+# os.environ.setdefault("MUJOCO_GL", "egl")
 
 from evorob.utils.filesys import get_last_checkpoint_dir, get_project_root
 from evorob.world.base import World
@@ -77,7 +77,7 @@ class EvalWorld(World):
     @staticmethod
     def _default_controller():
         from evorob.world.robot.controllers.mlp import NeuralNetworkController
-        return NeuralNetworkController(input_size=43, output_size=8, hidden_size=16)
+        return NeuralNetworkController(input_size=43, output_size=8, hidden_size=12)
 
     def set_controller(self, controller: Controller) -> None:
         """Override the default MLP controller.

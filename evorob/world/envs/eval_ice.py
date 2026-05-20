@@ -62,7 +62,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
             "render_fps": int(np.round(1.0 / self.dt)),
         }
 
-        obs_size = self.data.qpos.size + self.data.qvel.size + self.data.qfrc_actuator.size # (self.data.qpos.size - 2) + self.data.qvel.size
+        obs_size = self.data.qpos.size + self.data.qvel.size # (self.data.qpos.size - 2) + self.data.qvel.size
         self.observation_space = Box(
             low=-np.inf, high=np.inf, shape=(obs_size,), dtype=np.float64
         )
@@ -74,10 +74,10 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.6,
+            "ctrl": 0.5,
             "cfrc": 5e-4,
             "healthy": 1.0,
-            "y_dev": 0.3,
+            "y_dev": 0.4,
         }
         
         xyz_velocity = (xyz_after - xyz_before) / self.dt
@@ -138,7 +138,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         # print(f"qpos: {len(self.data.qpos.flat)}, qvel: {len(self.data.qvel.flat)}, qfrc_actuator: {len(self.data.qfrc_actuator.flat)}\n")
-        obs = np.concatenate((self.data.qpos.flat.copy(), self.data.qvel.flat.copy(), self.data.qfrc_actuator.flat.copy()))
+        obs = np.concatenate((self.data.qpos.flat.copy(), self.data.qvel.flat.copy()))
         # print("Concatenated obs shape:", obs.shape())
         return obs
 
