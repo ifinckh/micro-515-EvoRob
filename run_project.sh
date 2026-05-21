@@ -5,8 +5,8 @@
 #SBATCH --nodes=1                                # Number of nodes requested
 #SBATCH --ntasks=1                               # Number of tasks requested
 #SBATCH --cpus-per-task=64                       # Number of CPU cores per task (adjust based on your parallel environment)
-#SBATCH --mem=8G                                # Memory allocation
-#SBATCH --time=00:20:00                          # Expected runtime (hours:minutes:seconds)
+#SBATCH --mem=32G                                # Memory allocation
+#SBATCH --time=60:00:00                          # Expected runtime (hours:minutes:seconds)
 #SBATCH --partition=academic                     # Partition to submit to academic partition
 #SBATCH --account=micro-515                      # Account name
 
