@@ -1,4 +1,0 @@
-/home/finckh/miniconda3/envs/evorob/lib/python3.10/site-packages/gymnasium/utils/passive_env_checker.py:158: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
-  logger.warn(f"{pre} is not within the observation space.")
-/home/finckh/miniconda3/envs/evorob/lib/python3.10/site-packages/gymnasium/utils/passive_env_checker.py:158: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
-  logger.warn(f"{pre} is not within the observation space.")
