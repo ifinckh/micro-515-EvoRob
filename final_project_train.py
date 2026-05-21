@@ -120,7 +120,7 @@ class FinalWorld(World):
 
         Returns (points, connectivity_mat) for AntRobot construction.
         """
-        control_params = genotype[:self.n_weights] * 0.1
+        control_params = genotype[:self.n_weights] #* 0.1
         body_params    = (genotype[self.n_weights:] + 1) / 4 + 0.1
         self.controller.geno2pheno(control_params)
 
@@ -780,202 +780,6 @@ def run_multi_task_evolution_CMA_ES(
         f.write(f"  {'mean':<6}: {float(_best_full_fitness.mean()):10.2f}\n")
     print(f"\nTraining summary saved to: {score_path}")
 
-
-def run_multi_task_evolution_CMA_ES_from_checkpoint(
-    num_generations: int = 100,
-    population_size: int = 100,
-    n_repeats:       int = 4,
-    n_steps:         int = 500,
-    sigma:           float = 0.3,
-    bounds:          tuple = (-1, 1),
-    ckpt_interval:   int = 10,
-    results_dir:     str = None,
-    random_seed:     int = 40,
-) -> None:
-    np.random.seed(random_seed)
-
-    world = FinalWorld()
-    
-    # Load the full population and fitness from checkpoint
-    last_gen_dir = get_last_checkpoint_dir(checkpoint_dir)
-    if last_gen_dir is None:
-        last_gen_dir = checkpoint_dir
-    
-    # Try to load full population and fitness
-    full_x_path = join(last_gen_dir, "full_x.npy")
-    full_f_path = join(last_gen_dir, "full_f.npy")
-    
-    if not isfile(full_x_path) or not isfile(full_f_path):
-        # Fallback to root checkpoint directory
-        full_x_path = join(checkpoint_dir, "full_x.npy")
-        full_f_path = join(checkpoint_dir, "full_f.npy")
-    
-    if not isfile(full_x_path) or not isfile(full_f_path):
-        print(f"ERROR: Could not find full_x.npy and full_f.npy in checkpoint")
-        print(f"  Checked: {last_gen_dir}")
-        print(f"  Checked: {checkpoint_dir}")
-        return
-    
-    loaded_population_all_gens = np.load(full_x_path, allow_pickle=True)
-    loaded_fitness_all_gens = np.load(full_f_path, allow_pickle=True)
-    
-    print(f"DEBUG: loaded_population_all_gens shape={loaded_population_all_gens.shape}, "
-          f"dtype={loaded_population_all_gens.dtype}, ndim={loaded_population_all_gens.ndim}")
-    print(f"DEBUG: loaded_fitness_all_gens shape={loaded_fitness_all_gens.shape}, "
-          f"dtype={loaded_fitness_all_gens.dtype}, ndim={loaded_fitness_all_gens.ndim}")
-    
-    # full_x and full_f contain lists of populations/fitnesses across all generations
-    # Get the last generation's population and fitness
-    if loaded_population_all_gens.dtype == object:
-        # Object array containing generations of different shapes
-        print(f"DEBUG: Object array detected, extracting last generation")
-        loaded_population = np.array(loaded_population_all_gens[-1])  # Last generation's population
-        loaded_fitness_full = np.array(loaded_fitness_all_gens[-1])   # Last generation's fitness
-    elif loaded_population_all_gens.ndim == 3:
-        # 3D array [n_generations, pop_size, n_params]
-        print(f"DEBUG: 3D array detected, extracting last generation")
-        loaded_population = loaded_population_all_gens[-1]  # Last generation's population
-        loaded_fitness_full = loaded_fitness_all_gens[-1]    # Last generation's fitness
-    else:
-        # Already single population
-        print(f"DEBUG: Single population format")
-        loaded_population = loaded_population_all_gens
-        loaded_fitness_full = loaded_fitness_all_gens
-    
-    print(f"DEBUG: After extraction: loaded_population shape={loaded_population.shape}")
-    print(f"DEBUG: After extraction: loaded_fitness_full shape={loaded_fitness_full.shape}")
-    print(f"Loaded population from checkpoint: shape={loaded_population.shape}")
-    print(f"Loaded fitness (full objectives): shape={loaded_fitness_full.shape}")
-    
-    # Update world with first genotype to set robot morphology
-    world.update_robot_xml(loaded_population[0])
-    print(f"Genotype : {world.n_params} params"
-          f"  (controller={world.n_weights}, body={world.n_body_params})")
-
-    if results_dir is None:
-        results_dir = join(ROOT_DIR, "results", "final_project")
-
-    # Verify population size matches
-    if len(loaded_population) != population_size:
-        print(f"WARNING: Loaded population size ({len(loaded_population)}) differs from requested ({population_size})")
-        print(f"Using loaded population size: {len(loaded_population)}")
-        population_size = len(loaded_population)
-
-    ea = CMA_ES(
-        n_params = world.n_params,
-        population_size=population_size,
-        num_generations=num_generations,
-        sigma=sigma,
-        bounds=bounds,
-        output_dir=results_dir,
-    )
-
-    # Convert full fitness (3 objectives) to scalar fitness by summing
-    loaded_fitness_scalar = np.array([f.sum() for f in loaded_fitness_full])
-    
-    n_obj = 1  # CMA-ES optimizes a single scalar fitness, so we will sum the objectives
-    print(f"\nContinuing from checkpoint with {len(loaded_population)} individuals")
-    print(f"Running {num_generations} generations  pop={population_size}")
-    print(f"Objectives : flat & ice & hill (summed)")
-    print(f"Checkpoints: {results_dir}\n")
-
-    os.makedirs(results_dir, exist_ok=True)
-    _best_xml_stage = join(results_dir, "_best_robot.xml")  # staging copy of best robot
-    _best_scalar = float(loaded_fitness_scalar.max())
-    _best_genotype = loaded_population[int(np.argmax(loaded_fitness_scalar))].copy()
-    video_interval = 50
-    video_seconds = 20
-    video_fps = 20
-    
-    # Find best individual from loaded population for tracking
-    best_idx = np.argmax(loaded_fitness_scalar)
-    _best_full_fitness = loaded_fitness_full[best_idx].copy()
-    
-    # Warm-start internal records WITHOUT calling es.tell (pycma restricts tell usage).
-    # We set the EA bookkeeping structures and will use the loaded population
-    # as the first generation's population in the main loop.
-    ea.full_x = [loaded_population]
-    ea.full_f = [loaded_fitness_scalar]
-    ea.x = loaded_population
-    ea.f = loaded_fitness_scalar
-    best_idx = int(np.argmax(loaded_fitness_scalar))
-    ea.x_best_so_far = loaded_population[best_idx].copy()
-    ea.f_best_so_far = float(loaded_fitness_scalar[best_idx])
-    initial_population_override = loaded_population
-
-    # Store the best robot XML from checkpoint
-    best_robot_in_checkpoint = join(last_gen_dir, "Robot.xml")
-    if isfile(best_robot_in_checkpoint):
-        shutil.copy2(best_robot_in_checkpoint, _best_xml_stage)
-        print(f"Loaded best robot from checkpoint: {best_robot_in_checkpoint}\n")
-    
-    # progress bar for generations
-    pbar = tqdm.tqdm(range(num_generations), desc="Generations")
-
-    for gen in range(num_generations):
-        pbar.update(1)
-        if gen == 0 and 'initial_population_override' in locals():
-            pop = initial_population_override
-        else:
-            pop = ea.ask()
-        fitnesses = np.empty(len(pop))
-        for idx, genotype in enumerate(pop):
-            # Evaluate all three objectives
-            full_fitness = world.evaluate_individual(
-                genotype, n_repeats=n_repeats, n_steps=n_steps
-            )
-            # sum the 3 objective rewards to get a single scalar fitness for CMA-ES
-            fitnesses[idx] = float(full_fitness.sum())
-            scalar = fitnesses[idx]
-            if scalar > _best_scalar:
-                _best_scalar = scalar
-                _best_full_fitness = full_fitness
-                _best_genotype = genotype.copy()
-                shutil.copy2(
-                    join(world.temp_dir.name, "Robot.xml"),
-                    _best_xml_stage,
-                )
-        save_ckpt = (gen % ckpt_interval == 0)
-        ea.tell(pop, fitnesses, save_checkpoint=save_ckpt)
-        if save_ckpt:
-            shutil.copy2(
-                _best_xml_stage,
-                join(results_dir, str(gen), "Robot.xml"),
-            )
-        if (gen + 1) % video_interval == 0 and _best_genotype is not None:
-            print(f"Recording terrain videos for generation {gen + 1}...")
-            world.record_terrain_videos(
-                _best_genotype,
-                results_dir,
-                gen + 1,
-                seconds=video_seconds,
-                fps=video_fps,
-            )
-
-    pbar.close()
-    
-    # --- Training summary ---
-    score_path = join(results_dir, "training_score.txt")
-    with open(score_path, "w") as f:
-        f.write("=" * 60 + "\n")
-        f.write("MICRO-515 Final Project — Training Summary (Continued)\n")
-        f.write("=" * 60 + "\n\n")
-        f.write(f"Continued from checkpoint: {checkpoint_dir}\n")
-        f.write(f"Generations     : {num_generations}\n")
-        f.write(f"Population size : {population_size}\n")
-        f.write(f"Controller      : {type(world.controller).__name__}"
-                f"  ({world.n_weights} params)\n")
-        f.write(f"Genotype size   : {world.n_params}"
-                f"  (controller={world.n_weights}, body={world.n_body_params})\n\n")
-        f.write("Best individual (highest sum of fitness across objectives):\n")
-        labels = ["flat", "ice", "hill"]
-        for label, val in zip(labels, _best_full_fitness):
-            f.write(f"  {label:<6}: {float(val):10.2f}\n")
-        f.write(f"  {'min':<6}: {float(_best_full_fitness.min()):10.2f}\n")
-        f.write(f"  {'mean':<6}: {float(_best_full_fitness.mean()):10.2f}\n")
-    print(f"\nTraining summary saved to: {score_path}")
-
-
 if __name__ == "__main__":
     # Quick smoke-test — 2 generations, tiny population
     
@@ -1013,22 +817,16 @@ if __name__ == "__main__":
           f"checkpoint interval {params['ckpt_interval']} generations, "
           f"results saved to '{params['results_dir']}'\n")
     
-    if checkpoint_dir is not None:
-        print(f"Loading checkpoint from '{checkpoint_dir}' and continuing training...\n")
-        run_multi_task_evolution_CMA_ES_from_checkpoint(**params)
-    else:
-        run_multi_task_evolution_CMA_ES(
-            num_generations=params['num_generations'],
-            population_size=params['population_size'],
-            n_repeats=params['n_repeats'],
-            sigma=params['sigma'],
-            ckpt_interval=params['ckpt_interval'],
-            results_dir=params['results_dir'],
-            random_seed=params['random_seed'],
-        )
-    
-    
-    
+
+    run_multi_task_evolution_CMA_ES(
+        num_generations=params['num_generations'],
+        population_size=params['population_size'],
+        n_repeats=params['n_repeats'],
+        sigma=params['sigma'],
+        ckpt_interval=params['ckpt_interval'],
+        results_dir=params['results_dir'],
+        random_seed=params['random_seed'],
+    )
     
      # run_multi_task_evolution(
     #     num_generations=100,

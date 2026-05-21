@@ -130,7 +130,8 @@ class EvalWorld(World):
         The body morphology is NOT regenerated here — call update_robot_xml first
         to provide the robot XML, then call geno2pheno to load the controller.
         """
-        self.controller.geno2pheno(genotype[:self.n_weights])
+        control_params = genotype[:self.n_weights]
+        self.controller.geno2pheno(control_params)
 
     # ------------------------------------------------------------------
     # One-shot loader from a FinalWorld checkpoint

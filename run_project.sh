@@ -30,4 +30,4 @@ PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
 # $PYTHON final_project_train.py --num_generations 300 --population_size 300 --sigma 0.4 --best_dir_path results/2026-05-07_12-06-36_final_test
 
 # from scratch
-$PYTHON final_project_train.py --num_generations 2 --population_size 2 --sigma 0.4
+$PYTHON final_project_train.py --num_generations 2000 --population_size 300 --sigma 0.4

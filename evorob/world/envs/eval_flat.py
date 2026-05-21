@@ -73,7 +73,7 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.1,
+            "ctrl": 0.4,
             "cfrc": 1e-4,
             "healthy": 1.0,
             "y_dev": 0.4,

@@ -74,7 +74,7 @@ class EvalIceEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.6,
+            "ctrl": 0.8,
             "cfrc": 5e-4,
             "healthy": 1.0,
             "y_dev": 0.4,

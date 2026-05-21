@@ -24,4 +24,4 @@ PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
 # $PYTHON -c "import PIL; print(PIL.__version__)"
 
 # Run
-$PYTHON final_project_test.py --best_dir_path results/2026-05-12_18-44-48_final_test
+$PYTHON final_project_test.py --best_dir_path results/2026-05-21_16-13-44_final_test

@@ -1,0 +1,19 @@
+Controller set: NeuralNetworkController  (816 params)
+Loaded genotype: shape=(818,)
+Loaded robot XML: results/2026-05-21_16-13-44_final_test/0/Robot.xml
+
+Running 10 episodes on the evaluation terrain  (seed=0) …
+  episode   1/10: 20451.36
+  episode   2/10: -19223.41
+  episode   3/10: -2755.43
+  episode   4/10: 19828.40
+  episode   5/10: -6538.86
+  episode   6/10: -28471.17
+  episode   7/10: 2131.18
+  episode   8/10: 38234.70
+  episode   9/10: 18979.20
+  episode  10/10: -7455.09
+
+Results: mean=3518.09 ± 19494.55  best=38234.70  worst=-28471.17
+Score saved: results/2026-05-21_16-13-44_final_test/evaluation_output/evaluation_score.txt
+Video saved: results/2026-05-21_16-13-44_final_test/evaluation_output/evaluation_video.mp4
