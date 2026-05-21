@@ -15,7 +15,8 @@ export MUJOCO_GL=egl
 mkdir -p logs
 
 # Use env directly (robust)
-PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
+# PYTHON=/home/finckh/miniconda3/envs/evorob/bin/python
+source .venv/bin/activate
 
 # echo "Python used:"
 # $PYTHON -c "import sys; print(sys.executable)"
