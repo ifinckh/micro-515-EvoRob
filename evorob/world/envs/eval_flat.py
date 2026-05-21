@@ -73,10 +73,10 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
         
         weights = {
             "x_pos": 1.0,
-            "ctrl": 0.3,
+            "ctrl": 0.1,
             "cfrc": 1e-4,
             "healthy": 1.0,
-            "y_dev": 0.2,
+            "y_dev": 0.4,
         }
 
         xyz_velocity = (xyz_after - xyz_before) / self.dt
@@ -117,7 +117,7 @@ class EvalFlatEnv(MujocoEnv, utils.EzPickle):
     def _is_terminated(self, xyz_velocity: np.ndarray) -> bool:
         z = float(self.data.qpos[2])
         qacc = self.data.qacc
-        if z < 0.2 or z > 1.0:
+        if z < 0.2 or z > 1.5:
             return True
         if not np.isfinite(self.state_vector()).all():
             return True

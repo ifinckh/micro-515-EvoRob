@@ -983,7 +983,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--num_generations", type=int, default=300)
     parser.add_argument("--population_size", type=int, default=300)
-    parser.add_argument("--sigma", type=float, default=0.6)
+    parser.add_argument("--sigma", type=float, default=0.3)
     parser.add_argument("--best_dir_path", type=str, default=None)
     args = parser.parse_args()
     
@@ -1002,6 +1002,7 @@ if __name__ == "__main__":
         "ckpt_interval": 5,
         "sigma": args.sigma,
         "results_dir": results_dir,
+        "random_seed": 40,
     }   
     
     
@@ -1023,6 +1024,7 @@ if __name__ == "__main__":
             sigma=params['sigma'],
             ckpt_interval=params['ckpt_interval'],
             results_dir=params['results_dir'],
+            random_seed=params['random_seed'],
         )
     
     
