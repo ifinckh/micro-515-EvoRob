@@ -124,8 +124,9 @@ class EvalWorld(World):
     def geno2pheno(self, genotype: np.ndarray) -> None:
         """Pass the controller portion of the genotype to controller.geno2pheno().
 
-        No scaling is applied — the controller's own geno2pheno is responsible
-        for any necessary transformation of the raw genotype values.
+        The same 0.1 controller-weight scaling as FinalWorld.geno2pheno is
+        applied here so dummy evaluation loads the submitted genotype exactly
+        like training did.
 
         The body morphology is NOT regenerated here — call update_robot_xml first
         to provide the robot XML, then call geno2pheno to load the controller.

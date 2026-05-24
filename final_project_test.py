@@ -48,20 +48,19 @@ os.environ.setdefault("MUJOCO_GL", "egl")  # "osmesa" for macOS, "egl" for Linux
 import evorob.world          # registers EvalEnv-v0
 import gymnasium as gym
 
+from evorob.world.eval_world import EvalWorld
+
 # ===========================================================================
 # STUDENT CONFIGURATION — edit this section
 # ===========================================================================
-
-# import EvalWorld
-from evorob.world.eval_world import EvalWorld
 
 # --- Controller ---
 # Set this to the controller you used during training.
 # Leave None to use the default (mlp_sol, input=27, output=8, hidden=8).
 #
 from evorob.world.robot.controllers.mlp import NeuralNetworkController
-OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator
-MY_CONTROLLER = NeuralNetworkController(input_size=43, output_size=8, hidden_size=16)
+OBS_SPACE_SIZE = 15 + 14 + 14 # qpos + qvel + qfrc_actuator = 43
+MY_CONTROLLER = NeuralNetworkController(input_size=OBS_SPACE_SIZE, output_size=8, hidden_size=16)
 #
 # from evorob.world.robot.controllers.so2 import SO2Controller
 # MY_CONTROLLER = SO2Controller(input_size=27, output_size=8, hidden_size=8)
@@ -70,15 +69,15 @@ MY_CONTROLLER = NeuralNetworkController(input_size=43, output_size=8, hidden_siz
 
 # --- Paths ---
 # Option A: directory that contains x_best.npy (recommended)
-CHECKPOINT_DIR = None # "results/2026-05-04_21-54-46_final_test"
+CHECKPOINT_DIR = "."  # submission folder, or override with --best_dir_path
 
 # Option B: provide the robot XML and genotype as separate files
 ROBOT_XML_PATH = None  # e.g. "/abs/path/to/Robot.xml"
 GENOTYPE_PATH  = None   # e.g. "/abs/path/to/x_best.npy"
 
 # --- Output ---
-OUTPUT_DIR = None # CHECKPOINT_DIR # "evaluation_output"
-N_EPISODES = 10     # increase to 256 for the final leaderboard submission
+OUTPUT_DIR = "evaluation_output"
+N_EPISODES = 256
 SEED       = 0      # fixed — do NOT change for a fair comparison
 MAX_STEPS  = 1000   # fixed — do NOT change
 

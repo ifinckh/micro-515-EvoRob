@@ -66,8 +66,8 @@ class EvalEnv(MujocoEnv, utils.EzPickle):
             "render_fps": int(np.round(1.0 / self.dt)),
         }
 
-        # Observation: qpos (skip root xy) + qvel — dimensions inferred from model
-        obs_size = (self.data.qpos.size - 2) + self.data.qvel.size
+        # Observation matches final_project_train.py: qpos + qvel + qfrc_actuator.
+        obs_size = self.data.qpos.size + self.data.qvel.size + self.data.qfrc_actuator.size
         self.observation_space = Box(
             low=-np.inf, high=np.inf, shape=(obs_size,), dtype=np.float64
         )
